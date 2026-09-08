@@ -2,6 +2,12 @@
 
 Entradas en orden cronológico inverso (la más reciente arriba).
 
+## 2026-09-08 — Se agregan el afiche y la imagen de producto
+
+- Se suben `material/afiche-strategy.jpg` y `material/producto-strategy.jpg`.
+- La imagen de producto se muestra también en la página provisoria del sitio
+  (`sitio-web/img/producto-strategy.jpg`).
+
 ## 2026-09-08 — Publicación en Vercel
 
 - Se crea el proyecto `strategy-inacap` en Vercel enlazado al repositorio, con

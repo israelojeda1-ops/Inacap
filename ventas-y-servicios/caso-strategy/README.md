@@ -23,8 +23,9 @@ colegios y fundaciones.
 | Ruta | Contenido |
 |---|---|
 | `informe/` | El informe en `.docx` (aún no subido) |
-| `sitio-web/` | La tienda online: `index.html` más las imágenes en `sitio-web/img/` (aún no subidos) |
-| `material/` | Afiches e imágenes de producto (aún no subidos) |
+| `sitio-web/` | La tienda online: `index.html` (provisorio por ahora) más las imágenes en `sitio-web/img/` |
+| `material/afiche-strategy.jpg` | Afiche publicitario del juego (1024×1536) |
+| `material/producto-strategy.jpg` | Imagen de producto: caja, tablero, cartas y fichas (1536×1024) |
 | `bitacora.md` | Historial de cambios del proyecto |
 
 ## Sitio publicado
@@ -51,6 +52,6 @@ python3 -m http.server 8000
 - [ ] El pago está simulado: el sitio no procesa transacciones reales y así lo
       declara en pantalla. Si alguna vez se quisiera cobrar de verdad haría falta
       integrar Webpay o Mercado Pago, lo que requiere un servidor.
-- [ ] Subir el informe, el `index.html` y el material a sus carpetas.
+- [ ] Subir el informe y el `index.html` real a sus carpetas.
 - [ ] Separar las imágenes en base64 del `index.html` a archivos en `sitio-web/img/`.
 - [ ] Confirmar estado de la entrega y fecha de entrega.
