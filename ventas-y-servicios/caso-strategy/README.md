@@ -23,7 +23,8 @@ colegios y fundaciones.
 | Ruta | Contenido |
 |---|---|
 | `informe/` | El informe en `.docx` (aún no subido) |
-| `sitio-web/index.html` | La tienda online en un solo archivo (HTML, CSS y JS), 47 KB |
+| `sitio-web/index.html` | La tienda online y el recorrido explicativo en un solo archivo (HTML, CSS y JS), 88 KB |
+| `sitio-web/favicon.ico`, `favicon.svg`, `apple-touch-icon.png` | Ícono del sitio: un dado amarillo sobre azul |
 | `sitio-web/img/` | Las tres imágenes del sitio (`hero-juego.jpg`, `tablero.jpg`, `cartas.jpg`), antes incrustadas en base64 |
 | `material/afiche-strategy.jpg` | Afiche publicitario del juego (1024×1536) |
 | `material/producto-strategy.jpg` | Imagen de producto: caja, tablero, cartas y fichas (1536×1024) |
@@ -90,7 +91,6 @@ python3 -m http.server 8000
 
 - [ ] Los precios del sitio ($24.990 el juego y $109.990 el Pack Aula) son de
       ejemplo y hay que confirmarlos.
-- [ ] El sitio no tiene favicon; el navegador pide `/favicon.ico` y recibe 404.
 - [ ] El video explicativo está resuelto con el recorrido interactivo del
       sitio, no con un video grabado. Si la profesora pide un video real,
       hay que grabarlo y pegar el enlace en `VIDEO_URL`.

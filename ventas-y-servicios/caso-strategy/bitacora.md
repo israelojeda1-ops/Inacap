@@ -2,6 +2,18 @@
 
 Entradas en orden cronológico inverso (la más reciente arriba).
 
+## 2026-09-08 — Ícono del sitio (favicon)
+
+- El sitio no tenía ícono y el navegador pedía `/favicon.ico` recibiendo un
+  404 en cada visita. Ahora hay uno: un dado amarillo sobre fondo azul, con
+  los mismos colores de la marca.
+- Se agregan `favicon.ico` (16, 32, 48 y 64 px), `favicon.svg` para las
+  pantallas de alta resolución y `apple-touch-icon.png` (180 px) para cuando
+  alguien guarda el sitio en la pantalla de inicio del celular. También se
+  declara `theme-color` azul, que es el color que toma la barra del navegador
+  en Android.
+- Verificado: ya no queda ningún recurso con 404 en la página.
+
 ## 2026-09-08 — Narración y sonido del video explicativo
 
 - El recorrido ahora tiene voz: va describiendo lo que sucede en pantalla, no
