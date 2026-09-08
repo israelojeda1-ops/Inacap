@@ -52,14 +52,25 @@ colegios y fundaciones.
   Mientras no haya un video grabado, la ventana reproduce un **recorrido
   interactivo** hecho en HTML, CSS y JavaScript, con seis pasos: qué es
   STRATEGY, el tablero, el turno con el dado, los cuatro mazos de cartas, una
-  partida de ejemplo y cómo se gana. Avanza solo (1 minuto y 21 segundos en
+  partida de ejemplo y cómo se gana. Avanza solo (1 minuto y 35 segundos en
   total) y trae barra de reproducción con pausa, paso anterior/siguiente,
-  saltos por punto y botón de repetir. Además se puede interactuar:
+  saltos por punto, botón de repetir y botón de sonido. Además se puede interactuar:
   tocar cualquier casilla del tablero para leer qué pasa al caer en ella,
   tirar el dado y ver avanzar la ficha, responder una carta de cada mazo
   (marca correcta o incorrecta y explica) y saltar a cualquier turno de la
   partida de ejemplo. El recorrido se detiene cuando alguien interactúa, para
   que pueda mirarlo con calma.
+- El recorrido tiene **sonido**: una voz va describiendo lo que ocurre —el paso
+  en el que va, la casilla que se toca, el número que sale en el dado, la carta
+  elegida y si la respuesta estuvo bien o mal, y cada turno de la partida de
+  ejemplo— más efectos de dado, avance de ficha, acierto y error. La voz es la
+  del propio navegador (`speechSynthesis`), así que no hay archivos de audio y
+  el idioma sale en español si el equipo tiene una voz en español instalada.
+  Los efectos se generan con `AudioContext`, también sin archivos.
+  Todo lo que dice la voz aparece además escrito como subtítulo bajo la barra,
+  así que se entiende igual con el sonido apagado o en un computador sin voces.
+  El botón 🔊 de la barra silencia y reactiva, y la elección se recuerda en el
+  navegador.
   Si más adelante se graba un video de verdad, basta con pegar el enlace en la
   constante `VIDEO_URL` al inicio del script del `index.html` (acepta enlaces
   normales de YouTube o Vimeo) y la ventana pasa a mostrar ese video en lugar

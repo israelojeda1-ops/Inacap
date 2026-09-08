@@ -211,6 +211,9 @@ nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:5px}
 .xp-dots button{width:.65em;height:.65em;border-radius:50%;border:none;background:rgba(255,255,255,.3);padding:0;cursor:pointer}
 .xp-dots button.on{background:var(--yellow);transform:scale(1.3)}
 .xp-time{font-size:.8em;color:#C9D5EE;min-width:2.6em;text-align:right;font-variant-numeric:tabular-nums}
+.xp-ctl.snd.off{background:rgba(255,255,255,.1);color:#8C9BC4}
+.xp-cap{padding:.5em .9em;background:rgba(0,0,0,.28);color:#E7ECF9;font-size:.9em;line-height:1.35;text-align:center;min-height:2.6em;display:flex;align-items:center;justify-content:center;border-top:1px solid rgba(255,255,255,.08)}
+.xp-cap:empty{display:none}
 .xp-title{font-family:"Fredoka",sans-serif;font-size:.85em;color:#C9D5EE;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:12em}
 @media(max-width:640px){.xp-title,.xp-dots{display:none}.xp h4{font-size:1.5em}.xp-card{width:5.6em;height:7.6em}}
 .hero-art{position:relative}
@@ -1187,7 +1190,9 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
     var PLAYERS = [ { nm:"María", color:"#E2483C" }, { nm:"Diego", color:"#3FA9E0" } ];
 
     var SCENES = [
-      { title:"Qué es STRATEGY", dur:8000, build:function(el){
+      { title:"Qué es STRATEGY", dur:11000,
+        say:"STRATEGY es un juego de mesa chileno para aprender matemáticas jugando. Se juega de 2 a 4 jugadores, desde los 8 años, y una partida dura entre 20 y 30 minutos. Te voy contando paso a paso cómo se juega.",
+        build:function(el){
           el.innerHTML = '<div class="xp-scene">'
             + '<div class="xp-kicker">Video explicativo</div>'
             + '<h4>Cómo se juega STRATEGY</h4>'
@@ -1200,7 +1205,9 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
             + '<p class="hint">Puedes pausar el recorrido y probar cada parte con el mouse.</p>'
             + '</div>';
         } },
-      { title:"El tablero", dur:14000, build:function(el){
+      { title:"El tablero", dur:17000,
+        say:"Este es el tablero: 18 casillas que van de la salida a la meta. Cada color es un tipo de casilla: verde es suma, celeste resta, morado multiplicación, naranjo división, amarillo carta y rojo sorpresa. Toca cualquier casilla y te cuento qué pasa al caer en ella.",
+        build:function(el){
           el.innerHTML = '<div class="xp-scene">'
             + '<div class="xp-kicker">Paso 1 · El tablero</div>'
             + '<h4>De la salida a la meta</h4>'
@@ -1211,16 +1218,20 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
           var note = el.querySelector("#xpNote");
           el.querySelectorAll(".cell").forEach(function(g){
             function show(){
-              var i = +g.getAttribute("data-cell");
-              note.textContent = "Casilla " + (i + 1) + ". " + CELL_INFO[TRACK[i].t];
+              var i = +g.getAttribute("data-cell"), txt = "Casilla " + (i + 1) + ". " + CELL_INFO[TRACK[i].t];
+              note.textContent = txt;
               moveToken(el, 0, i);
               pause();
+              sfx.move();
+              say("La ficha se mueve a la " + txt);
             }
             g.addEventListener("click", show);
             g.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); show(); } });
           });
         } },
-      { title:"El turno y los dados", dur:14000, build:function(el){
+      { title:"El turno y los dados", dur:16000,
+        say:"En tu turno tiras el dado y avanzas esa cantidad de casillas. En la casilla donde caes te toca un ejercicio de ese tipo: si respondes bien te quedas ahí, y si fallas retrocedes o pierdes el turno. Prueba tirando el dado.",
+        build:function(el){
           el.innerHTML = '<div class="xp-scene">'
             + '<div class="xp-kicker">Paso 2 · El turno</div>'
             + '<h4>Tiras el dado y resuelves</h4>'
@@ -1234,18 +1245,25 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
             pause();
             var n = 1 + Math.floor(Math.random() * 6);
             die.classList.remove("rolling"); void die.offsetWidth; die.classList.add("rolling");
+            sfx.roll();
             setTimeout(function(){
               die.textContent = n;
               at = at + n;
-              if (at >= TRACK.length - 1){ at = TRACK.length - 1; }
+              var meta = at >= TRACK.length - 1;
+              if (meta) at = TRACK.length - 1;
               moveToken(el, 0, at);
-              note.textContent = at >= TRACK.length - 1
+              var txt = meta
                 ? "Llegó a la meta. Para ganar hay que responder bien el último desafío."
                 : "Sacó " + n + " y avanzó a la casilla " + (at + 1) + ". " + CELL_INFO[TRACK[at].t];
+              note.textContent = txt;
+              if (meta) sfx.win(); else sfx.move();
+              say(meta ? txt : ("Sacaste un " + n + ". " + txt.replace("Sacó " + n + " y avanzó", "La ficha avanza")));
             }, 260);
           });
         } },
-      { title:"Los mazos de cartas", dur:18000, build:function(el){
+      { title:"Los mazos de cartas", dur:20000,
+        say:"La caja trae 4 mazos con más de 200 cartas: Desafío, con ejercicios de alternativas; Problema, con situaciones para leer y resolver; Verdadero o Falso, para discutir en la mesa; y Estrategia y Comodín, que sirven para avanzar, bloquear o repetir turno. Elige un mazo y responde la carta.",
+        build:function(el){
           el.innerHTML = '<div class="xp-scene">'
             + '<div class="xp-kicker">Paso 3 · Las cartas</div>'
             + '<h4>Cuatro mazos, más de 200 cartas</h4>'
@@ -1270,12 +1288,14 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
             panel.querySelectorAll(".opt").forEach(function(b){
               b.addEventListener("click", function(){
                 pause();
-                var k = +b.getAttribute("data-opt"), free = d.ok < 0;
+                var k = +b.getAttribute("data-opt"), free = d.ok < 0, bien = free || k === d.ok;
                 panel.querySelectorAll(".opt").forEach(function(x){ x.disabled = true; });
-                b.classList.add(free || k === d.ok ? "ok" : "bad");
+                b.classList.add(bien ? "ok" : "bad");
                 if (!free && k !== d.ok) panel.querySelectorAll(".opt")[d.ok].classList.add("ok");
-                fb.textContent = (free || k === d.ok) ? d.good : d.bad;
-                fb.className = "fb " + ((free || k === d.ok) ? "ok" : "bad");
+                fb.textContent = bien ? d.good : d.bad;
+                fb.className = "fb " + (bien ? "ok" : "bad");
+                if (bien) sfx.ok(); else sfx.bad();
+                say("Respondiste " + d.opts[k] + ". " + fb.textContent);
               });
             });
           }
@@ -1284,12 +1304,17 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
               pause();
               el.querySelectorAll(".xp-card").forEach(function(x){ x.classList.remove("active"); });
               b.classList.add("active");
-              draw(+b.getAttribute("data-deck"));
+              var i = +b.getAttribute("data-deck");
+              draw(i);
+              sfx.move();
+              say("Carta de " + DECKS[i].tag + ". " + DECKS[i].ask);
             });
           });
           draw(0);
         } },
-      { title:"Una partida de ejemplo", dur:18000, build:function(el){
+      { title:"Una partida de ejemplo", dur:20000,
+        say:"Miremos una partida entre María y Diego. Te voy narrando turno por turno lo que pasa en el tablero.",
+        build:function(el){
           el.innerHTML = '<div class="xp-scene">'
             + '<div class="xp-kicker">Paso 4 · Partida de ejemplo</div>'
             + '<h4>Dos jugadores, siete turnos</h4>'
@@ -1300,24 +1325,27 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
               }).join("") + '</ul>'
             + '</div></div>';
           var items = Array.prototype.slice.call(el.querySelectorAll("#xpLog li")), timer;
-          function step(i){
+          function step(i, mudo){
             items.forEach(function(li, k){
               li.classList.toggle("now", k === i);
               li.classList.toggle("done", k < i);
             });
             moveToken(el, 0, PLAY[i].at[0]);
             moveToken(el, 1, PLAY[i].at[1]);
+            if (!mudo){ sfx.move(); say("Turno " + (i + 1) + ". " + PLAY[i].txt); }
           }
           items.forEach(function(li){
             function go(){ clearInterval(timer); pause(); step(+li.getAttribute("data-step")); }
             li.addEventListener("click", go);
             li.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); go(); } });
           });
-          var i = 0; step(0);
-          timer = setInterval(function(){ i = (i + 1) % PLAY.length; step(i); }, 2400);
+          var i = 0; step(0, true);
+          timer = setInterval(function(){ i = (i + 1) % PLAY.length; step(i); }, 2600);
           return function(){ clearInterval(timer); };
         } },
-      { title:"Cómo se gana", dur:9000, build:function(el){
+      { title:"Cómo se gana", dur:11000,
+        say:"Gana quien llega primero a la meta, y para entrar hay que responder bien el último desafío, así que la partida se define en la última casilla. La caja trae la guía del jugador con 3 modos de juego y todo lo necesario para usarlo también en la sala de clases.",
+        build:function(el){
           el.innerHTML = '<div class="xp-scene">'
             + '<div class="xp-kicker">Paso 5 · La meta</div>'
             + '<h4>Gana quien llega primero a la meta</h4>'
@@ -1329,12 +1357,88 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
             + '<p class="hint">Puedes repetir el recorrido con el botón ↺ de la barra.</p>'
             + '</div>';
           el.querySelector("#xpBuy").addEventListener("click", function(){
+            sfx.win();
             closeVideo();
             add("individual");
             openCart();
           });
         } }
     ];
+
+    /* --- sonido: efectos sintetizados y voz del navegador --- */
+    var sound = true;
+    try { sound = localStorage.getItem("strategyXpSound") !== "off"; } catch (e) {}
+    var actx = null;
+    function ac(){
+      if (!actx){
+        var C = window.AudioContext || window.webkitAudioContext;
+        if (!C) return null;
+        try { actx = new C(); } catch (e){ return null; }
+      }
+      if (actx.state === "suspended") { try { actx.resume(); } catch (e){} }
+      return actx;
+    }
+    function tone(f, at, dur, type, vol){
+      if (!sound) return;
+      var c = ac(); if (!c) return;
+      var t = c.currentTime + at, o = c.createOscillator(), g = c.createGain();
+      o.type = type || "sine";
+      o.frequency.setValueAtTime(f, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.linearRampToValueAtTime(vol || 0.12, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(c.destination);
+      o.start(t); o.stop(t + dur + 0.03);
+    }
+    var sfx = {
+      step: function(){ tone(523.25, 0, .20, "triangle", .10); tone(783.99, .10, .24, "triangle", .07); },
+      move: function(){ tone(392, 0, .12, "square", .06); tone(587.33, .07, .12, "square", .05); },
+      roll: function(){ for (var i = 0; i < 8; i++) tone(170 + Math.random() * 260, i * .05, .06, "square", .05); },
+      ok:   function(){ tone(659.25, 0, .15, "triangle", .11); tone(880, .11, .17, "triangle", .11); tone(1318.51, .23, .30, "triangle", .09); },
+      bad:  function(){ tone(233.08, 0, .20, "sawtooth", .08); tone(155.56, .15, .32, "sawtooth", .07); },
+      win:  function(){ [523.25, 659.25, 783.99, 1046.5].forEach(function(f, i){ tone(f, i * .12, .34, "triangle", .10); }); }
+    };
+    /* voz: se usa la del sistema en español si el navegador la tiene */
+    var synth = window.speechSynthesis || null, voice = null;
+    function pickVoice(){
+      if (!synth) return;
+      var v = synth.getVoices() || [];
+      voice = v.filter(function(x){ return /^es(-|_|$)/i.test(x.lang || ""); })[0] || null;
+    }
+    if (synth){
+      pickVoice();
+      if ("onvoiceschanged" in synth) synth.addEventListener("voiceschanged", pickVoice);
+    }
+    function say(txt){
+      if (!host) return;
+      var cap = host.querySelector("#xpCap");
+      if (cap) cap.textContent = txt || "";
+      if (!sound || !synth || !txt) return;
+      try {
+        synth.cancel();
+        if (synth.paused) synth.resume();
+        var u = new SpeechSynthesisUtterance(txt);
+        u.lang = (voice && voice.lang) || "es-CL";
+        if (voice) u.voice = voice;
+        u.rate = 1; u.pitch = 1; u.volume = 1;
+        synth.speak(u);
+      } catch (e){}
+    }
+    function hush(){ if (synth){ try { synth.cancel(); } catch (e){} } }
+    function speechPause(){ if (synth && synth.speaking && !synth.paused){ try { synth.pause(); } catch (e){} } }
+    function speechResume(){ if (synth && synth.paused){ try { synth.resume(); } catch (e){} } }
+    function setSound(on){
+      sound = !!on;
+      try { localStorage.setItem("strategyXpSound", sound ? "on" : "off"); } catch (e){}
+      if (!sound) hush();
+      if (host){
+        var b = host.querySelector("#xpSound");
+        b.textContent = sound ? "\uD83D\uDD0A" : "\uD83D\uDD07";
+        b.classList.toggle("off", !sound);
+        b.setAttribute("aria-pressed", sound ? "true" : "false");
+        b.setAttribute("aria-label", sound ? "Silenciar la narración" : "Activar la narración");
+      }
+    }
 
     var TOTAL = SCENES.reduce(function(s, x){ return s + x.dur; }, 0);
     var idx = 0, elapsed = 0, playing = false, raf = null, last = 0, cleanup = null, host = null;
@@ -1360,6 +1464,8 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
       idx = Math.max(0, Math.min(SCENES.length - 1, i));
       elapsed = 0;
       cleanup = SCENES[idx].build(host.querySelector("#xpStage")) || null;
+      sfx.step();
+      say(SCENES[idx].say);
       paint();
     }
     function tick(ts){
@@ -1376,12 +1482,13 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
     function play(){
       if (playing) return;
       if (idx === SCENES.length - 1 && elapsed >= SCENES[idx].dur) show(0);
-      playing = true; last = 0; paint();
+      playing = true; last = 0; speechResume(); paint();
       raf = requestAnimationFrame(tick);
     }
     function pause(){
       if (!playing) return;
       playing = false; last = 0;
+      speechPause();
       if (raf){ cancelAnimationFrame(raf); raf = null; }
       paint();
     }
@@ -1398,13 +1505,21 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
         + '<div class="xp-dots">' + SCENES.map(function(s, i){
             return '<button type="button" data-go="' + i + '" aria-label="Ir a: ' + esc(s.title) + '"></button>';
           }).join("") + '</div>'
+        + '<button class="xp-ctl snd" id="xpSound" type="button" aria-pressed="true" aria-label="Silenciar la narración">\uD83D\uDD0A</button>'
         + '<button class="xp-ctl" id="xpAgain" type="button" aria-label="Volver a empezar">↺</button>'
-        + '</div></div>';
+        + '</div>'
+        + '<div class="xp-cap" id="xpCap" aria-live="polite"></div>'
+        + '</div>';
       host = frame;
       host.querySelector("#xpPlay").addEventListener("click", function(){ playing ? pause() : play(); });
       host.querySelector("#xpPrev").addEventListener("click", function(){ show(idx - 1); });
       host.querySelector("#xpNext").addEventListener("click", function(){ show(idx + 1); });
       host.querySelector("#xpAgain").addEventListener("click", function(){ show(0); play(); });
+      host.querySelector("#xpSound").addEventListener("click", function(){
+        setSound(!sound);
+        if (sound){ sfx.step(); say(SCENES[idx].say); }
+      });
+      setSound(sound);
       host.querySelectorAll(".xp-dots button").forEach(function(b){
         b.addEventListener("click", function(){ show(+b.getAttribute("data-go")); });
       });
@@ -1421,10 +1536,12 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
     }
     function unmount(){
       pause();
+      hush();
       if (cleanup){ cleanup(); cleanup = null; }
       idx = 0; elapsed = 0; host = null;
     }
-    return { mount:mount, unmount:unmount, pause:pause, steps:SCENES.length, duration:TOTAL };
+    return { mount:mount, unmount:unmount, pause:pause, steps:SCENES.length, duration:TOTAL,
+             hasSound:function(){ return sound; } };
   })();
   function embedUrl(u){
     var m;
@@ -1441,7 +1558,7 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
     } else {
       frame.classList.add("xp-mode");
       XP.mount(frame);
-      $("#videoFoot").textContent = "Recorrido interactivo en " + XP.steps + " pasos: puedes pausar, avanzar y probar las cartas y el dado.";
+      $("#videoFoot").textContent = "Recorrido interactivo en " + XP.steps + " pasos, con narración y subtítulos: puedes pausar, avanzar, silenciar y probar las cartas y el dado.";
     }
     closeCart();
     $("#videoModal").classList.add("show");

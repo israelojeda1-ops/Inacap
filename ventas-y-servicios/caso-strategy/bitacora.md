@@ -2,6 +2,28 @@
 
 Entradas en orden cronológico inverso (la más reciente arriba).
 
+## 2026-09-08 — Narración y sonido del video explicativo
+
+- El recorrido ahora tiene voz: va describiendo lo que sucede en pantalla, no
+  solo el texto fijo de cada paso. Narra la casilla que se toca en el tablero,
+  el número que sale en el dado y a qué casilla llega la ficha, la carta que se
+  elige, la respuesta que se dio y si estuvo bien o mal, y cada turno de la
+  partida de ejemplo mientras avanza.
+- Se agregan efectos de sonido: dado rodando, avance de ficha, acierto,
+  error, cambio de paso y llegada a la meta.
+- La voz es la del navegador (`speechSynthesis`) y los efectos se generan con
+  `AudioContext`: no hay archivos de audio en el repositorio y el sitio sigue
+  pesando lo mismo. Si el equipo no tiene voz en español, el recorrido funciona
+  igual y el texto se lee en los subtítulos.
+- Todo lo que dice la voz se muestra escrito en una barra de subtítulos bajo
+  los controles, para que se entienda con el sonido apagado.
+- Botón 🔊 en la barra para silenciar o reactivar; la preferencia se guarda en
+  el navegador. Pausar el recorrido pausa la voz y cerrar la ventana la corta.
+- Las duraciones de los pasos se alargaron para que alcance a hablar: el
+  recorrido completo pasa de 1:21 a 1:35.
+- Probado con 22 verificaciones nuevas de narración y sonido, más las 34
+  anteriores del recorrido y las de imágenes: todo pasa.
+
 ## 2026-09-08 — Video explicativo interactivo del juego
 
 - La ventana de video ya no queda en "próximamente": ahora reproduce un
