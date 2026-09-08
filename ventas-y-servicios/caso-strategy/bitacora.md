@@ -2,6 +2,13 @@
 
 Entradas en orden cronológico inverso (la más reciente arriba).
 
+## 2026-09-08 — Publicación en Vercel
+
+- Se crea el proyecto `strategy-inacap` en Vercel enlazado al repositorio, con
+  directorio raíz `sitio-web/`. URL pública: https://strategy-inacap.vercel.app
+- Se sube un `index.html` provisorio de "sitio en construcción" que será
+  reemplazado por la tienda real cuando llegue el archivo.
+
 ## 2026-09-08 — Creación del proyecto en el repositorio
 
 - Se crea la carpeta `ventas-y-servicios/caso-strategy/` con `informe/`,

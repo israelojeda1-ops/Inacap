@@ -12,7 +12,7 @@ detalle y una `bitacora.md` con el historial de cambios.
 | Asignatura | Proyecto | Docente | Estado | Fecha de entrega |
 |---|---|---|---|---|
 | Contabilidad | [Unidad 1 · Marco Conceptual IFRS para Pymes](contabilidad/unidad-1-ifrs-pymes/) | Viviana Villablanca | PENDIENTE | PENDIENTE |
-| Ventas y Servicios | [Caso STRATEGY](ventas-y-servicios/caso-strategy/) | Patricia Angélica Rubilar Salinas | PENDIENTE | PENDIENTE |
+| Ventas y Servicios | [Caso STRATEGY](ventas-y-servicios/caso-strategy/) · [sitio web](https://strategy-inacap.vercel.app) | Patricia Angélica Rubilar Salinas | PENDIENTE | PENDIENTE |
 
 Estados posibles: `borrador` · `corregido` · `entregado`.
 Los campos marcados como `PENDIENTE` son datos que aún no han sido confirmados.

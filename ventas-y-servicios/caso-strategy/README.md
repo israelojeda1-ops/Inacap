@@ -27,6 +27,14 @@ colegios y fundaciones.
 | `material/` | Afiches e imágenes de producto (aún no subidos) |
 | `bitacora.md` | Historial de cambios del proyecto |
 
+## Sitio publicado
+
+- **URL pública:** https://strategy-inacap.vercel.app
+- **Proyecto Vercel:** `strategy-inacap` (team `israelojeda1-ops-projects`), con
+  directorio raíz `ventas-y-servicios/caso-strategy/sitio-web`.
+- Cada push a la rama de producción del repo publica automáticamente.
+- Por ahora muestra una página provisoria de "sitio en construcción".
+
 ## Cómo ver el sitio web en local
 
 ```bash
