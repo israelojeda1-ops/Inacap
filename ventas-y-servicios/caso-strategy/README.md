@@ -48,6 +48,10 @@ colegios y fundaciones.
   teléfono, región y dirección. El pago es simulado y así se declara en
   pantalla.
 - Formulario aparte de cotización para colegios y fundaciones.
+- Ventana de video explicativo (botón "Ver video explicativo" en la portada).
+  El enlace se configura en la constante `VIDEO_URL` al inicio del script del
+  `index.html`; acepta enlaces normales de YouTube o Vimeo. Mientras esté
+  vacío muestra un aviso de "próximamente".
 - Preguntas frecuentes en acordeón y diseño responsive (en celular el menú
   superior se oculta y queda visible el botón del carrito).
 
@@ -64,6 +68,7 @@ python3 -m http.server 8000
 - [ ] Los precios del sitio ($24.990 el juego y $109.990 el Pack Aula) son de
       ejemplo y hay que confirmarlos.
 - [ ] El sitio no tiene favicon; el navegador pide `/favicon.ico` y recibe 404.
+- [ ] Falta el enlace del video explicativo (`VIDEO_URL` en `index.html`).
 - [ ] El correo, el WhatsApp y el Instagram del pie de página son ficticios.
 - [ ] El pago está simulado: el sitio no procesa transacciones reales y así lo
       declara en pantalla. Si alguna vez se quisiera cobrar de verdad haría falta

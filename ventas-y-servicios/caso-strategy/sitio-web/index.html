@@ -121,8 +121,25 @@ nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:5px}
 .price-was{text-decoration:line-through;color:#AFC0E4;font-size:1.1rem}
 .price-note{font-size:.92rem;color:#C7D3EE}
 .hero-cta{display:flex;flex-wrap:wrap;gap:.8rem}
+.btn-video{background:rgba(255,255,255,.14);color:#fff;border:2px solid rgba(255,255,255,.35)}
+.btn-video:hover{background:rgba(255,255,255,.24)}
+.btn-video .play{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--yellow);color:var(--navy-deep);font-size:.8rem;padding-left:2px}
+
+/* ---------- video ---------- */
+.video-modal{position:fixed;inset:0;z-index:96;display:none;align-items:center;justify-content:center;padding:1rem}
+.video-modal.show{display:flex}
+.video-card{background:var(--navy-deep);border-radius:var(--radius-l);width:min(960px,100%);box-shadow:var(--shadow-lift);overflow:hidden}
+.video-head{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.4rem;color:#fff}
+.video-head h3{font-size:1.2rem}
+.video-frame{position:relative;width:100%;height:0;padding-bottom:56.25%;background:#000}
+.video-frame iframe,.video-frame .video-placeholder{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-placeholder{display:grid;place-items:center;text-align:center;color:#fff;background:linear-gradient(rgba(13,29,69,.55),rgba(13,29,69,.85)),url("img/tablero.jpg") center/cover;padding:1.5rem}
+.video-placeholder .big-play{width:78px;height:78px;border-radius:50%;background:var(--yellow);color:var(--navy-deep);display:grid;place-items:center;font-size:1.9rem;padding-left:6px;margin:0 auto 1rem;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.video-placeholder p{margin:.2rem 0;color:#DCE3F5}
+.video-foot{padding:.9rem 1.4rem 1.2rem;color:#C9D5EE;font-size:.92rem}
 .hero-art{position:relative}
 .hero-art img{
+  width:100%;height:auto;
   border-radius:var(--radius-l);box-shadow:var(--shadow-lift);
   transform:rotate(-2.2deg);border:6px solid #fff;
 }
@@ -158,9 +175,10 @@ section{padding:4.4rem 0}
 /* qué incluye */
 .includes{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center}
 .gallery{display:grid;gap:1rem;align-content:start}
-.gallery img{border-radius:var(--radius-m);box-shadow:var(--shadow-card);width:100%;object-fit:cover}
-.gallery .shot-board{aspect-ratio:16/10}
-.gallery .shot-cards{aspect-ratio:24/8}
+.shot{position:relative;width:100%;height:0;overflow:hidden;border-radius:var(--radius-m);box-shadow:var(--shadow-card)}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;box-shadow:none}
+.shot-board{padding-bottom:62.5%}  /* 16:10 */
+.shot-cards{padding-bottom:33.33%} /* 3:1 */
 .box-list{list-style:none;padding:0;margin:0}
 .box-list li{display:flex;gap:.85rem;padding:.72rem 0;border-bottom:1px dashed var(--line);align-items:flex-start}
 .box-list li:last-child{border-bottom:none}
@@ -345,6 +363,7 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
       <div class="hero-cta">
         <button class="btn btn-yellow" data-add="individual">Agregar al carrito</button>
         <a class="btn btn-ghost" href="#incluye" style="color:#fff;border-color:rgba(255,255,255,.6)">Ver qué incluye</a>
+        <button class="btn btn-video" type="button" id="openVideo"><span class="play">▶</span> Ver video explicativo</button>
       </div>
     </div>
     <div class="hero-art">
@@ -390,8 +409,8 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
 <section id="incluye" style="padding-top:0">
   <div class="wrap includes">
     <div class="gallery">
-      <img class="shot-board" src="img/tablero.jpg" alt="Tablero de STRATEGY con casillas de colores, fichas y cartas de estrategia">
-      <img class="shot-cards" src="img/cartas.jpg" alt="Cartas de desafío, problema y verdadero o falso del juego">
+      <div class="shot shot-board"><img src="img/tablero.jpg" alt="Tablero de STRATEGY con casillas de colores, fichas y cartas de estrategia"></div>
+      <div class="shot shot-cards"><img src="img/cartas.jpg" alt="Cartas de desafío, problema y verdadero o falso del juego"></div>
     </div>
     <div>
       <h2>Qué viene en la caja</h2>
@@ -698,6 +717,18 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
   </div>
 </div>
 
+<!-- VIDEO EXPLICATIVO -->
+<div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Video explicativo">
+  <div class="video-card">
+    <div class="video-head">
+      <h3>Cómo se juega STRATEGY</h3>
+      <button class="x" id="closeVideo" aria-label="Cerrar video">×</button>
+    </div>
+    <div class="video-frame" id="videoFrame"></div>
+    <div class="video-foot">Un recorrido de dos minutos por el tablero, las cartas y una partida de ejemplo.</div>
+  </div>
+</div>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -709,6 +740,10 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
     aula:       { id:"aula",       name:"Pack Aula",      sub:"5 cajas · guía para el docente", price:109990, img:"img/tablero.jpg" }
   };
   var SHIP_COST = 3990, FREE_SHIP_FROM = 50000;
+  /* Enlace del video explicativo. Acepta un enlace normal de YouTube
+     (https://www.youtube.com/watch?v=... o https://youtu.be/...) o de Vimeo.
+     Si queda vacío, la ventana muestra un aviso de "próximamente". */
+  var VIDEO_URL = "";
   var COUPONS = { APRENDE15:{ off:.15, label:"15% de descuento" }, PROFE10:{ off:.10, label:"10% de descuento docentes" } };
 
   var cart = [], coupon = null, ship = "despacho";
@@ -823,9 +858,9 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
 
   $("#openCart").addEventListener("click", openCart);
   $("#closeCart").addEventListener("click", closeCart);
-  $("#overlay").addEventListener("click", function(){ closeCart(); closeCheckout(); });
+  $("#overlay").addEventListener("click", function(){ closeCart(); closeCheckout(); closeVideo(); });
   document.addEventListener("keydown", function(e){
-    if (e.key === "Escape"){ closeCart(); closeCheckout(); }
+    if (e.key === "Escape"){ closeCart(); closeCheckout(); closeVideo(); }
   });
 
   $$("[data-add]").forEach(function(b){
@@ -969,6 +1004,41 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
     box.classList.add("show");
     e.target.reset();
     box.scrollIntoView({ block:"nearest" });
+  });
+
+  /* ---------- video explicativo ---------- */
+  function embedUrl(u){
+    var m;
+    if ((m = u.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([\w-]{11})/))) return "https://www.youtube-nocookie.com/embed/" + m[1] + "?autoplay=1&rel=0";
+    if ((m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/))) return "https://player.vimeo.com/video/" + m[1] + "?autoplay=1";
+    return u;
+  }
+  function openVideo(){
+    var frame = $("#videoFrame");
+    if (VIDEO_URL){
+      frame.innerHTML = '<iframe src="' + embedUrl(VIDEO_URL) + '" title="Video explicativo de STRATEGY" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+    } else {
+      frame.innerHTML = '<div class="video-placeholder"><div><div class="big-play">▶</div>'
+        + '<p style="font-family:Fredoka,sans-serif;font-size:1.3rem;color:#fff">Video explicativo próximamente</p>'
+        + '<p>Estamos grabando la partida de ejemplo. Mientras tanto, revisa <a href="#incluye" style="color:var(--yellow)">qué viene en la caja</a>.</p></div></div>';
+    }
+    closeCart();
+    $("#videoModal").classList.add("show");
+    $("#overlay").classList.add("show");
+    $("#closeVideo").focus();
+  }
+  function closeVideo(){
+    var vm = $("#videoModal");
+    if (!vm.classList.contains("show")) return;
+    vm.classList.remove("show");
+    $("#videoFrame").innerHTML = "";  /* detiene la reproducción */
+    if (!$("#drawer").classList.contains("show") && !$("#checkout").classList.contains("show")) $("#overlay").classList.remove("show");
+  }
+  $("#openVideo").addEventListener("click", openVideo);
+  $("#closeVideo").addEventListener("click", closeVideo);
+  $("#videoFrame").addEventListener("click", function(e){
+    var a = e.target.closest ? e.target.closest("a[href^='#']") : null;
+    if (a) closeVideo();
   });
 
   /* ---------- acordeón FAQ ---------- */

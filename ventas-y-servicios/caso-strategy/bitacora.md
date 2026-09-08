@@ -2,6 +2,20 @@
 
 Entradas en orden cronológico inverso (la más reciente arriba).
 
+## 2026-09-08 — Corrección de imágenes deformadas y ventana de video
+
+- Las dos imágenes de la galería "Qué viene en la caja" se veían altas y
+  angostas en algunos navegadores porque dependían de la propiedad CSS
+  `aspect-ratio` aplicada al `<img>`. Ahora van dentro de un contenedor de
+  proporción fija con `object-fit: cover`, que funciona igual en todos los
+  navegadores. La imagen de portada queda con ancho completo y alto automático.
+- Se agrega un botón "Ver video explicativo" en la portada que abre una
+  ventana con marco 16:9. El enlace del video se configura en `VIDEO_URL`;
+  si está vacío muestra un aviso de "próximamente". Se cierra con ×, con
+  Escape o tocando el fondo, y detiene la reproducción al cerrarse.
+- Probado en 1280, 820 y 390 px: ninguna imagen queda deformada y la batería
+  anterior de pruebas sigue pasando.
+
 ## 2026-09-08 — Se incorpora el prototipo original de la tienda y se separan sus imágenes
 
 - Se reemplaza la versión reconstruida por el `index.html` original del
