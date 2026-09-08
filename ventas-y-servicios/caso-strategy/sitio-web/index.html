@@ -1,962 +1,1002 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CL">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STRATEGY | Juega, piensa y aprende</title>
-  <meta name="description" content="STRATEGY es el juego de mesa educativo que convierte las matemáticas en diversión. Para niños de 4° a 8° básico. Compra online con despacho a todo Chile o cotiza para tu colegio.">
-  <meta property="og:title" content="STRATEGY · Juega, piensa y aprende">
-  <meta property="og:description" content="El juego de mesa que convierte las matemáticas en diversión. Venta online y cotizaciones para colegios.">
-  <meta property="og:image" content="img/producto-strategy.jpg">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231d3a8a'/%3E%3Ctext x='32' y='44' font-family='Arial Black,Arial' font-weight='900' font-size='34' fill='%23fbbf24' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
-  <style>
-    :root {
-      --navy: #1d3a8a;
-      --navy-dark: #142a66;
-      --yellow: #fbbf24;
-      --yellow-dark: #d99e06;
-      --orange: #f97316;
-      --green: #22a24b;
-      --purple: #7c3aed;
-      --sky: #0ea5e9;
-      --red: #e11d48;
-      --ink: #111827;
-      --muted: #4b5563;
-      --line: #e5e7eb;
-      --bg: #f6f7fb;
-      --card: #ffffff;
-      --radius: 18px;
-      --shadow: 0 10px 30px rgba(20, 42, 102, .10);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
-    body { font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55; }
-    img { max-width: 100%; display: block; }
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; cursor: pointer; }
-    .container { width: min(1120px, 92%); margin: 0 auto; }
-    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STRATEGY — El juego de mesa que convierte las matemáticas en diversión</title>
+<meta name="description" content="Compra en línea STRATEGY, el juego de mesa educativo para aprender matemáticas. Para 2 a 4 jugadores, desde 8 años. Despacho a todo Chile y venta por volumen para colegios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#16306B;
+  --navy-deep:#0D1D45;
+  --navy-soft:#25478F;
+  --yellow:#FFD22E;
+  --yellow-deep:#F0B800;
+  --paper:#F6F7FB;
+  --white:#FFFFFF;
+  --ink:#152142;
+  --ink-soft:#4B5878;
+  --green:#35A76B;
+  --purple:#7C5AC8;
+  --orange:#F08B2B;
+  --red:#E2483C;
+  --sky:#3FA9E0;
+  --line:#DCE2F0;
+  --radius-s:10px;
+  --radius-m:18px;
+  --radius-l:28px;
+  --shadow-card:0 14px 34px rgba(13,29,69,.10);
+  --shadow-lift:0 22px 50px rgba(13,29,69,.22);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none !important;animation:none !important}
+}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.display{font-family:"Fredoka","Nunito",sans-serif;font-weight:700;line-height:1.08;letter-spacing:-.01em;margin:0}
+h1{font-size:clamp(2.4rem,5.2vw,3.9rem)}
+h2{font-size:clamp(1.9rem,3.6vw,2.9rem)}
+h3{font-size:1.28rem}
+p{margin:0 0 1rem}
+a{color:inherit}
+img{max-width:100%;display:block}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-    /* ---------- Header ---------- */
-    header { position: sticky; top: 0; z-index: 50; background: var(--navy); color: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.18); }
-    nav { width: min(1120px, 92%); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 1.35rem; letter-spacing: .04em; }
-    .brand .logo { width: 38px; height: 38px; border-radius: 10px; background: var(--yellow); color: var(--navy); display: grid; place-items: center; font-weight: 900; font-size: 1.3rem; }
-    nav ul { list-style: none; display: flex; align-items: center; gap: 4px; }
-    nav ul a { display: block; padding: 8px 12px; border-radius: 10px; font-weight: 600; font-size: .95rem; opacity: .92; }
-    nav ul a:hover, nav ul a.active { background: rgba(255,255,255,.12); opacity: 1; }
-    .menu-btn { display: none; background: transparent; border: 2px solid rgba(255,255,255,.5); color: #fff; border-radius: 10px; padding: 6px 10px; font-size: 1.2rem; }
-    .cart-btn { position: relative; display: inline-flex; align-items: center; gap: 6px; background: var(--yellow); color: var(--navy) !important; font-weight: 800 !important; border-radius: 999px !important; padding: 8px 14px !important; }
-    .cart-btn:hover { background: #fcd34d !important; }
-    .badge { min-width: 20px; height: 20px; padding: 0 6px; background: var(--red); color: #fff; border-radius: 999px; font-size: .75rem; font-weight: 800; display: inline-grid; place-items: center; }
-    .badge:empty { display: none; }
+/* ---------- botones ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  border:none;border-radius:999px;padding:.92rem 1.7rem;
+  font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.02rem;
+  text-decoration:none;transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.btn:active{transform:translateY(2px)}
+.btn-yellow{background:var(--yellow);color:var(--navy-deep);box-shadow:0 5px 0 var(--yellow-deep)}
+.btn-yellow:hover{background:#FFDC5C}
+.btn-navy{background:var(--navy);color:#fff;box-shadow:0 5px 0 var(--navy-deep)}
+.btn-navy:hover{background:var(--navy-soft)}
+.btn-ghost{background:transparent;color:var(--navy);border:2px solid var(--navy)}
+.btn-ghost:hover{background:rgba(22,48,107,.07)}
+.btn-block{width:100%}
+.btn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
 
-    /* ---------- Hero ---------- */
-    .hero { background: radial-gradient(circle at 15% 20%, rgba(251,191,36,.18), transparent 40%), linear-gradient(135deg, var(--navy-dark), var(--navy) 60%, #2a4fb0); color: #fff; padding: 56px 0 72px; overflow: hidden; position: relative; }
-    .hero::after { content: "+ − × ÷ = ?"; position: absolute; right: -10px; bottom: -30px; font-size: 9rem; font-weight: 900; opacity: .06; letter-spacing: .1em; pointer-events: none; }
-    .hero-inner { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; }
-    .eyebrow { display: inline-block; background: var(--yellow); color: var(--navy); font-weight: 800; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; margin-bottom: 18px; }
-    .hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.05; font-weight: 900; letter-spacing: -.01em; }
-    .hero h1 span { color: var(--yellow); }
-    .hero p.lead { margin: 18px 0 26px; font-size: 1.15rem; color: rgba(255,255,255,.88); max-width: 46ch; }
-    .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 22px; border-radius: 999px; font-weight: 800; border: 2px solid transparent; transition: transform .12s ease, box-shadow .12s ease, background .12s ease; }
-    .btn:hover { transform: translateY(-2px); }
-    .btn.primary { background: var(--yellow); color: var(--navy); box-shadow: 0 8px 20px rgba(251,191,36,.35); }
-    .btn.primary:hover { background: #fcd34d; }
-    .btn.secondary { background: transparent; color: #fff; border-color: rgba(255,255,255,.6); }
-    .btn.secondary:hover { background: rgba(255,255,255,.1); }
-    .btn.dark { background: var(--navy); color: #fff; }
-    .btn.dark:hover { background: var(--navy-dark); }
-    .btn.outline { background: #fff; color: var(--navy); border-color: var(--navy); }
-    .btn.small { padding: 9px 16px; font-size: .9rem; }
-    .btn[disabled] { opacity: .5; cursor: not-allowed; transform: none; }
-    .hero-media { position: relative; }
-    .hero-media img { border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,.35); transform: rotate(-2deg); }
-    .hero-chips { position: absolute; left: -10px; bottom: -18px; display: flex; gap: 8px; flex-wrap: wrap; }
-    .chip { background: #fff; color: var(--navy); font-weight: 800; font-size: .85rem; padding: 8px 12px; border-radius: 999px; box-shadow: var(--shadow); display: inline-flex; gap: 6px; align-items: center; }
+/* ---------- encabezado ---------- */
+header{
+  position:sticky;top:0;z-index:60;background:var(--navy);color:#fff;
+  border-bottom:4px solid var(--yellow);
+}
+.bar{display:flex;align-items:center;gap:1.4rem;padding:.72rem 0;min-height:66px}
+.logo{font-family:"Fredoka",sans-serif;font-weight:700;font-size:1.6rem;letter-spacing:.04em;text-decoration:none;color:#fff}
+.logo span{color:var(--yellow)}
+nav{margin-left:auto;display:flex;gap:1.4rem;align-items:center}
+nav a{text-decoration:none;font-weight:600;font-size:.98rem;opacity:.9}
+nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:5px}
+.cart-btn{
+  background:var(--yellow);color:var(--navy-deep);border:none;border-radius:999px;
+  padding:.55rem 1.15rem;font-family:"Fredoka",sans-serif;font-weight:600;display:flex;align-items:center;gap:.5rem;
+}
+.cart-btn:hover{background:#FFDC5C}
+.cart-count{background:var(--navy);color:#fff;border-radius:999px;min-width:23px;height:23px;display:grid;place-items:center;font-size:.83rem}
+@media(max-width:860px){nav a{display:none}}
 
-    /* ---------- Sections ---------- */
-    section { padding: 72px 0; }
-    .section-title { text-align: center; max-width: 60ch; margin: 0 auto 40px; }
-    .section-title h2 { font-size: clamp(1.8rem, 3.4vw, 2.5rem); font-weight: 900; color: var(--navy); }
-    .section-title p { color: var(--muted); margin-top: 10px; font-size: 1.05rem; }
-    .grid { display: grid; gap: 22px; }
-    .grid.four { grid-template-columns: repeat(4, 1fr); }
-    .grid.three { grid-template-columns: repeat(3, 1fr); }
-    .grid.two { grid-template-columns: repeat(2, 1fr); }
-    .card { background: var(--card); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
-    .icon { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-size: 1.6rem; color: #fff; margin-bottom: 16px; }
-    .icon.sky { background: var(--sky); } .icon.green { background: var(--green); } .icon.purple { background: var(--purple); } .icon.orange { background: var(--orange); }
-    .card h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 6px; }
-    .card p { color: var(--muted); font-size: .97rem; }
+/* ---------- hero ---------- */
+.hero{
+  background:
+    radial-gradient(circle at 12% 18%, rgba(63,169,224,.30), transparent 42%),
+    radial-gradient(circle at 88% 78%, rgba(124,90,200,.28), transparent 45%),
+    var(--navy);
+  color:#fff;padding:3.4rem 0 4rem;position:relative;overflow:hidden;
+}
+.hero::after{
+  content:"+  ×  ÷  −  =  8  3  ?  +  ×  ÷  =  −  ?  8";
+  position:absolute;inset:auto 0 -.4rem 0;font-family:"Fredoka",sans-serif;font-size:5.4rem;
+  color:rgba(255,255,255,.05);letter-spacing:.6rem;white-space:nowrap;pointer-events:none;
+}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:3.4rem;align-items:center;position:relative;z-index:1}
+.kicker{
+  display:inline-block;background:var(--yellow);color:var(--navy-deep);
+  font-family:"Fredoka",sans-serif;font-weight:600;font-size:.95rem;
+  padding:.32rem 1rem;border-radius:999px;margin-bottom:1.1rem;
+}
+.hero h1{margin-bottom:.9rem}
+.hero .lead{font-size:1.22rem;max-width:34ch;color:#E6ECF9;margin-bottom:1.6rem}
+.specs{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:1.9rem;padding:0;list-style:none}
+.specs li{
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+  border-radius:999px;padding:.35rem 1rem;font-size:.95rem;font-weight:600;
+}
+.price-row{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.3rem}
+.price{font-family:"Fredoka",sans-serif;font-size:2.5rem;font-weight:700;color:var(--yellow)}
+.price-was{text-decoration:line-through;color:#AFC0E4;font-size:1.1rem}
+.price-note{font-size:.92rem;color:#C7D3EE}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.8rem}
+.hero-art{position:relative}
+.hero-art img{
+  border-radius:var(--radius-l);box-shadow:var(--shadow-lift);
+  transform:rotate(-2.2deg);border:6px solid #fff;
+}
+.hero-tag{
+  position:absolute;right:-10px;bottom:-18px;background:var(--yellow);color:var(--navy-deep);
+  font-family:"Fredoka",sans-serif;font-weight:700;font-size:1.02rem;line-height:1.2;text-align:center;
+  padding:.85rem 1.1rem;border-radius:18px;transform:rotate(4deg);box-shadow:0 10px 22px rgba(0,0,0,.25);
+}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:2.4rem}
+  .hero-art{order:-1}
+  .hero-art img{transform:none}
+}
 
-    /* ---------- El juego ---------- */
-    #juego { background: #fff; }
-    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-    .about img { border-radius: var(--radius); box-shadow: var(--shadow); }
-    .about h2 { font-size: 2rem; color: var(--navy); font-weight: 900; margin-bottom: 14px; }
-    .about p { color: var(--muted); margin-bottom: 12px; }
-    .specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 22px 0; }
-    .spec { background: var(--bg); border-radius: 14px; padding: 14px; text-align: center; }
-    .spec strong { display: block; font-size: 1.3rem; color: var(--navy); }
-    .spec span { font-size: .85rem; color: var(--muted); }
-    .includes { margin-top: 18px; border: 2px dashed var(--line); border-radius: var(--radius); padding: 0; overflow: hidden; max-height: 0; opacity: 0; transition: max-height .45s ease, opacity .3s ease, padding .3s ease; }
-    .includes.open { max-height: 900px; opacity: 1; padding: 22px; border-color: var(--yellow); }
-    .includes h4 { color: var(--navy); margin-bottom: 12px; }
-    .includes ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .includes li { display: flex; gap: 10px; align-items: flex-start; font-size: .95rem; color: var(--muted); }
-    .includes li::before { content: "✔"; color: var(--green); font-weight: 900; }
+/* ---------- secciones ---------- */
+section{padding:4.4rem 0}
+[id]{scroll-margin-top:92px}
+.section-head{max-width:60ch;margin-bottom:2.4rem}
+.section-head p{color:var(--ink-soft);font-size:1.08rem;margin:.7rem 0 0}
 
-    /* ---------- Cartas ---------- */
-    .cards-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
-    .playcard { border-radius: 16px; padding: 18px 16px; color: #fff; min-height: 190px; display: flex; flex-direction: column; box-shadow: var(--shadow); transform: rotate(var(--r, 0deg)); transition: transform .15s ease; }
-    .playcard:hover { transform: rotate(0) translateY(-6px); }
-    .playcard .type { font-weight: 900; letter-spacing: .08em; font-size: .8rem; text-transform: uppercase; opacity: .9; }
-    .playcard .q { background: rgba(255,255,255,.95); color: var(--ink); border-radius: 10px; padding: 12px; margin-top: 12px; font-size: .92rem; flex: 1; }
-    .playcard .q small { display: block; color: var(--muted); margin-top: 6px; }
-    .pc-green { background: var(--green); --r: -3deg; } .pc-blue { background: var(--sky); --r: 2deg; } .pc-purple { background: var(--purple); --r: -1deg; } .pc-orange { background: var(--orange); --r: 3deg; } .pc-navy { background: var(--navy); --r: -2deg; }
+/* beneficios */
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+.benefit{background:#fff;border-radius:var(--radius-m);padding:1.7rem 1.4rem;border-bottom:6px solid var(--c);box-shadow:var(--shadow-card)}
+.benefit .glyph{
+  width:52px;height:52px;border-radius:15px;background:var(--c);color:#fff;
+  display:grid;place-items:center;font-family:"Fredoka",sans-serif;font-size:1.5rem;margin-bottom:1rem;
+}
+.benefit h3{margin-bottom:.4rem;font-size:1.12rem}
+.benefit p{margin:0;font-size:.98rem;color:var(--ink-soft)}
+@media(max-width:900px){.benefits{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.benefits{grid-template-columns:1fr}}
 
-    /* ---------- Tienda ---------- */
-    #tienda { background: linear-gradient(180deg, #fff 0%, var(--bg) 100%); }
-    .products { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
-    .product { background: #fff; border-radius: 22px; overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; position: relative; }
-    .product img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
-    .product .tag { position: absolute; top: 16px; left: 16px; background: var(--yellow); color: var(--navy); font-weight: 900; font-size: .78rem; padding: 6px 12px; border-radius: 999px; letter-spacing: .06em; text-transform: uppercase; }
-    .product .body { padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
-    .product h3 { font-size: 1.35rem; color: var(--navy); }
-    .product .desc { color: var(--muted); font-size: .97rem; }
-    .product ul { list-style: none; color: var(--muted); font-size: .92rem; display: grid; gap: 6px; }
-    .product ul li::before { content: "• "; color: var(--yellow-dark); font-weight: 900; }
-    .price-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--line); }
-    .price { font-size: 1.7rem; font-weight: 900; color: var(--navy); }
-    .price small { display: block; font-size: .78rem; color: var(--muted); font-weight: 600; }
-    .qty { display: inline-flex; align-items: center; border: 2px solid var(--line); border-radius: 999px; overflow: hidden; }
-    .qty button { width: 34px; height: 34px; border: 0; background: #fff; font-weight: 900; color: var(--navy); }
-    .qty button:hover { background: var(--bg); }
-    .qty input { width: 40px; text-align: center; border: 0; font-weight: 800; -moz-appearance: textfield; }
-    .qty input::-webkit-inner-spin-button { -webkit-appearance: none; }
-    .promo-banner { margin-top: 30px; background: var(--navy); color: #fff; border-radius: 18px; padding: 18px 24px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
-    .promo-banner code { background: var(--yellow); color: var(--navy); font-weight: 900; padding: 4px 10px; border-radius: 8px; font-size: 1rem; letter-spacing: .08em; }
-    .notice { margin-top: 18px; text-align: center; color: var(--muted); font-size: .88rem; }
+/* qué incluye */
+.includes{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center}
+.gallery{display:grid;gap:1rem;align-content:start}
+.gallery img{border-radius:var(--radius-m);box-shadow:var(--shadow-card);width:100%;object-fit:cover}
+.gallery .shot-board{aspect-ratio:16/10}
+.gallery .shot-cards{aspect-ratio:24/8}
+.box-list{list-style:none;padding:0;margin:0}
+.box-list li{display:flex;gap:.85rem;padding:.72rem 0;border-bottom:1px dashed var(--line);align-items:flex-start}
+.box-list li:last-child{border-bottom:none}
+.tick{flex:0 0 26px;height:26px;border-radius:8px;background:var(--navy);color:var(--yellow);display:grid;place-items:center;font-size:.85rem;font-family:"Fredoka",sans-serif}
+@media(max-width:900px){.includes{grid-template-columns:1fr;gap:2rem}}
 
-    /* ---------- Testimonios / highlight ---------- */
-    .highlight { background: var(--yellow); }
-    .highlight .section-title h2, .highlight .section-title p { color: var(--navy); }
-    .quote { background: #fff; border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
-    .quote p { color: var(--ink); font-style: italic; }
-    .quote footer { margin-top: 12px; font-weight: 800; color: var(--navy); font-size: .9rem; }
-    .quote footer span { display: block; font-weight: 500; color: var(--muted); }
+/* tienda */
+.shop{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;align-items:start}
+.card{background:var(--paper);border:2px solid var(--line);border-radius:var(--radius-l);padding:1.8rem;display:flex;flex-direction:column;height:100%}
+.card.featured{border-color:var(--yellow);background:#fff;box-shadow:var(--shadow-card);position:relative}
+.card.featured::before{
+  content:"Más vendido";position:absolute;top:-14px;left:1.6rem;background:var(--yellow);color:var(--navy-deep);
+  font-family:"Fredoka",sans-serif;font-weight:600;font-size:.86rem;padding:.22rem .9rem;border-radius:999px;
+}
+.card h3{font-size:1.4rem;margin-bottom:.35rem}
+.card .who{color:var(--ink-soft);font-size:.96rem;margin-bottom:1.1rem}
+.card .card-price{font-family:"Fredoka",sans-serif;font-size:2rem;color:var(--navy);margin-bottom:.2rem}
+.card .unit{font-size:.9rem;color:var(--ink-soft);margin-bottom:1.2rem}
+.card ul{list-style:none;padding:0;margin:0 0 1.5rem;font-size:.97rem}
+.card ul li{padding:.32rem 0 .32rem 1.5rem;position:relative;color:var(--ink-soft)}
+.card ul li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+.card .btn{margin-top:auto}
+@media(max-width:960px){.products{grid-template-columns:1fr}}
 
-    /* ---------- Cotización ---------- */
-    .split { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: start; }
-    .split h2 { font-size: 2rem; color: var(--navy); font-weight: 900; margin-bottom: 14px; }
-    .split p { color: var(--muted); margin-bottom: 12px; }
-    .bullets { list-style: none; display: grid; gap: 10px; margin: 16px 0; }
-    .bullets li { display: flex; gap: 10px; color: var(--muted); }
-    .bullets li::before { content: "★"; color: var(--yellow-dark); }
-    form { display: grid; gap: 14px; }
-    .form-card { background: #fff; border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    label { display: grid; gap: 6px; font-weight: 700; font-size: .9rem; color: var(--navy); }
-    input, select, textarea { width: 100%; padding: 12px 14px; border: 2px solid var(--line); border-radius: 12px; font: inherit; background: #fff; color: var(--ink); transition: border-color .12s ease; }
-    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--navy); }
-    input.invalid, select.invalid { border-color: var(--red); background: #fff1f2; }
-    .error { color: var(--red); font-size: .8rem; font-weight: 600; min-height: 1em; }
-    .hint { font-size: .8rem; color: var(--muted); font-weight: 500; }
-    .success { background: #ecfdf5; border: 2px solid #34d399; color: #065f46; border-radius: 14px; padding: 18px; display: none; }
-    .success.show { display: block; }
-    .radio-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .radio-group label { flex-direction: row; display: flex; align-items: center; gap: 10px; border: 2px solid var(--line); border-radius: 12px; padding: 12px; cursor: pointer; font-weight: 600; }
-    .radio-group input { width: auto; }
-    .radio-group label:has(input:checked) { border-color: var(--navy); background: #eef2ff; }
+/* pasos: tablero salida -> meta */
+.steps-board{background:var(--navy);color:#fff;border-radius:var(--radius-l);padding:2.6rem 2rem}
+.track{display:flex;align-items:stretch;gap:.9rem;flex-wrap:wrap}
+.tile{flex:1 1 190px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.2);border-radius:var(--radius-m);padding:1.3rem}
+.tile.start,.tile.end{flex:0 0 118px;display:grid;place-items:center;font-family:"Fredoka",sans-serif;font-size:1.15rem;text-align:center}
+.tile.start{background:var(--green);border-color:var(--green)}
+.tile.end{background:var(--red);border-color:var(--red)}
+.tile .num{
+  width:34px;height:34px;border-radius:10px;background:var(--yellow);color:var(--navy-deep);
+  display:grid;place-items:center;font-family:"Fredoka",sans-serif;font-weight:700;margin-bottom:.7rem;
+}
+.tile h3{font-size:1.06rem;margin-bottom:.3rem}
+.tile p{margin:0;font-size:.94rem;color:#D6DFF3}
 
-    /* ---------- Contacto / footer ---------- */
-    #contacto { background: #fff; }
-    .contact-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .contact-cards .card { text-align: center; }
-    .contact-cards .card strong { display: block; color: var(--navy); margin-top: 6px; word-break: break-word; }
-    footer.site { background: var(--navy-dark); color: rgba(255,255,255,.85); padding: 34px 0; font-size: .9rem; }
-    footer.site .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
-    footer.site a { color: var(--yellow); }
-    .disclaimer { background: #fff7ed; border-left: 4px solid var(--orange); padding: 12px 14px; border-radius: 10px; font-size: .85rem; color: #7c2d12; }
+/* colegios */
+.institutional{display:grid;grid-template-columns:.9fr 1.1fr;gap:3rem;align-items:start}
+.quote-form{background:#fff;border-radius:var(--radius-l);padding:2rem;box-shadow:var(--shadow-card)}
+.field{margin-bottom:1rem}
+.field label{display:block;font-weight:700;font-size:.93rem;margin-bottom:.32rem}
+.field input,.field select,.field textarea{
+  width:100%;padding:.72rem .9rem;border:2px solid var(--line);border-radius:var(--radius-s);
+  font:inherit;font-size:.98rem;background:#fff;color:var(--ink);
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--sky);outline:none}
+.field textarea{min-height:86px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.err{color:var(--red);font-size:.86rem;font-weight:700;margin-top:.3rem;display:none}
+.field.invalid input,.field.invalid select{border-color:var(--red)}
+.field.invalid .err{display:block}
+.form-note{font-size:.88rem;color:var(--ink-soft);margin:0}
+.ok-msg{background:#E7F6EE;border:2px solid var(--green);border-radius:var(--radius-m);padding:1.1rem 1.2rem;margin-top:1rem;display:none}
+.ok-msg.show{display:block}
+@media(max-width:900px){.institutional{grid-template-columns:1fr;gap:2rem}.two{grid-template-columns:1fr}}
 
-    /* ---------- Carrito (drawer) ---------- */
-    .overlay { position: fixed; inset: 0; background: rgba(17,24,39,.55); opacity: 0; pointer-events: none; transition: opacity .2s ease; z-index: 80; }
-    .overlay.show { opacity: 1; pointer-events: auto; }
-    .drawer { position: fixed; top: 0; right: 0; height: 100dvh; width: min(440px, 100%); background: #fff; z-index: 90; transform: translateX(100%); transition: transform .28s ease; display: flex; flex-direction: column; box-shadow: -10px 0 40px rgba(0,0,0,.2); }
-    .drawer.show { transform: translateX(0); }
-    .drawer header { position: static; background: var(--navy); padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; box-shadow: none; }
-    .drawer header h3 { font-size: 1.2rem; }
-    .close { background: transparent; border: 0; color: #fff; font-size: 1.6rem; line-height: 1; }
-    .drawer .items { flex: 1; overflow-y: auto; padding: 18px 22px; display: grid; gap: 14px; align-content: start; }
-    .item { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 14px; padding: 10px; }
-    .item img { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; }
-    .item h4 { font-size: .95rem; color: var(--navy); }
-    .item .sub { font-size: .85rem; color: var(--muted); }
-    .item .remove { background: transparent; border: 0; color: var(--red); font-size: .8rem; font-weight: 700; padding: 0; margin-top: 4px; }
-    .empty { text-align: center; color: var(--muted); padding: 40px 10px; }
-    .empty span { display: block; font-size: 3rem; margin-bottom: 10px; }
-    .summary { border-top: 1px solid var(--line); padding: 16px 22px 22px; display: grid; gap: 10px; background: var(--bg); }
-    .summary .line { display: flex; justify-content: space-between; font-size: .95rem; color: var(--muted); }
-    .summary .line[hidden] { display: none; }
-    .summary .line.total { font-size: 1.25rem; font-weight: 900; color: var(--navy); border-top: 2px solid var(--line); padding-top: 10px; }
-    .summary .line .ok { color: var(--green); font-weight: 700; }
-    .coupon { display: flex; gap: 8px; }
-    .coupon input { text-transform: uppercase; }
-    .coupon button { white-space: nowrap; }
-    .msg { font-size: .85rem; font-weight: 600; min-height: 1.1em; }
-    .msg.ok { color: var(--green); } .msg.bad { color: var(--red); }
+/* faq */
+.faq{max-width:800px}
+.q{border-bottom:1px solid var(--line)}
+.q button{
+  width:100%;background:none;border:none;text-align:left;padding:1.15rem 2.4rem 1.15rem 0;
+  font-family:"Fredoka",sans-serif;font-size:1.08rem;color:var(--ink);position:relative;
+}
+.q button::after{content:"+";position:absolute;right:.4rem;top:50%;transform:translateY(-50%);font-size:1.5rem;color:var(--navy)}
+.q[open] button::after{content:"–"}
+.q .a{padding:0 0 1.2rem;color:var(--ink-soft);display:none}
+.q[open] .a{display:block}
 
-    /* ---------- Checkout modal ---------- */
-    .modal { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 16px; background: rgba(17,24,39,.6); }
-    .modal.show { display: flex; }
-    .modal .box { background: #fff; border-radius: 22px; width: min(760px, 100%); max-height: 92dvh; overflow-y: auto; box-shadow: 0 30px 80px rgba(0,0,0,.4); }
-    .modal .box header { position: static; background: var(--navy); color: #fff; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: none; border-radius: 22px 22px 0 0; }
-    .modal .box .content { padding: 24px; }
-    .steps { display: flex; gap: 8px; margin-bottom: 18px; font-size: .8rem; font-weight: 700; color: var(--muted); }
-    .steps span { padding: 6px 10px; border-radius: 999px; background: var(--bg); }
-    .steps span.on { background: var(--yellow); color: var(--navy); }
-    .order-summary { background: var(--bg); border-radius: 14px; padding: 14px 16px; font-size: .92rem; display: grid; gap: 6px; }
-    .order-summary div { display: flex; justify-content: space-between; }
-    .order-summary .t { font-weight: 900; color: var(--navy); border-top: 1px solid var(--line); padding-top: 6px; font-size: 1.05rem; }
-    .confirm { text-align: center; padding: 20px 10px; }
-    .confirm .big { font-size: 3.5rem; }
-    .confirm h3 { color: var(--navy); font-size: 1.6rem; margin: 8px 0; }
-    .confirm p { color: var(--muted); }
-    .confirm code { background: var(--bg); padding: 4px 10px; border-radius: 8px; font-weight: 900; color: var(--navy); }
+/* footer */
+footer{background:var(--navy-deep);color:#C9D5EE;padding:3.2rem 0 2rem;font-size:.96rem}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:2.4rem;margin-bottom:2.2rem}
+footer h4{color:#fff;font-size:1.05rem;margin-bottom:.7rem}
+footer a{color:#C9D5EE;text-decoration:none}
+footer a:hover{color:var(--yellow);text-decoration:underline}
+.foot-list{list-style:none;padding:0;margin:0}
+.foot-list li{padding:.22rem 0}
+.legal{border-top:1px solid rgba(255,255,255,.14);padding-top:1.2rem;font-size:.87rem;color:#93A5CC;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+@media(max-width:820px){.foot-grid{grid-template-columns:1fr}}
 
-    .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 30px); background: var(--navy); color: #fff; padding: 12px 20px; border-radius: 999px; font-weight: 700; box-shadow: var(--shadow); opacity: 0; transition: all .25s ease; z-index: 120; pointer-events: none; max-width: 92vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: .95rem; }
-    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+/* ---------- carrito ---------- */
+.overlay{position:fixed;inset:0;background:rgba(13,29,69,.55);opacity:0;pointer-events:none;transition:opacity .2s;z-index:80}
+.overlay.show{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;height:100%;width:min(430px,100%);background:#fff;z-index:90;
+  transform:translateX(102%);transition:transform .26s ease;display:flex;flex-direction:column;
+}
+.drawer.show{transform:translateX(0)}
+.drawer-head{background:var(--navy);color:#fff;padding:1.15rem 1.4rem;display:flex;align-items:center;justify-content:space-between}
+.drawer-head h3{font-size:1.25rem}
+.x{background:none;border:none;color:inherit;font-size:1.7rem;line-height:1;padding:0 .2rem}
+.drawer-body{flex:1;overflow:auto;padding:1.3rem 1.4rem}
+.drawer-foot{border-top:1px solid var(--line);padding:1.2rem 1.4rem;background:var(--paper)}
+.line{display:flex;gap:.9rem;padding:.9rem 0;border-bottom:1px solid var(--line)}
+.line img{width:66px;height:66px;object-fit:cover;border-radius:12px;flex:0 0 66px}
+.line h4{font-size:1rem;margin-bottom:.2rem}
+.line .sub{font-size:.87rem;color:var(--ink-soft);margin-bottom:.45rem}
+.qty{display:flex;align-items:center;gap:.5rem}
+.qty button{width:30px;height:30px;border-radius:9px;border:2px solid var(--line);background:#fff;font-weight:700;color:var(--navy);line-height:1}
+.qty span{min-width:22px;text-align:center;font-weight:700}
+.line .rm{background:none;border:none;color:var(--ink-soft);font-size:.85rem;text-decoration:underline;padding:0;margin-left:auto;align-self:flex-start}
+.empty{text-align:center;color:var(--ink-soft);padding:2.6rem 1rem}
+.totals{font-size:.98rem;margin-bottom:1rem}
+.totals div{display:flex;justify-content:space-between;padding:.22rem 0}
+.totals .grand{font-family:"Fredoka",sans-serif;font-size:1.35rem;color:var(--navy);border-top:2px solid var(--line);margin-top:.5rem;padding-top:.6rem}
+.coupon{display:flex;gap:.5rem;margin-bottom:.9rem}
+.coupon input{flex:1;padding:.6rem .8rem;border:2px solid var(--line);border-radius:var(--radius-s);font:inherit;font-size:.95rem;text-transform:uppercase}
+.coupon button{border:2px solid var(--navy);background:#fff;color:var(--navy);border-radius:var(--radius-s);padding:.6rem 1rem;font-weight:700;font-size:.92rem}
+.ship-opts{display:grid;gap:.5rem;margin-bottom:1rem}
+.ship-opts label{display:flex;gap:.6rem;align-items:center;border:2px solid var(--line);border-radius:var(--radius-s);padding:.6rem .8rem;font-size:.94rem;cursor:pointer;background:#fff}
+.ship-opts input{accent-color:var(--navy)}
+.hint{font-size:.85rem;color:var(--ink-soft);margin:.4rem 0 0}
+.hint.good{color:var(--green);font-weight:700}
 
-    /* ---------- Responsive ---------- */
-    @media (max-width: 980px) {
-      .grid.four { grid-template-columns: repeat(2, 1fr); }
-      .cards-row { grid-template-columns: repeat(3, 1fr); }
-      .contact-cards { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 820px) {
-      .menu-btn { display: inline-block; }
-      nav ul { position: absolute; top: 68px; left: 0; right: 0; background: var(--navy-dark); flex-direction: column; align-items: stretch; padding: 10px 4%; display: none; gap: 2px; }
-      nav ul.open { display: flex; }
-      nav ul li:last-child { margin-top: 8px; }
-      .cart-btn { justify-content: center; }
-      .hero { padding: 40px 0 60px; }
-      .hero-inner, .about, .split, .products { grid-template-columns: 1fr; }
-      .hero-media img { transform: none; }
-      .hero-chips { position: static; margin-top: 14px; }
-      .grid.three { grid-template-columns: 1fr; }
-      .cards-row { grid-template-columns: repeat(2, 1fr); }
-      .row, .radio-group { grid-template-columns: 1fr; }
-      .includes ul { grid-template-columns: 1fr; }
-      section { padding: 52px 0; }
-      .toast { top: 82px; bottom: auto; transform: translate(-50%, -20px); }
-      .toast.show { transform: translate(-50%, 0); }
-    }
-    @media (max-width: 520px) {
-      .grid.four { grid-template-columns: 1fr; }
-      .cards-row { grid-template-columns: 1fr 1fr; }
-      .specs { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-      .spec strong { font-size: 1.05rem; }
-      .price-row { flex-direction: column; align-items: stretch; }
-      .price-row .btn { width: 100%; }
-    }
-  </style>
+/* ---------- checkout ---------- */
+.modal{
+  position:fixed;inset:0;z-index:95;display:none;align-items:flex-start;justify-content:center;
+  padding:2.5rem 1rem;overflow:auto;
+}
+.modal.show{display:flex}
+.modal-card{background:#fff;border-radius:var(--radius-l);width:min(640px,100%);box-shadow:var(--shadow-lift);overflow:hidden}
+.modal-head{background:var(--navy);color:#fff;padding:1.2rem 1.6rem;display:flex;justify-content:space-between;align-items:center}
+.modal-body{padding:1.7rem 1.6rem}
+.pay-opts{display:grid;gap:.5rem;margin:.4rem 0 1.2rem}
+.pay-opts label{display:flex;gap:.6rem;align-items:center;border:2px solid var(--line);border-radius:var(--radius-s);padding:.65rem .85rem;cursor:pointer;font-size:.96rem}
+.summary{background:var(--paper);border-radius:var(--radius-m);padding:1rem 1.2rem;margin-bottom:1.3rem;font-size:.96rem}
+.summary div{display:flex;justify-content:space-between;padding:.18rem 0}
+.summary .grand{font-family:"Fredoka",sans-serif;font-size:1.2rem;color:var(--navy);border-top:2px solid var(--line);margin-top:.4rem;padding-top:.5rem}
+.done{text-align:center;padding:2.4rem 1.6rem}
+.done .check{width:74px;height:74px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:2.2rem;margin:0 auto 1.2rem}
+.order-id{font-family:"Fredoka",sans-serif;font-size:1.5rem;color:var(--navy);letter-spacing:.05em}
+.demo-note{font-size:.85rem;color:var(--ink-soft);background:#FFF7DB;border:1px solid var(--yellow);border-radius:var(--radius-s);padding:.6rem .8rem;margin-top:1rem}
+
+/* toast */
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translate(-50%,120%);
+  background:var(--navy);color:#fff;padding:.8rem 1.4rem;border-radius:999px;z-index:100;
+  font-weight:700;font-size:.95rem;transition:transform .25s ease;box-shadow:var(--shadow-lift);
+}
+.toast.show{transform:translate(-50%,0)}
+</style>
 </head>
 <body>
 
 <header>
-  <nav>
-    <a class="brand" href="#inicio"><span class="logo">S</span> STRATEGY</a>
-    <button class="menu-btn" aria-label="Abrir menú" aria-expanded="false" onclick="toggleMenu(this)">☰</button>
-    <ul id="menu">
-      <li><a href="#inicio" class="active">Inicio</a></li>
-      <li><a href="#juego">El juego</a></li>
-      <li><a href="#cartas">Cartas</a></li>
-      <li><a href="#tienda">Tienda</a></li>
-      <li><a href="#colegios">Colegios</a></li>
-      <li><a href="#contacto">Contacto</a></li>
-      <li><a href="#" class="cart-btn" id="open-cart" onclick="openCart(event)">🛒 Carrito <span class="badge" id="cart-count"></span></a></li>
-    </ul>
-  </nav>
+  <div class="wrap bar">
+    <a class="logo" href="#inicio">STRATEGY<span>.</span></a>
+    <nav>
+      <a href="#juego">El juego</a>
+      <a href="#tienda">Tienda</a>
+      <a href="#colegios">Colegios</a>
+      <a href="#ayuda">Ayuda</a>
+    </nav>
+    <button class="cart-btn" id="openCart" aria-label="Abrir carrito de compras">
+      Carrito <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
 </header>
 
-<main>
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="inicio">
-    <div class="container hero-inner">
-      <div>
-        <div class="eyebrow">Juego de mesa educativo · 4° a 8° básico</div>
-        <h1>¡Juega, piensa <span>y aprende!</span></h1>
-        <p class="lead">STRATEGY es el juego de mesa que convierte las matemáticas en diversión. Desafíos, preguntas y estrategia para aprender jugando en familia o en la sala de clases.</p>
-        <div class="buttons">
-          <a class="btn primary" href="#tienda">Comprar ahora</a>
-          <button class="btn secondary" id="btn-incluye" onclick="verIncluye()">Ver qué incluye</button>
-        </div>
+<main id="inicio">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker">Juega, piensa y aprende</span>
+      <h1>El juego de mesa que convierte las matemáticas en diversión</h1>
+      <p class="lead">Tablero, cartas de desafío y estrategia para practicar operaciones desde 4° a 8° básico. Sin pantallas, en familia o en la sala de clases.</p>
+      <ul class="specs">
+        <li>2 a 4 jugadores</li>
+        <li>60 minutos</li>
+        <li>Desde 8 años</li>
+        <li>Despacho a todo Chile</li>
+      </ul>
+      <div class="price-row">
+        <span class="price">$24.990</span>
+        <span class="price-was">$29.990</span>
       </div>
-      <div class="hero-media">
-        <img src="img/producto-strategy.jpg" alt="Caja, tablero, cartas, dados y fichas del juego STRATEGY" width="1400" height="933" fetchpriority="high">
-        <div class="hero-chips">
-          <span class="chip">👥 2 a 4 jugadores</span>
-          <span class="chip">⏱ 60 minutos</span>
-          <span class="chip">🎓 8+ años</span>
-        </div>
+      <p class="price-note">Precio con IVA incluido. Despacho gratis en compras sobre $50.000.</p>
+      <div class="hero-cta">
+        <button class="btn btn-yellow" data-add="individual">Agregar al carrito</button>
+        <a class="btn btn-ghost" href="#incluye" style="color:#fff;border-color:rgba(255,255,255,.6)">Ver qué incluye</a>
       </div>
     </div>
-  </section>
-
-  <!-- ============ BENEFICIOS ============ -->
-  <section id="beneficios">
-    <div class="container">
-      <div class="section-title">
-        <h2>Más que un juego, una forma de aprender</h2>
-        <p>Cada partida trabaja habilidades que los niños necesitan dentro y fuera del colegio.</p>
-      </div>
-      <div class="grid four">
-        <div class="card"><div class="icon sky">🧠</div><h3>Pensamiento lógico</h3><p>Desarrolla el razonamiento y la capacidad de anticiparse a las jugadas del rival.</p></div>
-        <div class="card"><div class="icon green">➕</div><h3>Operaciones matemáticas</h3><p>Practica sumas, restas, multiplicaciones, divisiones y múltiplos sin darse cuenta.</p></div>
-        <div class="card"><div class="icon purple">👥</div><h3>Trabajo en equipo</h3><p>Fomenta la colaboración, el respeto de turnos y la toma de decisiones en grupo.</p></div>
-        <div class="card"><div class="icon orange">🏆</div><h3>Aprende y diviértete</h3><p>Pequeños desafíos, grandes aprendizajes y mejores oportunidades para el futuro.</p></div>
-      </div>
+    <div class="hero-art">
+      <img src="img/hero-juego.jpg" alt="Caja del juego de mesa STRATEGY junto al tablero armado sobre una mesa">
+      <div class="hero-tag">15% dcto.<br>con el código<br>APRENDE15</div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ============ EL JUEGO ============ -->
-  <section id="juego">
-    <div class="container about">
-      <img src="img/afiche-strategy.jpg" alt="Afiche promocional de STRATEGY" width="900" height="1350" loading="lazy">
-      <div>
-        <h2>¿Cómo se juega?</h2>
-        <p>Los jugadores avanzan por un tablero de casillas numeradas y de colores. En cada casilla deben resolver una carta: un desafío de cálculo, un problema, una pregunta de verdadero o falso o una carta de estrategia que puede cambiar el rumbo de la partida.</p>
-        <p>Gana quien llegue primero a la <strong>META</strong>, pero llegar requiere pensar, planificar y decidir. Por eso STRATEGY es una herramienta ideal tanto para la casa como para reforzar contenidos de 4° a 8° básico en el aula.</p>
-        <div class="specs">
-          <div class="spec"><strong>2–4</strong><span>jugadores</span></div>
-          <div class="spec"><strong>60 min</strong><span>por partida</span></div>
-          <div class="spec"><strong>8+</strong><span>años</span></div>
-        </div>
-        <button class="btn dark" onclick="verIncluye()">Ver qué incluye la caja</button>
-        <div class="includes" id="incluye" aria-live="polite">
-          <h4>📦 Contenido de la caja</h4>
-          <ul>
-            <li>1 tablero plegable de casillas numeradas</li>
-            <li>4 fichas de colores (rojo, amarillo, verde y azul)</li>
-            <li>2 dados</li>
-            <li>Mazo de cartas <strong>Desafío</strong></li>
-            <li>Mazo de cartas <strong>Pregunta / Problema</strong></li>
-            <li>Mazo de cartas <strong>Verdadero o falso</strong></li>
-            <li>Mazo de cartas <strong>Estrategia</strong> y <strong>Comodín</strong></li>
-            <li>Guía del jugador con reglas y estrategias para ganar</li>
-          </ul>
-        </div>
-      </div>
+<!-- BENEFICIOS -->
+<section id="juego">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Más que un juego, una forma de aprender</h2>
+      <p>Cada partida mezcla suerte y decisión: avanzar en el tablero depende de resolver un desafío, elegir bien una carta o arriesgarse a la casilla siguiente.</p>
     </div>
-  </section>
-
-  <!-- ============ CARTAS ============ -->
-  <section id="cartas">
-    <div class="container">
-      <div class="section-title">
-        <h2>Los tipos de cartas</h2>
-        <p>Cinco tipos de cartas para que ninguna partida sea igual a la anterior.</p>
-      </div>
-      <div class="cards-row">
-        <div class="playcard pc-green"><span class="type">Desafío</span><div class="q">24 ÷ 4 = ?<small>a) 4 &nbsp; b) 6 &nbsp; c) 8</small></div></div>
-        <div class="playcard pc-blue"><span class="type">Problema</span><div class="q">Si tienes 3 cajas con 5 lápices cada una, ¿cuántos lápices tienes en total?</div></div>
-        <div class="playcard pc-purple"><span class="type">Verdadero o falso</span><div class="q">18 es múltiplo de 3.<small>Responde antes de que se acabe el turno.</small></div></div>
-        <div class="playcard pc-orange"><span class="type">Estrategia</span><div class="q">💡 Avanza 2 casillas extra o haz retroceder 1 casilla a otro jugador.</div></div>
-        <div class="playcard pc-navy"><span class="type">Guía del jugador</span><div class="q">🏆 Reglas y estrategias para ganar. Incluida en cada caja.</div></div>
-      </div>
+    <div class="benefits">
+      <article class="benefit" style="--c:var(--sky)">
+        <div class="glyph">?</div>
+        <h3>Pensamiento lógico</h3>
+        <p>Cada turno obliga a decidir: calcular rápido o guardar la carta de estrategia para el final.</p>
+      </article>
+      <article class="benefit" style="--c:var(--green)">
+        <div class="glyph">×</div>
+        <h3>Operaciones al ritmo del curso</h3>
+        <p>Sumas, restas, multiplicación, división, múltiplos y fracciones alineados con el programa de 4° a 8° básico.</p>
+      </article>
+      <article class="benefit" style="--c:var(--purple)">
+        <div class="glyph">◍</div>
+        <h3>Se juega en equipo</h3>
+        <p>Funciona en parejas o grupos, así que sirve igual en la casa un domingo que en una clase de 30 estudiantes.</p>
+      </article>
+      <article class="benefit" style="--c:var(--orange)">
+        <div class="glyph">★</div>
+        <h3>Aprenden sin darse cuenta</h3>
+        <p>Los errores se corrigen en la mesa, entre risas, y no en una prueba con nota.</p>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ TIENDA ============ -->
-  <section id="tienda">
-    <div class="container">
-      <div class="section-title">
-        <h2>Venta online</h2>
-        <p>Cómpralo aquí y recíbelo en tu casa o colegio. Despacho a todo Chile.</p>
-      </div>
-      <div class="products">
-        <article class="product" data-id="juego">
-          <span class="tag">Más vendido</span>
-          <img src="img/caja-strategy.jpg" alt="Caja del juego STRATEGY" loading="lazy">
-          <div class="body">
-            <h3>STRATEGY · Juego de mesa</h3>
-            <p class="desc">La caja completa para jugar en casa: tablero, fichas, dados, todos los mazos de cartas y la guía del jugador.</p>
-            <ul>
-              <li>Para 2 a 4 jugadores desde los 8 años</li>
-              <li>Contenidos de matemáticas de 4° a 8° básico</li>
-              <li>Ideal para familias y regalos</li>
-            </ul>
-            <div class="price-row">
-              <div class="price" data-price="24990">$24.990<small>IVA incluido</small></div>
-              <div class="qty" aria-label="Cantidad">
-                <button type="button" onclick="stepQty('juego', -1)" aria-label="Menos">−</button>
-                <input type="number" id="qty-juego" value="1" min="1" max="20" inputmode="numeric">
-                <button type="button" onclick="stepQty('juego', 1)" aria-label="Más">+</button>
-              </div>
-            </div>
-            <button class="btn primary" onclick="addToCart('juego')">🛒 Agregar al carrito</button>
-          </div>
-        </article>
-
-        <article class="product" data-id="pack">
-          <span class="tag">Para colegios</span>
-          <img src="img/producto-strategy.jpg" alt="Set de juegos STRATEGY con tablero y cartas" loading="lazy">
-          <div class="body">
-            <h3>Pack Aula · 5 juegos</h3>
-            <p class="desc">Pensado para trabajar con un curso completo: cinco cajas de STRATEGY para formar grupos y una guía de uso pedagógico para el docente.</p>
-            <ul>
-              <li>5 cajas completas de STRATEGY</li>
-              <li>Guía docente con actividades por nivel</li>
-              <li>Ahorra frente a la compra individual</li>
-            </ul>
-            <div class="price-row">
-              <div class="price" data-price="109990">$109.990<small>IVA incluido · equivale a $21.998 por juego</small></div>
-              <div class="qty" aria-label="Cantidad">
-                <button type="button" onclick="stepQty('pack', -1)" aria-label="Menos">−</button>
-                <input type="number" id="qty-pack" value="1" min="1" max="20" inputmode="numeric">
-                <button type="button" onclick="stepQty('pack', 1)" aria-label="Más">+</button>
-              </div>
-            </div>
-            <button class="btn primary" onclick="addToCart('pack')">🛒 Agregar al carrito</button>
-          </div>
-        </article>
-      </div>
-
-      <div class="promo-banner">
-        <div>🎁 <strong>Lanzamiento:</strong> usa el código <code>APRENDE15</code> en el carrito y obtén un 15% de descuento.</div>
-        <div>🚚 Despacho <strong>gratis</strong> en compras sobre $80.000 · Retiro sin costo en Santiago Centro.</div>
-      </div>
-      <p class="notice">Prototipo académico: los precios son referenciales y el pago es simulado. No se realizan cobros reales.</p>
+<!-- QUÉ INCLUYE -->
+<section id="incluye" style="padding-top:0">
+  <div class="wrap includes">
+    <div class="gallery">
+      <img class="shot-board" src="img/tablero.jpg" alt="Tablero de STRATEGY con casillas de colores, fichas y cartas de estrategia">
+      <img class="shot-cards" src="img/cartas.jpg" alt="Cartas de desafío, problema y verdadero o falso del juego">
     </div>
-  </section>
-
-  <!-- ============ TESTIMONIOS ============ -->
-  <section class="highlight" id="opiniones">
-    <div class="container">
-      <div class="section-title">
-        <h2>Piensa · Planifica · Decide · ¡Gana!</h2>
-        <p>Lo que dicen quienes ya juegan STRATEGY.</p>
-      </div>
-      <div class="grid three">
-        <div class="quote"><p>“Mis alumnos piden jugar STRATEGY en vez del recreo. Repasamos divisiones sin que se den cuenta.”</p><footer>Profesora de 5° básico <span>Testimonio ilustrativo del prototipo</span></footer></div>
-        <div class="quote"><p>“Por fin un juego que compite con la tablet. Jugamos todos los domingos y mi hijo mejoró en matemáticas.”</p><footer>Apoderada <span>Testimonio ilustrativo del prototipo</span></footer></div>
-        <div class="quote"><p>“Las cartas de estrategia hacen que hasta el que va perdiendo pueda dar vuelta la partida. Es muy entretenido.”</p><footer>Jugador, 11 años <span>Testimonio ilustrativo del prototipo</span></footer></div>
-      </div>
+    <div>
+      <h2>Qué viene en la caja</h2>
+      <p style="color:var(--ink-soft)">Todo listo para jugar la primera partida el mismo día que llega, y todo pensado para que también sirva en la sala de clases.</p>
+      <ul class="box-list">
+        <li><span class="tick">1</span><div><strong>Tablero plegable</strong> con el recorrido de salida a meta y casillas de suma, resta, multiplicación y división.</div></li>
+        <li><span class="tick">4</span><div><strong>Fichas de jugador</strong> en rojo, azul, amarillo y verde, para 2 a 4 jugadores.</div></li>
+        <li><span class="tick">2</span><div><strong>Dados</strong> para el avance en el tablero.</div></li>
+        <li><span class="tick">4</span><div><strong>Mazos de cartas</strong> con más de 200 cartas: Desafío (ejercicios con alternativas), Problema (situaciones con enunciado), Verdadero o Falso, y Estrategia y Comodín para avanzar, bloquear o repetir turno.</div></li>
+        <li><span class="tick">1</span><div><strong>Guía del jugador</strong> con las reglas, tres modos de juego y sugerencias para usarlo en clases.</div></li>
+        <li><span class="tick">1</span><div><strong>Ficha de contenidos curriculares</strong> que detalla qué materias de 4° a 8° básico refuerza cada mazo.</div></li>
+        <li><span class="tick">✱</span><div><strong>Repuestos disponibles:</strong> si se pierde una ficha, un dado o una carta, la reponemos por separado sin comprar la caja de nuevo.</div></li>
+      </ul>
+      <p style="color:var(--ink-soft);font-size:.95rem;margin-top:1.2rem;padding-top:1rem;border-top:2px solid var(--line)">Los colegios reciben además la <strong>guía pedagógica para el docente</strong> y un taller de capacitación para usar el juego en clases. <a href="#colegios" style="color:var(--navy);font-weight:700">Ver compra institucional</a></p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ COTIZACIÓN COLEGIOS ============ -->
-  <section id="colegios">
-    <div class="container split">
-      <div>
-        <h2>Cotización para colegios y fundaciones</h2>
-        <p>¿Quieres llevar STRATEGY a tu establecimiento? Armamos una propuesta a medida según la cantidad de cursos, con precios preferentes por volumen y capacitación para docentes.</p>
-        <ul class="bullets">
-          <li>Descuentos especiales desde 10 juegos</li>
-          <li>Guía pedagógica alineada a 4° a 8° básico</li>
-          <li>Taller de inducción para profesores</li>
-          <li>Factura y orden de compra para instituciones</li>
+<!-- TIENDA -->
+<section class="shop" id="tienda">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Elige tu formato</h2>
+      <p>Para la casa, para la sala de clases o para todo un establecimiento. Todos los precios incluyen IVA y se emite boleta o factura.</p>
+    </div>
+    <div class="products">
+      <article class="card featured">
+        <h3>Juego STRATEGY</h3>
+        <p class="who">Para familias y regalo</p>
+        <div class="card-price">$24.990</div>
+        <div class="unit">Una caja completa</div>
+        <ul>
+          <li>Tablero, 4 fichas, 2 dados y 4 mazos</li>
+          <li>Guía del jugador y ficha de contenidos 4° a 8°</li>
+          <li>Despacho en 3 a 5 días hábiles</li>
         </ul>
-        <p class="hint">Respondemos en un plazo máximo de 2 días hábiles.</p>
-      </div>
-      <form class="form-card" id="form-cotizacion" novalidate>
-        <div class="row">
-          <label>Institución
-            <input type="text" name="institucion" required placeholder="Ej. Colegio San Martín">
-            <span class="error"></span>
-          </label>
-          <label>Tipo de institución
-            <select name="tipo" required>
-              <option value="">Selecciona…</option>
-              <option>Colegio municipal</option>
-              <option>Colegio particular subvencionado</option>
-              <option>Colegio particular</option>
-              <option>Fundación / ONG</option>
-              <option>Otro</option>
-            </select>
-            <span class="error"></span>
-          </label>
-        </div>
-        <div class="row">
-          <label>Nombre de contacto
-            <input type="text" name="contacto" required placeholder="Nombre y apellido">
-            <span class="error"></span>
-          </label>
-          <label>Cargo
-            <input type="text" name="cargo" placeholder="Ej. Jefa de UTP">
-            <span class="error"></span>
-          </label>
-        </div>
-        <div class="row">
-          <label>Correo institucional
-            <input type="email" name="email" required placeholder="nombre@colegio.cl">
-            <span class="error"></span>
-          </label>
-          <label>Teléfono
-            <input type="tel" name="telefono" required placeholder="+56 9 1234 5678">
-            <span class="error"></span>
-          </label>
-        </div>
-        <div class="row">
-          <label>Cantidad de juegos aproximada
-            <input type="number" name="cantidad" min="1" required placeholder="Ej. 20">
-            <span class="error"></span>
-          </label>
-          <label>Región
-            <select name="region" required data-regiones></select>
-            <span class="error"></span>
-          </label>
-        </div>
-        <label>Comentarios
-          <textarea name="comentarios" rows="3" placeholder="Cursos, fechas, necesidades de capacitación…"></textarea>
-        </label>
-        <button class="btn dark" type="submit">Solicitar cotización</button>
-        <div class="success" id="cotizacion-ok"></div>
-      </form>
-    </div>
-  </section>
+        <button class="btn btn-yellow btn-block" data-add="individual">Agregar al carrito</button>
+      </article>
 
-  <!-- ============ CONTACTO ============ -->
-  <section id="contacto">
-    <div class="container">
-      <div class="section-title">
-        <h2>Contacto</h2>
-        <p>¿Dudas sobre el juego, tu pedido o el despacho? Escríbenos.</p>
-      </div>
-      <div class="contact-cards">
-        <div class="card"><div class="icon orange" style="margin:0 auto 12px">✉️</div>Correo<strong>hola@strategyjuego.cl</strong></div>
-        <div class="card"><div class="icon green" style="margin:0 auto 12px">💬</div>WhatsApp<strong>+56 9 1234 5678</strong></div>
-        <div class="card"><div class="icon purple" style="margin:0 auto 12px">📸</div>Instagram<strong>@strategy.juego</strong></div>
+      <article class="card">
+        <h3>Pack Aula</h3>
+        <p class="who">Para un curso completo</p>
+        <div class="card-price">$109.990</div>
+        <div class="unit">5 cajas · $21.998 por unidad</div>
+        <ul>
+          <li>5 juegos completos</li>
+          <li>Guía pedagógica para el docente</li>
+          <li>Repuesto de fichas incluido</li>
+        </ul>
+        <button class="btn btn-navy btn-block" data-add="aula">Agregar al carrito</button>
+      </article>
+
+      <article class="card">
+        <h3>Compra institucional</h3>
+        <p class="who">Colegios, fundaciones y municipios</p>
+        <div class="card-price">Cotiza</div>
+        <div class="unit">Desde 20 cajas, con descuento por volumen</div>
+        <ul>
+          <li>Capacitación a docentes incluida</li>
+          <li>Evaluación de uso al mes de implementado</li>
+          <li>Facturación y orden de compra</li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="#colegios">Pedir cotización</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO COMPRAR -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Cómo comprar</h2>
+      <p>Tres pasos, igual que el tablero: de la salida a la meta.</p>
+    </div>
+    <div class="steps-board">
+      <div class="track">
+        <div class="tile start">SALIDA</div>
+        <div class="tile">
+          <div class="num">1</div>
+          <h3>Arma tu pedido</h3>
+          <p>Agrega el juego o el Pack Aula al carrito y aplica tu código de descuento si tienes uno.</p>
+        </div>
+        <div class="tile">
+          <div class="num">2</div>
+          <h3>Paga en línea</h3>
+          <p>Débito, crédito o transferencia. Recibes la confirmación y la boleta en tu correo.</p>
+        </div>
+        <div class="tile">
+          <div class="num">3</div>
+          <h3>Recíbelo en casa</h3>
+          <p>Despacho a todo Chile en 3 a 5 días hábiles, o retiro sin costo en nuestro punto de entrega.</p>
+        </div>
+        <div class="tile end">META</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- COLEGIOS -->
+<section id="colegios" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap institutional">
+    <div>
+      <h2>Para colegios y fundaciones</h2>
+      <p style="color:var(--ink-soft)">Trabajamos con establecimientos de forma directa: presentamos el juego al equipo directivo, hacemos una demostración con los docentes y acordamos el precio según la cantidad de cajas.</p>
+      <p style="color:var(--ink-soft)">Después de la compra capacitamos a los profesores, evaluamos el uso al mes de implementado y reponemos las piezas que se pierdan.</p>
+      <ul class="box-list" style="margin-top:1.4rem">
+        <li><span class="tick">✓</span><div>Demostración presencial o por videollamada, sin costo.</div></li>
+        <li><span class="tick">✓</span><div>Documento con los contenidos curriculares que cubre el juego.</div></li>
+        <li><span class="tick">✓</span><div>Precio por volumen desde 20 cajas.</div></li>
+      </ul>
+    </div>
+    <form class="quote-form" id="quoteForm" novalidate>
+      <h3 style="margin-bottom:.3rem">Solicita una cotización</h3>
+      <p class="form-note" style="margin-bottom:1.3rem">Respondemos en un día hábil con la propuesta y las condiciones de pago.</p>
+      <div class="two">
+        <div class="field">
+          <label for="q-nombre">Nombre y apellido</label>
+          <input id="q-nombre" name="nombre" type="text" autocomplete="name">
+          <span class="err">Escribe tu nombre.</span>
+        </div>
+        <div class="field">
+          <label for="q-cargo">Cargo</label>
+          <input id="q-cargo" name="cargo" type="text" placeholder="Jefe de UTP, director…">
+          <span class="err">Indica tu cargo.</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="q-estab">Establecimiento o institución</label>
+        <input id="q-estab" name="estab" type="text">
+        <span class="err">Falta el nombre del establecimiento.</span>
+      </div>
+      <div class="two">
+        <div class="field">
+          <label for="q-email">Correo</label>
+          <input id="q-email" name="email" type="email" autocomplete="email">
+          <span class="err">Revisa el correo, no parece válido.</span>
+        </div>
+        <div class="field">
+          <label for="q-cajas">Cantidad de cajas</label>
+          <input id="q-cajas" name="cajas" type="number" min="1" value="20">
+          <span class="err">Indica al menos 1 caja.</span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="q-msg">Cuéntanos qué necesitas <span style="font-weight:400;color:var(--ink-soft)">(opcional)</span></label>
+        <textarea id="q-msg" name="mensaje" placeholder="Cursos, fecha estimada, si requieren factura…"></textarea>
+      </div>
+      <button class="btn btn-navy btn-block" type="submit">Enviar solicitud</button>
+      <div class="ok-msg" id="quoteOk" role="status"></div>
+    </form>
+  </div>
+</section>
+
+<!-- AYUDA -->
+<section id="ayuda">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Preguntas frecuentes</h2>
+    </div>
+    <div class="faq">
+      <details class="q">
+        <summary style="list-style:none"><button type="button" style="pointer-events:none">¿Cuánto demora el despacho?</button></summary>
+        <div class="a">Entre 3 y 5 días hábiles en la Región Metropolitana y hasta 7 días hábiles en regiones. El despacho es gratis en compras sobre $50.000 y también puedes retirar sin costo en nuestro punto de entrega.</div>
+      </details>
+      <details class="q">
+        <summary style="list-style:none"><button type="button" style="pointer-events:none">¿Emiten factura?</button></summary>
+        <div class="a">Sí. Al pagar puedes elegir boleta o factura. Para compras institucionales trabajamos con orden de compra y facturación a 30 días.</div>
+      </details>
+      <details class="q">
+        <summary style="list-style:none"><button type="button" style="pointer-events:none">¿Sirve para un curso completo?</button></summary>
+        <div class="a">Sí. El Pack Aula trae 5 cajas, suficientes para grupos de 4 a 6 estudiantes en un curso de 30. Sobre 20 cajas conviene pedir una cotización institucional.</div>
+      </details>
+      <details class="q">
+        <summary style="list-style:none"><button type="button" style="pointer-events:none">Se me perdieron fichas, ¿puedo reponerlas?</button></summary>
+        <div class="a">Sí. Vendemos repuestos de fichas, dados y mazos por separado. Escríbenos por WhatsApp con el número de tu pedido y te enviamos el detalle.</div>
+      </details>
+      <details class="q">
+        <summary style="list-style:none"><button type="button" style="pointer-events:none">¿Puedo cambiar o devolver el juego?</button></summary>
+        <div class="a">Tienes 10 días corridos desde que recibes el pedido para cambiarlo o pedir la devolución del dinero, siempre que la caja esté sin uso. Si llega dañado, lo reemplazamos sin costo.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
 </main>
 
-<footer class="site">
-  <div class="container">
-    <div>© 2026 STRATEGY · Juega, piensa y aprende. Prototipo académico para la asignatura Ventas y Servicios, INACAP.</div>
-    <div>El futuro también se juega 🙂 · <a href="#inicio">Volver arriba</a></div>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>STRATEGY</h4>
+        <p style="margin:0">Juegos de mesa educativos para aprender matemáticas jugando. Piensa, planifica, decide y gana.</p>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul class="foot-list">
+          <li><a href="mailto:ventas@strategy.cl">ventas@strategy.cl</a></li>
+          <li><a href="https://wa.me/56900000000">WhatsApp +56 9 0000 0000</a></li>
+          <li><a href="https://instagram.com">Instagram @strategy.cl</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Compra</h4>
+        <ul class="foot-list">
+          <li><a href="#tienda">Tienda en línea</a></li>
+          <li><a href="#colegios">Compra institucional</a></li>
+          <li><a href="#ayuda">Despachos y devoluciones</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 STRATEGY. Todos los derechos reservados.</span>
+      <span>Sitio desarrollado como proyecto para la asignatura Ventas y Servicios.</span>
+    </div>
   </div>
 </footer>
 
-<!-- ============ CARRITO ============ -->
-<div class="overlay" id="overlay" onclick="closeCart()"></div>
-<aside class="drawer" id="drawer" aria-label="Carrito de compras" aria-hidden="true">
-  <header>
-    <h3>🛒 Tu carrito</h3>
-    <button class="close" onclick="closeCart()" aria-label="Cerrar carrito">×</button>
-  </header>
-  <div class="items" id="cart-items"></div>
-  <div class="summary" id="cart-summary">
+<!-- CARRITO -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Carrito de compras">
+  <div class="drawer-head">
+    <h3>Tu carrito</h3>
+    <button class="x" id="closeCart" aria-label="Cerrar carrito">×</button>
+  </div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot" id="cartFoot" hidden>
     <div class="coupon">
-      <input type="text" id="coupon-input" placeholder="Código de descuento" aria-label="Código de descuento" autocomplete="off">
-      <button class="btn outline small" type="button" onclick="applyCoupon()">Aplicar</button>
+      <label class="sr" for="coupon">Código de descuento</label>
+      <input id="coupon" placeholder="Código de descuento">
+      <button type="button" id="applyCoupon">Aplicar</button>
     </div>
-    <div class="msg" id="coupon-msg"></div>
-    <label>Despacho
-      <select id="shipping-select" onchange="persist(); renderCart()">
-        <option value="retiro">Retiro en tienda (Santiago Centro) · Gratis</option>
-        <option value="rm">Región Metropolitana · $3.990</option>
-        <option value="regiones">Otras regiones · $6.990</option>
-      </select>
-    </label>
-    <div class="line"><span>Subtotal</span><span id="sum-subtotal">$0</span></div>
-    <div class="line" id="line-discount" hidden><span>Descuento <span id="discount-label"></span></span><span id="sum-discount">-$0</span></div>
-    <div class="line"><span>Despacho</span><span id="sum-shipping">$0</span></div>
-    <div class="line total"><span>Total</span><span id="sum-total">$0</span></div>
-    <button class="btn primary" id="checkout-btn" onclick="openCheckout()">Ir a pagar</button>
-    <button class="btn small" style="background:transparent;color:var(--red)" type="button" onclick="clearCart()">Vaciar carrito</button>
+    <p class="hint" id="couponHint"></p>
+    <div class="ship-opts" style="margin-top:1rem">
+      <label><input type="radio" name="ship" value="retiro"> Retiro en punto de entrega — gratis</label>
+      <label><input type="radio" name="ship" value="despacho" checked> Despacho a domicilio — $3.990</label>
+    </div>
+    <div class="totals" id="totals"></div>
+    <button class="btn btn-yellow btn-block" id="goCheckout">Continuar con el pago</button>
   </div>
 </aside>
 
-<!-- ============ CHECKOUT ============ -->
-<div class="modal" id="checkout" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
-  <div class="box">
-    <header>
-      <h3 id="checkout-title">Finalizar compra</h3>
-      <button class="close" onclick="closeCheckout()" aria-label="Cerrar">×</button>
-    </header>
-    <div class="content" id="checkout-content">
-      <div class="steps"><span class="on">1 · Tus datos</span><span>2 · Pago</span><span>3 · Confirmación</span></div>
-      <form id="form-pago" novalidate>
-        <div class="row">
-          <label>Nombre completo
-            <input type="text" name="nombre" required autocomplete="name" placeholder="Nombre y apellido">
-            <span class="error"></span>
-          </label>
-          <label>RUT
-            <input type="text" name="rut" required inputmode="text" placeholder="12.345.678-9" maxlength="12">
-            <span class="error"></span>
-          </label>
-        </div>
-        <div class="row">
-          <label>Correo electrónico
-            <input type="email" name="email" required autocomplete="email" placeholder="tu@correo.cl">
-            <span class="error"></span>
-          </label>
-          <label>Teléfono
-            <input type="tel" name="telefono" required autocomplete="tel" placeholder="+56 9 1234 5678">
-            <span class="error"></span>
-          </label>
-        </div>
-        <div class="row" id="address-fields">
-          <label>Región
-            <select name="region" required data-regiones></select>
-            <span class="error"></span>
-          </label>
-          <label>Comuna
-            <input type="text" name="comuna" required autocomplete="address-level2" placeholder="Ej. Ñuñoa">
-            <span class="error"></span>
-          </label>
-        </div>
-        <label id="address-line">Dirección de despacho
-          <input type="text" name="direccion" required autocomplete="street-address" placeholder="Calle, número, depto.">
-          <span class="error"></span>
-        </label>
-        <div>
-          <div style="font-weight:700;font-size:.9rem;color:var(--navy);margin-bottom:8px">Medio de pago</div>
-          <div class="radio-group">
-            <label><input type="radio" name="pago" value="Tarjeta de crédito o débito (Webpay)" checked> 💳 Tarjeta (Webpay)</label>
-            <label><input type="radio" name="pago" value="Transferencia bancaria"> 🏦 Transferencia</label>
+<!-- CHECKOUT -->
+<div class="modal" id="checkout" role="dialog" aria-modal="true" aria-label="Finalizar compra">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="checkoutTitle">Finalizar compra</h3>
+      <button class="x" id="closeCheckout" aria-label="Cerrar">×</button>
+    </div>
+    <div class="modal-body" id="checkoutBody">
+      <div class="summary" id="checkoutSummary"></div>
+      <form id="payForm" novalidate>
+        <div class="two">
+          <div class="field">
+            <label for="c-nombre">Nombre y apellido</label>
+            <input id="c-nombre" type="text" autocomplete="name">
+            <span class="err">Escribe tu nombre.</span>
+          </div>
+          <div class="field">
+            <label for="c-rut">RUT</label>
+            <input id="c-rut" type="text" placeholder="12.345.678-9">
+            <span class="err">Escribe un RUT válido.</span>
           </div>
         </div>
-        <div class="order-summary" id="order-summary"></div>
-        <div class="disclaimer">⚠️ <strong>Pago simulado.</strong> Este sitio es un prototipo académico: no se procesan transacciones reales ni se almacenan datos. Para cobrar de verdad se requeriría integrar Webpay o Mercado Pago con un servidor.</div>
-        <button class="btn primary" type="submit" id="pay-btn">Pagar ahora</button>
+        <div class="two">
+          <div class="field">
+            <label for="c-email">Correo</label>
+            <input id="c-email" type="email" autocomplete="email">
+            <span class="err">Revisa el correo, no parece válido.</span>
+          </div>
+          <div class="field">
+            <label for="c-fono">Teléfono</label>
+            <input id="c-fono" type="tel" placeholder="+56 9 1234 5678">
+            <span class="err">Escribe un teléfono de contacto.</span>
+          </div>
+        </div>
+        <div class="field" id="addrField">
+          <label for="c-dir">Dirección de despacho</label>
+          <input id="c-dir" type="text" placeholder="Calle, número, comuna">
+          <span class="err">Necesitamos la dirección para despachar.</span>
+        </div>
+        <div class="field">
+          <label for="c-region">Región</label>
+          <select id="c-region">
+            <option value="">Selecciona una región</option>
+            <option>Arica y Parinacota</option><option>Tarapacá</option><option>Antofagasta</option>
+            <option>Atacama</option><option>Coquimbo</option><option>Valparaíso</option>
+            <option>Metropolitana</option><option>O'Higgins</option><option>Maule</option>
+            <option>Ñuble</option><option>Biobío</option><option>La Araucanía</option>
+            <option>Los Ríos</option><option>Los Lagos</option><option>Aysén</option><option>Magallanes</option>
+          </select>
+          <span class="err">Elige tu región.</span>
+        </div>
+        <label style="display:block;font-weight:700;font-size:.93rem;margin-bottom:.1rem">Forma de pago</label>
+        <div class="pay-opts">
+          <label><input type="radio" name="pay" value="Débito" checked> Tarjeta de débito</label>
+          <label><input type="radio" name="pay" value="Crédito"> Tarjeta de crédito</label>
+          <label><input type="radio" name="pay" value="Transferencia"> Transferencia bancaria</label>
+        </div>
+        <button class="btn btn-yellow btn-block" type="submit" id="payBtn">Pagar y confirmar pedido</button>
+        <p class="demo-note">Sitio de demostración: no se procesan pagos reales ni se guardan tus datos.</p>
       </form>
     </div>
   </div>
 </div>
 
-<div class="toast" id="toast" role="status"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-  /* ============================================================
-     Datos
-     ============================================================ */
-  const PRODUCTS = {
-    juego: { id: 'juego', name: 'STRATEGY · Juego de mesa', price: 24990, img: 'img/caja-strategy.jpg' },
-    pack:  { id: 'pack',  name: 'Pack Aula · 5 juegos',       price: 109990, img: 'img/producto-strategy.jpg' }
+(function(){
+  "use strict";
+
+  var CATALOG = {
+    individual: { id:"individual", name:"Juego STRATEGY", sub:"Caja completa · 2 a 4 jugadores", price:24990, img:"img/hero-juego.jpg" },
+    aula:       { id:"aula",       name:"Pack Aula",      sub:"5 cajas · guía para el docente", price:109990, img:"img/tablero.jpg" }
   };
-  const COUPONS = { APRENDE15: { pct: 15, label: 'APRENDE15 (15%)' } };
-  const SHIPPING = { retiro: 0, rm: 3990, regiones: 6990 };
-  const FREE_SHIPPING_FROM = 80000;
-  const REGIONES = [
-    'Arica y Parinacota','Tarapacá','Antofagasta','Atacama','Coquimbo','Valparaíso','Metropolitana de Santiago',
-    "Libertador General Bernardo O'Higgins",'Maule','Ñuble','Biobío','La Araucanía','Los Ríos','Los Lagos',
-    'Aysén del General Carlos Ibáñez del Campo','Magallanes y de la Antártica Chilena'
-  ];
-  const CLP = n => '$' + Math.round(n).toLocaleString('es-CL');
+  var SHIP_COST = 3990, FREE_SHIP_FROM = 50000;
+  var COUPONS = { APRENDE15:{ off:.15, label:"15% de descuento" }, PROFE10:{ off:.10, label:"10% de descuento docentes" } };
 
-  /* ============================================================
-     Estado del carrito (persistente en localStorage)
-     ============================================================ */
-  let cart = [];
-  let coupon = null;
-  try {
-    const saved = JSON.parse(localStorage.getItem('strategy-cart') || '{}');
-    if (Array.isArray(saved.items)) cart = saved.items.filter(i => PRODUCTS[i.id]);
-    if (saved.coupon && COUPONS[saved.coupon]) coupon = saved.coupon;
-    if (saved.shipping && SHIPPING[saved.shipping] !== undefined) document.getElementById('shipping-select').value = saved.shipping;
-  } catch (e) { /* almacenamiento no disponible: se sigue en memoria */ }
+  var cart = [], coupon = null, ship = "despacho";
 
-  function persist() {
-    try { localStorage.setItem('strategy-cart', JSON.stringify({ items: cart, coupon, shipping: document.getElementById('shipping-select').value })); } catch (e) {}
+  var clp = function(n){ return "$" + Math.round(n).toLocaleString("es-CL"); };
+  var $  = function(s){ return document.querySelector(s); };
+  var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+  /* ---------- toast ---------- */
+  var toastTimer;
+  function toast(msg){
+    var t = $("#toast");
+    t.textContent = msg; t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 2400);
   }
 
-  function stepQty(id, delta) {
-    const input = document.getElementById('qty-' + id);
-    input.value = Math.min(20, Math.max(1, (parseInt(input.value, 10) || 1) + delta));
+  /* ---------- cálculo ---------- */
+  function subtotal(){
+    return cart.reduce(function(s,i){ return s + i.price * i.qty; }, 0);
   }
-
-  function addToCart(id) {
-    const qty = Math.min(20, Math.max(1, parseInt(document.getElementById('qty-' + id).value, 10) || 1));
-    const item = cart.find(i => i.id === id);
-    if (item) item.qty = Math.min(20, item.qty + qty); else cart.push({ id, qty });
-    persist(); renderCart();
-    toast(`${PRODUCTS[id].name} agregado al carrito`);
-    openCart();
+  function discount(){
+    return coupon ? subtotal() * COUPONS[coupon].off : 0;
   }
-
-  function changeQty(id, delta) {
-    const item = cart.find(i => i.id === id);
-    if (!item) return;
-    item.qty += delta;
-    if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
-    persist(); renderCart();
+  function shipping(){
+    if (ship === "retiro") return 0;
+    return (subtotal() - discount()) >= FREE_SHIP_FROM ? 0 : SHIP_COST;
   }
+  function total(){ return subtotal() - discount() + shipping(); }
+  function count(){ return cart.reduce(function(s,i){ return s + i.qty; }, 0); }
 
-  function removeItem(id) { cart = cart.filter(i => i.id !== id); persist(); renderCart(); }
-
-  function clearCart() {
-    if (!cart.length) return;
-    cart = []; coupon = null; persist(); renderCart();
-    document.getElementById('coupon-msg').textContent = '';
-    document.getElementById('coupon-input').value = '';
-  }
-
-  function totals() {
-    const subtotal = cart.reduce((s, i) => s + PRODUCTS[i.id].price * i.qty, 0);
-    const discount = coupon ? Math.round(subtotal * COUPONS[coupon].pct / 100) : 0;
-    const shipKey = document.getElementById('shipping-select').value;
-    const afterDiscount = subtotal - discount;
-    const shipping = (shipKey === 'retiro' || afterDiscount >= FREE_SHIPPING_FROM || subtotal === 0) ? 0 : SHIPPING[shipKey];
-    const freeShipping = shipKey !== 'retiro' && afterDiscount >= FREE_SHIPPING_FROM && subtotal > 0;
-    return { subtotal, discount, shipping, freeShipping, shipKey, total: afterDiscount + shipping };
-  }
-
-  function renderCart() {
-    const count = cart.reduce((s, i) => s + i.qty, 0);
-    document.getElementById('cart-count').textContent = count || '';
-    const box = document.getElementById('cart-items');
-    if (!cart.length) {
-      box.innerHTML = '<div class="empty"><span>🧩</span>Tu carrito está vacío.<br>Agrega STRATEGY y empieza a aprender jugando.</div>';
-    } else {
-      box.innerHTML = cart.map(i => {
-        const p = PRODUCTS[i.id];
-        return `<div class="item">
-          <img src="${p.img}" alt="">
-          <div>
-            <h4>${p.name}</h4>
-            <div class="sub">${CLP(p.price)} c/u · <strong>${CLP(p.price * i.qty)}</strong></div>
-            <button class="remove" onclick="removeItem('${i.id}')">Quitar</button>
-          </div>
-          <div class="qty">
-            <button type="button" onclick="changeQty('${i.id}', -1)" aria-label="Menos">−</button>
-            <input type="text" value="${i.qty}" readonly aria-label="Cantidad">
-            <button type="button" onclick="changeQty('${i.id}', 1)" aria-label="Más">+</button>
-          </div>
-        </div>`;
-      }).join('');
+  /* ---------- carrito ---------- */
+  function add(id){
+    var found = null;
+    for (var i=0;i<cart.length;i++){ if (cart[i].id === id) found = cart[i]; }
+    if (found) { found.qty++; }
+    else {
+      var p = CATALOG[id];
+      cart.push({ id:p.id, name:p.name, sub:p.sub, price:p.price, img:p.img, qty:1 });
     }
-    const t = totals();
-    document.getElementById('sum-subtotal').textContent = CLP(t.subtotal);
-    document.getElementById('line-discount').hidden = !t.discount;
-    document.getElementById('discount-label').textContent = coupon ? COUPONS[coupon].label : '';
-    document.getElementById('sum-discount').textContent = '-' + CLP(t.discount);
-    document.getElementById('sum-shipping').innerHTML = t.freeShipping ? '<span class="ok">Gratis 🎉</span>' : (t.shipping ? CLP(t.shipping) : '<span class="ok">Gratis</span>');
-    document.getElementById('sum-total').textContent = CLP(t.total);
-    document.getElementById('checkout-btn').disabled = !cart.length;
-    if (coupon) document.getElementById('coupon-input').value = coupon;
+    render();
+    toast(CATALOG[id].name + " agregado al carrito");
+  }
+  function setQty(id, delta){
+    for (var i=0;i<cart.length;i++){
+      if (cart[i].id === id){
+        cart[i].qty += delta;
+        if (cart[i].qty < 1) cart.splice(i,1);
+        break;
+      }
+    }
+    render();
+  }
+  function remove(id){
+    cart = cart.filter(function(i){ return i.id !== id; });
+    render();
   }
 
-  function applyCoupon() {
-    const input = document.getElementById('coupon-input');
-    const msg = document.getElementById('coupon-msg');
-    const code = input.value.trim().toUpperCase();
-    msg.className = 'msg';
-    if (!code) { msg.textContent = 'Escribe un código.'; msg.classList.add('bad'); return; }
-    if (!cart.length) { msg.textContent = 'Agrega productos antes de aplicar un código.'; msg.classList.add('bad'); return; }
-    if (COUPONS[code]) {
-      coupon = code; persist(); renderCart();
-      msg.textContent = `✔ Código ${code} aplicado: ${COUPONS[code].pct}% de descuento.`; msg.classList.add('ok');
+  function render(){
+    $("#cartCount").textContent = count();
+    var body = $("#cartBody"), foot = $("#cartFoot");
+
+    if (!cart.length){
+      body.innerHTML = '<div class="empty"><p style="font-size:2.4rem;margin:0 0 .4rem">🎲</p>'
+        + '<p>Tu carrito está vacío.</p>'
+        + '<p style="font-size:.92rem">Agrega el juego desde la tienda y vuelve aquí para pagar.</p></div>';
+      foot.hidden = true;
+      return;
+    }
+    foot.hidden = false;
+
+    body.innerHTML = cart.map(function(i){
+      return '<div class="line">'
+        + '<img src="' + i.img + '" alt="">'
+        + '<div style="flex:1">'
+        +   '<h4>' + i.name + '</h4>'
+        +   '<div class="sub">' + i.sub + '</div>'
+        +   '<div class="qty">'
+        +     '<button type="button" data-qty="-1" data-id="' + i.id + '" aria-label="Quitar una unidad">−</button>'
+        +     '<span>' + i.qty + '</span>'
+        +     '<button type="button" data-qty="1" data-id="' + i.id + '" aria-label="Agregar una unidad">+</button>'
+        +     '<button type="button" class="rm" data-rm="' + i.id + '">Quitar</button>'
+        +   '</div>'
+        + '</div>'
+        + '<div style="font-weight:700;white-space:nowrap">' + clp(i.price * i.qty) + '</div>'
+        + '</div>';
+    }).join("");
+
+    var rows = '<div><span>Productos</span><span>' + clp(subtotal()) + '</span></div>';
+    if (coupon) rows += '<div style="color:var(--green);font-weight:700"><span>' + COUPONS[coupon].label + '</span><span>−' + clp(discount()) + '</span></div>';
+    rows += '<div><span>Envío</span><span>' + (shipping() === 0 ? "Gratis" : clp(shipping())) + '</span></div>';
+    rows += '<div class="grand"><span>Total</span><span>' + clp(total()) + '</span></div>';
+    $("#totals").innerHTML = rows;
+
+    var falta = FREE_SHIP_FROM - (subtotal() - discount());
+    var hint = $("#couponHint");
+    if (coupon){
+      hint.className = "hint good";
+      hint.textContent = "Código " + coupon + " aplicado.";
+    } else if (ship === "despacho" && falta > 0){
+      hint.className = "hint";
+      hint.textContent = "Te faltan " + clp(falta) + " para el despacho gratis.";
     } else {
-      coupon = null; persist(); renderCart();
-      msg.textContent = 'El código no es válido o ya expiró.'; msg.classList.add('bad');
+      hint.className = "hint";
+      hint.textContent = "";
     }
   }
 
-  function openCart(e) { if (e) e.preventDefault(); renderCart(); document.getElementById('drawer').classList.add('show'); document.getElementById('drawer').setAttribute('aria-hidden', 'false'); document.getElementById('overlay').classList.add('show'); document.body.style.overflow = 'hidden'; }
-  function closeCart() { document.getElementById('drawer').classList.remove('show'); document.getElementById('drawer').setAttribute('aria-hidden', 'true'); document.getElementById('overlay').classList.remove('show'); document.body.style.overflow = ''; }
+  /* ---------- apertura / cierre ---------- */
+  function openCart(){ $("#drawer").classList.add("show"); $("#overlay").classList.add("show"); $("#closeCart").focus(); }
+  function closeCart(){ $("#drawer").classList.remove("show"); $("#overlay").classList.remove("show"); }
 
-  /* ============================================================
-     Checkout
-     ============================================================ */
-  function renderOrderSummary() {
-    const t = totals();
-    const rows = cart.map(i => `<div><span>${i.qty} × ${PRODUCTS[i.id].name}</span><span>${CLP(PRODUCTS[i.id].price * i.qty)}</span></div>`).join('');
-    const shipName = document.querySelector('#shipping-select option:checked').textContent.split('·')[0].trim();
-    document.getElementById('order-summary').innerHTML = rows +
-      (t.discount ? `<div><span>Descuento ${COUPONS[coupon].label}</span><span>-${CLP(t.discount)}</span></div>` : '') +
-      `<div><span>Despacho · ${shipName}</span><span>${t.shipping ? CLP(t.shipping) : 'Gratis'}</span></div>` +
-      `<div class="t"><span>Total a pagar</span><span>${CLP(t.total)}</span></div>`;
-    const retiro = t.shipKey === 'retiro';
-    document.getElementById('address-fields').style.display = retiro ? 'none' : '';
-    document.getElementById('address-line').style.display = retiro ? 'none' : '';
-    ['region', 'comuna', 'direccion'].forEach(n => { document.querySelector(`#form-pago [name="${n}"]`).required = !retiro; });
-  }
+  $("#openCart").addEventListener("click", openCart);
+  $("#closeCart").addEventListener("click", closeCart);
+  $("#overlay").addEventListener("click", function(){ closeCart(); closeCheckout(); });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape"){ closeCart(); closeCheckout(); }
+  });
 
-  function openCheckout() {
-    if (!cart.length) return;
-    closeCart();
-    renderOrderSummary();
-    document.getElementById('checkout').classList.add('show');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => document.querySelector('#form-pago [name="nombre"]').focus(), 50);
-  }
-  function closeCheckout() { document.getElementById('checkout').classList.remove('show'); document.body.style.overflow = ''; }
+  $$("[data-add]").forEach(function(b){
+    b.addEventListener("click", function(){ add(b.getAttribute("data-add")); openCart(); });
+  });
 
-  /* ============================================================
-     Validación
-     ============================================================ */
-  function cleanRut(rut) { return rut.replace(/[^0-9kK]/g, '').toUpperCase(); }
-  function formatRut(rut) {
-    const r = cleanRut(rut);
-    if (r.length < 2) return r;
-    const body = r.slice(0, -1), dv = r.slice(-1);
-    return body.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '-' + dv;
-  }
-  function validarRut(rut) {
-    const r = cleanRut(rut);
-    if (r.length < 8 || r.length > 9) return false;
-    const body = r.slice(0, -1), dv = r.slice(-1);
-    if (!/^\d+$/.test(body)) return false;
-    let sum = 0, mul = 2;
-    for (let i = body.length - 1; i >= 0; i--) { sum += parseInt(body[i], 10) * mul; mul = mul === 7 ? 2 : mul + 1; }
-    const res = 11 - (sum % 11);
-    const expected = res === 11 ? '0' : res === 10 ? 'K' : String(res);
-    return expected === dv;
-  }
-  const validEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
-  const validPhone = v => v.replace(/\D/g, '').length >= 8;
+  $("#cartBody").addEventListener("click", function(e){
+    var q = e.target.closest("[data-qty]"), r = e.target.closest("[data-rm]");
+    if (q) setQty(q.getAttribute("data-id"), parseInt(q.getAttribute("data-qty"), 10));
+    if (r) remove(r.getAttribute("data-rm"));
+  });
 
-  function setError(field, text) {
-    const err = field.parentElement.querySelector('.error');
-    field.classList.toggle('invalid', !!text);
-    if (err) err.textContent = text || '';
-  }
+  $$('input[name="ship"]').forEach(function(r){
+    r.addEventListener("change", function(){ ship = r.value; render(); });
+  });
 
-  function validateForm(form) {
-    let ok = true, first = null;
-    form.querySelectorAll('input, select, textarea').forEach(f => {
-      if (f.type === 'radio' || f.closest('[style*="display: none"]')) return;
-      let text = '';
-      const v = f.value.trim();
-      if (f.required && !v) text = 'Este campo es obligatorio.';
-      else if (v && f.name === 'rut' && !validarRut(v)) text = 'El RUT no es válido. Revisa el dígito verificador.';
-      else if (v && f.type === 'email' && !validEmail(v)) text = 'Ingresa un correo válido.';
-      else if (v && f.type === 'tel' && !validPhone(v)) text = 'Ingresa un teléfono válido (mínimo 8 dígitos).';
-      else if (v && f.type === 'number' && (!(+v >= +(f.min || 1)))) text = 'Ingresa una cantidad válida.';
-      setError(f, text);
-      if (text) { ok = false; first = first || f; }
-    });
-    if (first) first.focus();
+  $("#applyCoupon").addEventListener("click", function(){
+    var code = $("#coupon").value.trim().toUpperCase();
+    var hint = $("#couponHint");
+    if (COUPONS[code]){
+      coupon = code; render();
+    } else {
+      coupon = null; render();
+      hint.className = "hint";
+      hint.style.color = "var(--red)";
+      hint.textContent = code ? "Ese código no existe o ya venció." : "Escribe un código para aplicarlo.";
+      return;
+    }
+    hint.style.color = "";
+  });
+
+  /* ---------- validación ---------- */
+  function fieldOf(el){ return el.closest(".field"); }
+  function fail(el, ok){
+    var f = fieldOf(el);
+    if (!f) return ok;
+    f.classList.toggle("invalid", !ok);
     return ok;
   }
-
-  // Validación en vivo al salir de cada campo y formato automático del RUT
-  document.querySelectorAll('form').forEach(form => {
-    form.addEventListener('blur', e => {
-      const f = e.target;
-      if (!f.matches('input, select, textarea') || f.type === 'radio') return;
-      if (f.name === 'rut' && f.value.trim()) f.value = formatRut(f.value);
-      if (f.classList.contains('invalid') || f.value.trim()) validateSingle(f);
-    }, true);
-  });
-  function validateSingle(f) {
-    const v = f.value.trim(); let text = '';
-    if (f.required && !v) text = 'Este campo es obligatorio.';
-    else if (v && f.name === 'rut' && !validarRut(v)) text = 'El RUT no es válido. Revisa el dígito verificador.';
-    else if (v && f.type === 'email' && !validEmail(v)) text = 'Ingresa un correo válido.';
-    else if (v && f.type === 'tel' && !validPhone(v)) text = 'Ingresa un teléfono válido (mínimo 8 dígitos).';
-    setError(f, text);
+  function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v.trim()); }
+  function validRut(v){
+    var s = v.replace(/[.\-\s]/g, "").toUpperCase();
+    if (s.length < 8) return false;
+    var body = s.slice(0, -1), dv = s.slice(-1);
+    if (!/^\d+$/.test(body)) return false;
+    var sum = 0, mul = 2;
+    for (var i = body.length - 1; i >= 0; i--){
+      sum += parseInt(body[i], 10) * mul;
+      mul = mul === 7 ? 2 : mul + 1;
+    }
+    var res = 11 - (sum % 11);
+    var calc = res === 11 ? "0" : res === 10 ? "K" : String(res);
+    return calc === dv;
   }
 
-  /* ---------- Envío del formulario de pago (simulado) ---------- */
-  function bindPagoForm() {
-  document.getElementById('form-pago').addEventListener('submit', e => {
+  /* ---------- checkout ---------- */
+  function openCheckout(){
+    if (!cart.length) { toast("Agrega un producto antes de pagar"); return; }
+    closeCart();
+    $("#checkoutSummary").innerHTML =
+      cart.map(function(i){
+        return '<div><span>' + i.qty + ' × ' + i.name + '</span><span>' + clp(i.price * i.qty) + '</span></div>';
+      }).join("")
+      + (coupon ? '<div style="color:var(--green)"><span>' + COUPONS[coupon].label + '</span><span>−' + clp(discount()) + '</span></div>' : "")
+      + '<div><span>Envío</span><span>' + (shipping() === 0 ? "Gratis" : clp(shipping())) + '</span></div>'
+      + '<div class="grand"><span>Total a pagar</span><span>' + clp(total()) + '</span></div>';
+    $("#addrField").style.display = ship === "retiro" ? "none" : "";
+    $("#checkout").classList.add("show");
+    $("#overlay").classList.add("show");
+    $("#c-nombre").focus();
+  }
+  function closeCheckout(){
+    $("#checkout").classList.remove("show");
+    if (!$("#drawer").classList.contains("show")) $("#overlay").classList.remove("show");
+  }
+  $("#goCheckout").addEventListener("click", openCheckout);
+  $("#closeCheckout").addEventListener("click", closeCheckout);
+
+  $("#payForm").addEventListener("submit", function(e){
     e.preventDefault();
-    const form = e.target;
-    if (!validateForm(form)) return;
-    const btn = document.getElementById('pay-btn');
-    btn.disabled = true; btn.textContent = 'Procesando pago simulado…';
-    document.querySelector('.steps').innerHTML = '<span>1 · Tus datos</span><span class="on">2 · Pago</span><span>3 · Confirmación</span>';
-    const data = Object.fromEntries(new FormData(form).entries());
-    const t = totals();
-    setTimeout(() => {
-      const nro = 'STR-' + Date.now().toString().slice(-6);
-      document.getElementById('checkout-content').innerHTML = `
-        <div class="steps"><span>1 · Tus datos</span><span>2 · Pago</span><span class="on">3 · Confirmación</span></div>
-        <div class="confirm">
-          <div class="big">🎉</div>
-          <h3>¡Gracias por tu compra, ${data.nombre.split(' ')[0]}!</h3>
-          <p>Tu pedido <code>${nro}</code> fue registrado por <strong>${CLP(t.total)}</strong> con ${data.pago.toLowerCase()}.</p>
-          <p style="margin-top:8px">${t.shipKey === 'retiro' ? 'Te avisaremos a <strong>' + data.email + '</strong> cuando esté listo para retiro en Santiago Centro.' : 'Lo despacharemos a <strong>' + data.direccion + ', ' + data.comuna + '</strong> y te enviaremos el seguimiento a <strong>' + data.email + '</strong>.'}</p>
-          <div class="disclaimer" style="margin:18px 0;text-align:left">Este es un prototipo académico: no se realizó ningún cobro real.</div>
-          <button class="btn dark" onclick="finishOrder()">Volver a la tienda</button>
-        </div>`;
-    }, 1400);
+    var ok = true;
+    ok = fail($("#c-nombre"), $("#c-nombre").value.trim().length > 2) && ok;
+    ok = fail($("#c-rut"), validRut($("#c-rut").value)) && ok;
+    ok = fail($("#c-email"), validEmail($("#c-email").value)) && ok;
+    ok = fail($("#c-fono"), $("#c-fono").value.replace(/\D/g, "").length >= 8) && ok;
+    ok = fail($("#c-region"), $("#c-region").value !== "") && ok;
+    if (ship !== "retiro") ok = fail($("#c-dir"), $("#c-dir").value.trim().length > 5) && ok;
+
+    if (!ok){
+      var first = $(".field.invalid input, .field.invalid select");
+      if (first) first.focus();
+      return;
+    }
+
+    var pay = document.querySelector('input[name="pay"]:checked').value;
+    var id = "ST-" + Math.floor(100000 + Math.random() * 899999);
+    var email = $("#c-email").value.trim();
+    var monto = clp(total());
+    var entrega = ship === "retiro" ? "Retiro en punto de entrega" : "Despacho a domicilio";
+
+    $("#checkoutTitle").textContent = "Pedido confirmado";
+    $("#checkoutBody").innerHTML =
+      '<div class="done">'
+      + '<div class="check">✓</div>'
+      + '<h3 style="font-size:1.5rem;margin-bottom:.5rem">¡Gracias por tu compra!</h3>'
+      + '<p style="color:var(--ink-soft)">Enviamos la boleta y el seguimiento a <strong>' + email + '</strong>.</p>'
+      + '<p style="margin:1.2rem 0 .2rem;color:var(--ink-soft);font-size:.9rem">Número de pedido</p>'
+      + '<p class="order-id">' + id + '</p>'
+      + '<p style="color:var(--ink-soft);margin-top:1rem">' + entrega + ' · Pago con ' + pay + ' · Total ' + monto + '</p>'
+      + '<button class="btn btn-navy" id="finish" style="margin-top:1.4rem">Seguir navegando</button>'
+      + '<p class="demo-note">Sitio de demostración: no se procesó ningún pago real.</p>'
+      + '</div>';
+
+    $("#finish").addEventListener("click", function(){
+      cart = []; coupon = null;
+      $("#coupon").value = "";
+      render();
+      closeCheckout();
+      window.scrollTo({ top:0, behavior:"smooth" });
+    });
   });
-  }
-  const checkoutTemplate = document.getElementById('checkout-content').innerHTML;
-  bindPagoForm();
 
-  function finishOrder() {
-    cart = []; coupon = null; persist(); renderCart();
-    closeCheckout();
-    // Restaura el formulario de pago para una próxima compra
-    document.getElementById('checkout-content').innerHTML = checkoutTemplate;
-    fillRegiones();
-    bindPagoForm();
-    document.getElementById('coupon-msg').textContent = '';
-    document.getElementById('coupon-input').value = '';
-    toast('Pedido registrado. ¡Gracias por aprender jugando!');
-  }
-
-  /* ---------- Formulario de cotización ---------- */
-  document.getElementById('form-cotizacion').addEventListener('submit', e => {
+  /* ---------- cotización ---------- */
+  $("#quoteForm").addEventListener("submit", function(e){
     e.preventDefault();
-    const form = e.target;
-    if (!validateForm(form)) return;
-    const data = Object.fromEntries(new FormData(form).entries());
-    const ok = document.getElementById('cotizacion-ok');
-    ok.innerHTML = `✔ <strong>Solicitud recibida.</strong> Gracias, ${data.contacto.split(' ')[0]}. Prepararemos una cotización para <strong>${data.institucion}</strong> por aproximadamente <strong>${data.cantidad} juego${data.cantidad == 1 ? '' : 's'}</strong> y te escribiremos a <strong>${data.email}</strong> dentro de 2 días hábiles.<br><small>Prototipo académico: la solicitud no se envía a un servidor real.</small>`;
-    ok.classList.add('show');
-    form.querySelectorAll('input, select, textarea').forEach(f => { if (f.type !== 'submit') { f.value = ''; setError(f, ''); } });
-    ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    toast('Cotización solicitada');
+    var ok = true;
+    ok = fail($("#q-nombre"), $("#q-nombre").value.trim().length > 2) && ok;
+    ok = fail($("#q-cargo"), $("#q-cargo").value.trim().length > 1) && ok;
+    ok = fail($("#q-estab"), $("#q-estab").value.trim().length > 2) && ok;
+    ok = fail($("#q-email"), validEmail($("#q-email").value)) && ok;
+    ok = fail($("#q-cajas"), parseInt($("#q-cajas").value, 10) >= 1) && ok;
+    if (!ok){
+      var first = $("#quoteForm .field.invalid input");
+      if (first) first.focus();
+      return;
+    }
+    var cajas = parseInt($("#q-cajas").value, 10);
+    var box = $("#quoteOk");
+    box.innerHTML = "<strong>Solicitud enviada.</strong> Prepararemos una propuesta por " + cajas
+      + (cajas === 1 ? " caja" : " cajas") + " y te escribiremos a " + $("#q-email").value.trim() + " en un día hábil.";
+    box.classList.add("show");
+    e.target.reset();
+    box.scrollIntoView({ block:"nearest" });
   });
 
-  /* ============================================================
-     UI general
-     ============================================================ */
-  function fillRegiones() {
-    document.querySelectorAll('select[data-regiones]').forEach(sel => {
-      sel.innerHTML = '<option value="">Selecciona región…</option>' + REGIONES.map(r => `<option>${r}</option>`).join('');
+  /* ---------- acordeón FAQ ---------- */
+  $$(".q summary").forEach(function(s){
+    s.addEventListener("click", function(){
+      $$(".q").forEach(function(d){ if (d !== s.parentNode) d.removeAttribute("open"); });
     });
-  }
-  function toggleMenu(btn) {
-    const menu = document.getElementById('menu');
-    const open = menu.classList.toggle('open');
-    btn.setAttribute('aria-expanded', open);
-  }
-  document.querySelectorAll('#menu a:not(.cart-btn)').forEach(a => a.addEventListener('click', () => {
-    document.getElementById('menu').classList.remove('open');
-    document.querySelector('.menu-btn').setAttribute('aria-expanded', 'false');
-  }));
-  function verIncluye() {
-    const box = document.getElementById('incluye');
-    const wasOpen = box.classList.contains('open');
-    box.classList.add('open');
-    document.getElementById('juego').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    if (wasOpen) setTimeout(() => box.classList.add('open'), 0);
-  }
-  let toastTimer;
-  function toast(text) {
-    const el = document.getElementById('toast');
-    el.textContent = text; el.classList.add('show');
-    clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
-  }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeCart(); closeCheckout(); } });
-  document.getElementById('checkout').addEventListener('click', e => { if (e.target.id === 'checkout') closeCheckout(); });
-  document.getElementById('coupon-input').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); applyCoupon(); } });
+  });
 
-  // Resalta el enlace activo del menú según la sección visible
-  const sections = [...document.querySelectorAll('main section[id]')];
-  const links = [...document.querySelectorAll('#menu a[href^="#"]:not(.cart-btn)')];
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (!en.isIntersecting) return;
-      const id = en.target.id === 'beneficios' ? 'inicio' : en.target.id === 'opiniones' ? 'tienda' : en.target.id;
-      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-    });
-  }, { rootMargin: '-45% 0px -50% 0px' });
-  sections.forEach(s => io.observe(s));
+  /* ---------- navegación interna (funciona también dentro de un iframe) ---------- */
+  document.addEventListener("click", function(e){
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    var id = a.getAttribute("href").slice(1);
+    var target = id ? document.getElementById(id) : null;
+    if (id && !target) return;
+    e.preventDefault();
+    closeCart();
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var y = target ? target.getBoundingClientRect().top + window.pageYOffset - 82 : 0;
+    if (window.scrollTo.length === 1 || typeof window.scrollTo === "function"){
+      try { window.scrollTo({ top: Math.max(y, 0), behavior: reduce ? "auto" : "smooth" }); }
+      catch (err) { window.scrollTo(0, Math.max(y, 0)); }
+    }
+  });
 
-  fillRegiones();
-  renderCart();
+  render();
+})();
 </script>
 </body>
 </html>

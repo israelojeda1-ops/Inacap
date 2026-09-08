@@ -2,6 +2,17 @@
 
 Entradas en orden cronológico inverso (la más reciente arriba).
 
+## 2026-09-08 — Se incorpora el prototipo original de la tienda y se separan sus imágenes
+
+- Se reemplaza la versión reconstruida por el `index.html` original del
+  grupo. Las cinco imágenes en base64 (tres distintas) pasan a
+  `sitio-web/img/`; el HTML baja de 642 KB a 47 KB.
+- Probado en local con `python3 -m http.server` y Chromium (escritorio y
+  celular): botón "Ver qué incluye", enlaces del menú, agregar y quitar del
+  carrito, cupón `APRENDE15`, cambio de despacho, formulario de pago con RUT
+  válido e inválido, cotización y preguntas frecuentes. Todo funciona.
+- Único detalle: no hay favicon (404 inofensivo).
+
 ## 2026-09-08 — Se reconstruye la tienda online completa
 
 - Se reemplaza la página provisoria por el sitio completo en `sitio-web/index.html`

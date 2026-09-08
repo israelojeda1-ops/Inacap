@@ -23,8 +23,8 @@ colegios y fundaciones.
 | Ruta | Contenido |
 |---|---|
 | `informe/` | El informe en `.docx` (aún no subido) |
-| `sitio-web/index.html` | La tienda online completa en un solo archivo (HTML, CSS y JS) |
-| `sitio-web/img/` | Imágenes optimizadas para la web: producto, caja y afiche |
+| `sitio-web/index.html` | La tienda online en un solo archivo (HTML, CSS y JS), 47 KB |
+| `sitio-web/img/` | Las tres imágenes del sitio (`hero-juego.jpg`, `tablero.jpg`, `cartas.jpg`), antes incrustadas en base64 |
 | `material/afiche-strategy.jpg` | Afiche publicitario del juego (1024×1536) |
 | `material/producto-strategy.jpg` | Imagen de producto: caja, tablero, cartas y fichas (1536×1024) |
 | `bitacora.md` | Historial de cambios del proyecto |
@@ -38,15 +38,18 @@ colegios y fundaciones.
 
 ## Funciones del sitio web
 
-- Catálogo con dos productos: el juego ($24.990) y el Pack Aula ($109.990).
-- Carrito lateral con cantidades, persistente en el navegador (`localStorage`).
-- Código de descuento `APRENDE15` (15%).
-- Cálculo de despacho: retiro gratis, Región Metropolitana $3.990, otras
-  regiones $6.990 y envío gratis sobre $80.000.
-- Formulario de pago con validación de RUT chileno (módulo 11), correo y
-  teléfono. El pago es simulado y así se declara en pantalla.
+- Catálogo con el juego ($24.990), el Pack Aula ($109.990) y compra
+  institucional por cotización.
+- Carrito lateral con cantidades y eliminación de productos.
+- Códigos de descuento `APRENDE15` (15%) y `PROFE10` (10%).
+- Despacho: $3.990 a domicilio, gratis sobre $50.000 o con retiro en punto
+  de entrega.
+- Formulario de pago con validación de RUT chileno (módulo 11), correo,
+  teléfono, región y dirección. El pago es simulado y así se declara en
+  pantalla.
 - Formulario aparte de cotización para colegios y fundaciones.
-- Diseño responsive con menú hamburguesa en celular.
+- Preguntas frecuentes en acordeón y diseño responsive (en celular el menú
+  superior se oculta y queda visible el botón del carrito).
 
 ## Cómo ver el sitio web en local
 
@@ -59,10 +62,8 @@ python3 -m http.server 8000
 ## Pendientes
 
 - [ ] Los precios del sitio ($24.990 el juego y $109.990 el Pack Aula) son de
-      ejemplo y hay que confirmarlos. También el contenido del Pack Aula
-      (se describió como 5 juegos más guía docente) y las tarifas de despacho.
-- [ ] Los testimonios de la sección de opiniones son ilustrativos y están
-      marcados como tales en la página.
+      ejemplo y hay que confirmarlos.
+- [ ] El sitio no tiene favicon; el navegador pide `/favicon.ico` y recibe 404.
 - [ ] El correo, el WhatsApp y el Instagram del pie de página son ficticios.
 - [ ] El pago está simulado: el sitio no procesa transacciones reales y así lo
       declara en pantalla. Si alguna vez se quisiera cobrar de verdad haría falta
