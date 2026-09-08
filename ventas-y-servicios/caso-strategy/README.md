@@ -49,9 +49,21 @@ colegios y fundaciones.
   pantalla.
 - Formulario aparte de cotización para colegios y fundaciones.
 - Ventana de video explicativo (botón "Ver video explicativo" en la portada).
-  El enlace se configura en la constante `VIDEO_URL` al inicio del script del
-  `index.html`; acepta enlaces normales de YouTube o Vimeo. Mientras esté
-  vacío muestra un aviso de "próximamente".
+  Mientras no haya un video grabado, la ventana reproduce un **recorrido
+  interactivo** hecho en HTML, CSS y JavaScript, con seis pasos: qué es
+  STRATEGY, el tablero, el turno con el dado, los cuatro mazos de cartas, una
+  partida de ejemplo y cómo se gana. Avanza solo (1 minuto y 21 segundos en
+  total) y trae barra de reproducción con pausa, paso anterior/siguiente,
+  saltos por punto y botón de repetir. Además se puede interactuar:
+  tocar cualquier casilla del tablero para leer qué pasa al caer en ella,
+  tirar el dado y ver avanzar la ficha, responder una carta de cada mazo
+  (marca correcta o incorrecta y explica) y saltar a cualquier turno de la
+  partida de ejemplo. El recorrido se detiene cuando alguien interactúa, para
+  que pueda mirarlo con calma.
+  Si más adelante se graba un video de verdad, basta con pegar el enlace en la
+  constante `VIDEO_URL` al inicio del script del `index.html` (acepta enlaces
+  normales de YouTube o Vimeo) y la ventana pasa a mostrar ese video en lugar
+  del recorrido.
 - Preguntas frecuentes en acordeón y diseño responsive (en celular el menú
   superior se oculta y queda visible el botón del carrito).
 
@@ -68,7 +80,12 @@ python3 -m http.server 8000
 - [ ] Los precios del sitio ($24.990 el juego y $109.990 el Pack Aula) son de
       ejemplo y hay que confirmarlos.
 - [ ] El sitio no tiene favicon; el navegador pide `/favicon.ico` y recibe 404.
-- [ ] Falta el enlace del video explicativo (`VIDEO_URL` en `index.html`).
+- [ ] El video explicativo está resuelto con el recorrido interactivo del
+      sitio, no con un video grabado. Si la profesora pide un video real,
+      hay que grabarlo y pegar el enlace en `VIDEO_URL`.
+- [ ] Los ejercicios y la partida de ejemplo del recorrido son contenido de
+      muestra (7 × 8, múltiplos de 6, dos jugadores llamados María y Diego).
+      Se pueden cambiar en el arreglo `DECKS` y en `PLAY` dentro del script.
 - [ ] El correo, el WhatsApp y el Instagram del pie de página son ficticios.
 - [ ] El pago está simulado: el sitio no procesa transacciones reales y así lo
       declara en pantalla. Si alguna vez se quisiera cobrar de verdad haría falta

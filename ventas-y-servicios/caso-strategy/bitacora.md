@@ -2,6 +2,30 @@
 
 Entradas en orden cronológico inverso (la más reciente arriba).
 
+## 2026-09-08 — Video explicativo interactivo del juego
+
+- La ventana de video ya no queda en "próximamente": ahora reproduce un
+  recorrido interactivo hecho con HTML, CSS y JavaScript dentro del mismo
+  `index.html`, sin librerías ni archivos de video.
+- Son seis pasos de 1:21 en total: qué es STRATEGY, el tablero (18 casillas
+  dibujadas en SVG), el turno con el dado, los cuatro mazos de cartas, una
+  partida de ejemplo de siete turnos y cómo se gana.
+- Tiene barra de reproducción con pausa, paso anterior y siguiente, puntos
+  para saltar de un paso a otro, tiempo transcurrido y botón para repetir.
+- Es interactivo: se puede tocar cada casilla del tablero para leer qué pasa
+  al caer en ella, tirar el dado y ver avanzar la ficha, responder una carta
+  de cada mazo (queda marcada en verde o rojo y aparece la explicación) y
+  saltar a cualquier turno de la partida de ejemplo. Al interactuar el
+  recorrido se pausa solo.
+- El último paso incluye "Agregar al carrito", que cierra la ventana y abre el
+  carrito con el juego dentro.
+- Si más adelante hay un video grabado, se pega el enlace en `VIDEO_URL` y la
+  ventana muestra ese video en vez del recorrido: no hay que borrar nada.
+- Probado en 1280 y 390 px con 34 verificaciones automáticas (reproducción,
+  pausa, navegación, tablero, dado, las cuatro cartas, partida, carrito y
+  cierre con Escape). Los colores de los mazos se ajustaron para que el texto
+  cumpla contraste AA.
+
 ## 2026-09-08 — Corrección de imágenes deformadas y ventana de video
 
 - Las dos imágenes de la galería "Qué viene en la caja" se veían altas y

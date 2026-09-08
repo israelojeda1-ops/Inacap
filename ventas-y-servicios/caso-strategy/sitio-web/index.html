@@ -132,11 +132,87 @@ nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:5px}
 .video-head{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.4rem;color:#fff}
 .video-head h3{font-size:1.2rem}
 .video-frame{position:relative;width:100%;height:0;padding-bottom:56.25%;background:#000}
-.video-frame iframe,.video-frame .video-placeholder{position:absolute;inset:0;width:100%;height:100%;border:0}
-.video-placeholder{display:grid;place-items:center;text-align:center;color:#fff;background:linear-gradient(rgba(13,29,69,.55),rgba(13,29,69,.85)),url("img/tablero.jpg") center/cover;padding:1.5rem}
-.video-placeholder .big-play{width:78px;height:78px;border-radius:50%;background:var(--yellow);color:var(--navy-deep);display:grid;place-items:center;font-size:1.9rem;padding-left:6px;margin:0 auto 1rem;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-.video-placeholder p{margin:.2rem 0;color:#DCE3F5}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .video-foot{padding:.9rem 1.4rem 1.2rem;color:#C9D5EE;font-size:.92rem}
+/* video explicativo interactivo (se usa mientras no haya un enlace en VIDEO_URL) */
+.video-card{max-height:94vh;display:flex;flex-direction:column}
+.video-frame.xp-mode{padding-bottom:0;height:auto;aspect-ratio:16/9;min-height:300px;background:var(--navy-deep)}
+@media(max-width:640px){.video-frame.xp-mode{aspect-ratio:auto;height:min(72vh,560px)}}
+.xp{position:absolute;inset:0;display:flex;flex-direction:column;color:#fff;font-family:"Nunito",sans-serif;font-size:clamp(12px,1.6vw,16px);
+  background:radial-gradient(circle at 20% 15%,rgba(255,210,46,.14),transparent 45%),radial-gradient(circle at 85% 90%,rgba(63,169,224,.18),transparent 50%),var(--navy-deep);user-select:none}
+.xp-stage{flex:1;position:relative;overflow:hidden}
+.xp-scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7em;padding:1.1em 1.4em;text-align:center;animation:xpIn .45s ease both}
+@keyframes xpIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.xp-kicker{font-family:"Fredoka",sans-serif;color:var(--yellow);letter-spacing:.06em;text-transform:uppercase;font-size:.8em;font-weight:600}
+.xp h4{font-family:"Fredoka",sans-serif;font-size:1.9em;line-height:1.1;margin:0}
+.xp p{margin:0;color:#DCE3F5;max-width:34em;line-height:1.4}
+.xp .hint{font-size:.85em;color:#9FB0D8}
+.xp-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.5em}
+.xp-chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:.35em .9em;font-weight:700;font-size:.9em}
+.xp-row{display:flex;align-items:center;justify-content:center;gap:1.2em;width:100%;flex-wrap:wrap}
+.xp-col{display:flex;flex-direction:column;align-items:center;gap:.6em}
+.xp-btn{border:none;border-radius:999px;padding:.55em 1.2em;font-family:"Fredoka",sans-serif;font-weight:600;font-size:1em;cursor:pointer;background:var(--yellow);color:var(--navy-deep);box-shadow:0 4px 0 var(--yellow-deep)}
+.xp-btn:active{transform:translateY(2px);box-shadow:none}
+.xp-btn.ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6);box-shadow:none}
+.xp-btn.ok{background:var(--green);color:#fff;box-shadow:0 4px 0 #237a4b}
+.xp-btn.bad{background:var(--red);color:#fff;box-shadow:0 4px 0 #a52f26}
+.xp-btn:disabled{opacity:.55;cursor:default;box-shadow:none;transform:none}
+/* fichas y dados */
+.xp-token{width:1.5em;height:1.5em;border-radius:50%;border:3px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.4);display:inline-block}
+.xp-bounce .xp-token{animation:xpBounce 1.4s ease-in-out infinite}
+.xp-bounce .xp-token:nth-child(2){animation-delay:.2s}.xp-bounce .xp-token:nth-child(3){animation-delay:.4s}.xp-bounce .xp-token:nth-child(4){animation-delay:.6s}
+@keyframes xpBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-.6em)}}
+.xp-dice{display:flex;gap:.8em}
+.xp-die{width:3.2em;height:3.2em;border-radius:.6em;background:#fff;color:var(--navy-deep);display:grid;place-items:center;font-family:"Fredoka",sans-serif;font-size:1.9em;font-weight:700;box-shadow:0 6px 0 #C9D5EE}
+.xp-die.rolling{animation:xpRoll .5s ease-in-out}
+@keyframes xpRoll{0%{transform:rotate(0) scale(1)}50%{transform:rotate(180deg) scale(1.15)}100%{transform:rotate(360deg) scale(1)}}
+/* tablero */
+.xp-board{width:min(100%,30em);height:auto;display:block}
+.xp-board .cell{stroke:#fff;stroke-width:1.2;cursor:pointer;transition:filter .15s}
+.xp-board .cell:hover{filter:brightness(1.15)}
+.xp-board text{font-family:"Fredoka",sans-serif;font-weight:700;fill:#fff;pointer-events:none}
+.xp-board .tok{stroke:#fff;stroke-width:2;transition:cx .6s cubic-bezier(.4,0,.2,1),cy .6s cubic-bezier(.4,0,.2,1)}
+.xp-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:.5em .9em;font-size:.85em}
+.xp-legend span{display:inline-flex;align-items:center;gap:.35em}
+.xp-legend i{width:1em;height:1em;border-radius:.25em;display:inline-block}
+.xp-note{background:rgba(255,255,255,.1);border-left:4px solid var(--yellow);border-radius:.5em;padding:.5em .9em;font-size:.9em;min-height:2.6em;max-width:34em}
+/* cartas */
+.xp-cards{display:flex;gap:.7em;justify-content:center;flex-wrap:wrap}
+.xp-card{width:7.2em;height:9.6em;border-radius:.8em;background:var(--c);color:var(--k);border:3px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.35);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4em;font-family:"Fredoka",sans-serif;font-weight:600;transition:transform .2s,box-shadow .2s;padding:.4em}
+.xp-card:hover,.xp-card.active{transform:translateY(-.5em) scale(1.04);box-shadow:0 14px 28px rgba(0,0,0,.45)}
+.xp-card.active{outline:3px solid var(--yellow)}
+.xp-card .ico{font-size:2em;line-height:1}
+.xp-card .nm{font-size:.85em;line-height:1.15;text-align:center}
+.xp-panel{background:#fff;color:var(--ink);border-radius:.9em;padding:.9em 1.1em;width:min(100%,30em);min-height:7em;display:flex;flex-direction:column;gap:.55em;align-items:center;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.xp-panel .tag{font-family:"Fredoka",sans-serif;font-size:.8em;letter-spacing:.05em;text-transform:uppercase;color:var(--k);background:var(--c);border-radius:999px;padding:.2em .8em}
+.xp-panel .ask{font-family:"Fredoka",sans-serif;font-size:1.25em;color:var(--navy-deep)}
+.xp-panel .opts{display:flex;gap:.5em;flex-wrap:wrap;justify-content:center}
+.xp-panel .opt{border:2px solid var(--line);background:var(--paper);border-radius:999px;padding:.4em 1em;font-weight:700;cursor:pointer;color:var(--navy);font-family:"Nunito",sans-serif;font-size:1em}
+.xp-panel .opt:hover{border-color:var(--navy)}
+.xp-panel .opt.ok{background:var(--green);border-color:var(--green);color:#fff}
+.xp-panel .opt.bad{background:var(--red);border-color:var(--red);color:#fff}
+.xp-panel .fb{font-weight:700;min-height:1.4em;color:var(--ink-soft)}
+.xp-panel .fb.ok{color:var(--green)}.xp-panel .fb.bad{color:var(--red)}
+/* partida de ejemplo */
+.xp-split{display:grid;grid-template-columns:1.1fr 1fr;gap:1em;width:100%;align-items:center;max-width:52em}
+@media(max-width:640px){.xp-split{grid-template-columns:1fr}.xp-split .xp-board{max-width:16em;margin:0 auto}}
+.xp-log{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.35em;text-align:left}
+.xp-log li{display:flex;gap:.55em;align-items:flex-start;padding:.4em .6em;border-radius:.5em;background:rgba(255,255,255,.06);opacity:.35;transition:opacity .3s,background .3s;cursor:pointer;font-size:.9em;line-height:1.3}
+.xp-log li.done{opacity:.8}.xp-log li.now{opacity:1;background:rgba(255,210,46,.18);outline:2px solid var(--yellow)}
+.xp-log .xp-token{width:1em;height:1em;flex:none;margin-top:.15em;border-width:2px}
+/* barra de control */
+.xp-bar{display:flex;align-items:center;gap:.6em;padding:.55em .9em;background:rgba(0,0,0,.35);border-top:1px solid rgba(255,255,255,.12)}
+.xp-ctl{width:2.2em;height:2.2em;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1em;cursor:pointer;display:grid;place-items:center;flex:none}
+.xp-ctl:hover{background:rgba(255,255,255,.28)}
+.xp-ctl.play{background:var(--yellow);color:var(--navy-deep)}
+.xp-progress{flex:1;height:.45em;background:rgba(255,255,255,.18);border-radius:999px;overflow:hidden;cursor:pointer}
+.xp-progress span{display:block;height:100%;width:0;background:var(--yellow);border-radius:999px}
+.xp-dots{display:flex;gap:.35em}
+.xp-dots button{width:.65em;height:.65em;border-radius:50%;border:none;background:rgba(255,255,255,.3);padding:0;cursor:pointer}
+.xp-dots button.on{background:var(--yellow);transform:scale(1.3)}
+.xp-time{font-size:.8em;color:#C9D5EE;min-width:2.6em;text-align:right;font-variant-numeric:tabular-nums}
+.xp-title{font-family:"Fredoka",sans-serif;font-size:.85em;color:#C9D5EE;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:12em}
+@media(max-width:640px){.xp-title,.xp-dots{display:none}.xp h4{font-size:1.5em}.xp-card{width:5.6em;height:7.6em}}
 .hero-art{position:relative}
 .hero-art img{
   width:100%;height:auto;
@@ -725,7 +801,7 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
       <button class="x" id="closeVideo" aria-label="Cerrar video">×</button>
     </div>
     <div class="video-frame" id="videoFrame"></div>
-    <div class="video-foot">Un recorrido de dos minutos por el tablero, las cartas y una partida de ejemplo.</div>
+    <div class="video-foot" id="videoFoot">Un recorrido por el tablero, las cartas y una partida de ejemplo.</div>
   </div>
 </div>
 
@@ -742,7 +818,8 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
   var SHIP_COST = 3990, FREE_SHIP_FROM = 50000;
   /* Enlace del video explicativo. Acepta un enlace normal de YouTube
      (https://www.youtube.com/watch?v=... o https://youtu.be/...) o de Vimeo.
-     Si queda vacío, la ventana muestra un aviso de "próximamente". */
+     Si queda vacío, la ventana muestra el recorrido interactivo del juego
+     que está más abajo (objeto XP), sin necesidad de un video grabado. */
   var VIDEO_URL = "";
   var COUPONS = { APRENDE15:{ off:.15, label:"15% de descuento" }, PROFE10:{ off:.10, label:"10% de descuento docentes" } };
 
@@ -1007,6 +1084,348 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
   });
 
   /* ---------- video explicativo ---------- */
+  /* ---------- video explicativo interactivo ----------
+     Mientras no haya un enlace en VIDEO_URL, la ventana reproduce este
+     recorrido animado por el tablero, los dados, las cartas y una partida
+     de ejemplo. Se puede pausar, avanzar, retroceder y probar las cartas. */
+  var XP = (function(){
+    var COLORS = { suma:"#35A76B", resta:"#3FA9E0", multi:"#7C5AC8", divi:"#F08B2B", carta:"#FFD22E", sorpresa:"#E2483C", salida:"#25478F", meta:"#16306B" };
+    var TRACK = [
+      { t:"salida",  s:"S"  }, { t:"suma", s:"+" }, { t:"carta", s:"★" }, { t:"resta", s:"−" },
+      { t:"multi",   s:"×"  }, { t:"sorpresa", s:"!" }, { t:"divi", s:"÷" }, { t:"suma", s:"+" },
+      { t:"carta",   s:"★"  }, { t:"multi", s:"×" }, { t:"resta", s:"−" }, { t:"sorpresa", s:"!" },
+      { t:"divi",    s:"÷"  }, { t:"carta", s:"★" }, { t:"suma", s:"+" }, { t:"multi", s:"×" },
+      { t:"resta",   s:"−"  }, { t:"meta", s:"M" }
+    ];
+    var CELL_INFO = {
+      salida:   "Casilla de salida: todas las fichas parten aquí.",
+      suma:     "Casilla de suma: resuelves una suma para quedarte en la casilla.",
+      resta:    "Casilla de resta: si fallas, retrocedes una casilla.",
+      multi:    "Casilla de multiplicación: la que más aparece de 5° básico en adelante.",
+      divi:     "Casilla de división: puedes usar papel y lápiz, no hay reloj.",
+      carta:    "Casilla de carta: tomas una carta del mazo que indique el color.",
+      sorpresa: "Casilla sorpresa: avanzas, retrocedes o repites turno según la carta.",
+      meta:     "Meta: gana quien llega primero con una respuesta correcta."
+    };
+    var COLS = 6, CW = 46, GAP = 6, PAD = 10;
+    var POS = (function(){
+      var a = [], r, c, cc;
+      for (r = 0; r < 3; r++){
+        for (c = 0; c < COLS; c++){
+          cc = (r % 2 === 0) ? c : (COLS - 1 - c);
+          a.push({ x: PAD + cc * (CW + GAP), y: PAD + r * (CW + GAP) });
+        }
+      }
+      return a;
+    })();
+    var VB_W = PAD * 2 + COLS * CW + (COLS - 1) * GAP;
+    var VB_H = PAD * 2 + 3 * CW + 2 * GAP;
+
+    function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+    function board(opts){
+      opts = opts || {};
+      var svg = '<svg class="xp-board" viewBox="0 0 ' + VB_W + ' ' + VB_H + '" role="img" aria-label="Tablero de STRATEGY con 18 casillas de salida a meta">';
+      TRACK.forEach(function(cell, i){
+        var p = POS[i];
+        svg += '<g class="cell" data-cell="' + i + '" tabindex="0" role="button" aria-label="Casilla ' + (i+1) + '">'
+             + '<rect x="' + p.x + '" y="' + p.y + '" width="' + CW + '" height="' + CW + '" rx="8" fill="' + COLORS[cell.t] + '"></rect>'
+             + '<text x="' + (p.x + CW/2) + '" y="' + (p.y + CW/2 + 7) + '" text-anchor="middle" font-size="21">' + cell.s + '</text>'
+             + '</g>';
+      });
+      (opts.tokens || []).forEach(function(tk, n){
+        var p = POS[tk.at] || POS[0];
+        svg += '<circle class="tok" id="tok' + n + '" r="11" cx="' + (p.x + CW/2) + '" cy="' + (p.y + CW/2) + '" fill="' + tk.color + '"></circle>';
+      });
+      svg += '</svg>';
+      return svg;
+    }
+    function moveToken(root, n, at){
+      var el = root.querySelector("#tok" + n), p = POS[Math.max(0, Math.min(POS.length - 1, at))];
+      if (el){ el.setAttribute("cx", p.x + CW/2); el.setAttribute("cy", p.y + CW/2); }
+    }
+    var LEGEND = '<div class="xp-legend">'
+      + '<span><i style="background:' + COLORS.suma + '"></i>Suma</span>'
+      + '<span><i style="background:' + COLORS.resta + '"></i>Resta</span>'
+      + '<span><i style="background:' + COLORS.multi + '"></i>Multiplicación</span>'
+      + '<span><i style="background:' + COLORS.divi + '"></i>División</span>'
+      + '<span><i style="background:' + COLORS.carta + '"></i>Carta</span>'
+      + '<span><i style="background:' + COLORS.sorpresa + '"></i>Sorpresa</span></div>';
+
+    var DECKS = [
+      { id:"desafio", c:"#3FA9E0", k:"#0D1D45", ico:"?", nm:"Desafío", tag:"Desafío",
+        ask:"7 × 8 = ?", opts:["54","56","63"], ok:1,
+        good:"¡Correcto! Avanzas las casillas que marca el dado.",
+        bad:"No era esa. Pierdes el turno y sigue el jugador de al lado.",
+        note:"Ejercicios con alternativas, del nivel que elijan al empezar." },
+      { id:"problema", c:"#35A76B", k:"#0D1D45", ico:"✎", nm:"Problema", tag:"Problema",
+        ask:"Ana compra 3 cajas de 12 lápices y regala 9. ¿Cuántos le quedan?", opts:["27","36","45"], ok:0,
+        good:"Correcto: 3 × 12 = 36 y 36 − 9 = 27.",
+        bad:"Casi. Primero 3 × 12 = 36, y recién ahí restas los 9.",
+        note:"Situaciones con enunciado: hay que leer antes de calcular." },
+      { id:"vf", c:"#7C5AC8", k:"#FFFFFF", ico:"✓", nm:"Verdadero o Falso", tag:"Verdadero o falso",
+        ask:"Todos los múltiplos de 6 son también múltiplos de 3.", opts:["Verdadero","Falso"], ok:0,
+        good:"Verdadero: 6 ya contiene un 3, así que todo múltiplo de 6 lo es de 3.",
+        bad:"Es verdadero: 6 = 2 × 3, así que cada múltiplo de 6 también lo es de 3.",
+        note:"Cartas rápidas para discutir en la mesa por qué sí o por qué no." },
+      { id:"estrategia", c:"#F08B2B", k:"#0D1D45", ico:"⚡", nm:"Estrategia y Comodín", tag:"Estrategia",
+        ask:"Avanza 3 casillas o hazlas retroceder a quien va primero.", opts:["Avanzar 3","Frenar al puntero"], ok:-1,
+        good:"Las dos valen: aquí no hay respuesta correcta, hay decisión.",
+        bad:"",
+        note:"Se guardan para el final: son las que dan vuelta la partida." }
+    ];
+
+    var PLAY = [
+      { who:0, txt:"María saca 4 y cae en una casilla de multiplicación: 6 × 7 = 42. Correcta, avanza." , at:[4,0] },
+      { who:1, txt:"Diego saca 3, cae en casilla de carta y toma un Desafío: se equivoca y pierde el turno.", at:[4,3] },
+      { who:0, txt:"María cae en sorpresa: la carta dice retroceder 2 casillas.", at:[7,3] },
+      { who:0, txt:"Retrocede a la casilla 6 y queda a tiro de Diego.", at:[5,3] },
+      { who:1, txt:"Diego resuelve un problema con enunciado y avanza 5 de golpe.", at:[5,8] },
+      { who:1, txt:"Diego usa su carta de Estrategia guardada y avanza 3 más.", at:[5,11] },
+      { who:0, txt:"María responde bien dos turnos seguidos y lo pasa antes de la meta.", at:[13,11] }
+    ];
+    var PLAYERS = [ { nm:"María", color:"#E2483C" }, { nm:"Diego", color:"#3FA9E0" } ];
+
+    var SCENES = [
+      { title:"Qué es STRATEGY", dur:8000, build:function(el){
+          el.innerHTML = '<div class="xp-scene">'
+            + '<div class="xp-kicker">Video explicativo</div>'
+            + '<h4>Cómo se juega STRATEGY</h4>'
+            + '<p>Un juego de mesa para practicar matemáticas jugando: se avanza en el tablero resolviendo desafíos y usando bien las cartas.</p>'
+            + '<div class="xp-row xp-bounce" style="gap:.6em">'
+            + '<span class="xp-token" style="background:#E2483C"></span><span class="xp-token" style="background:#3FA9E0"></span>'
+            + '<span class="xp-token" style="background:#FFD22E"></span><span class="xp-token" style="background:#35A76B"></span></div>'
+            + '<div class="xp-chips"><span class="xp-chip">2 a 4 jugadores</span><span class="xp-chip">Desde 8 años</span>'
+            + '<span class="xp-chip">20 a 30 minutos</span><span class="xp-chip">4° a 8° básico</span></div>'
+            + '<p class="hint">Puedes pausar el recorrido y probar cada parte con el mouse.</p>'
+            + '</div>';
+        } },
+      { title:"El tablero", dur:14000, build:function(el){
+          el.innerHTML = '<div class="xp-scene">'
+            + '<div class="xp-kicker">Paso 1 · El tablero</div>'
+            + '<h4>De la salida a la meta</h4>'
+            + board({ tokens:[{ at:0, color:"#E2483C" }] })
+            + LEGEND
+            + '<div class="xp-note" id="xpNote">Toca una casilla del tablero para ver qué pasa al caer en ella.</div>'
+            + '</div>';
+          var note = el.querySelector("#xpNote");
+          el.querySelectorAll(".cell").forEach(function(g){
+            function show(){
+              var i = +g.getAttribute("data-cell");
+              note.textContent = "Casilla " + (i + 1) + ". " + CELL_INFO[TRACK[i].t];
+              moveToken(el, 0, i);
+              pause();
+            }
+            g.addEventListener("click", show);
+            g.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); show(); } });
+          });
+        } },
+      { title:"El turno y los dados", dur:14000, build:function(el){
+          el.innerHTML = '<div class="xp-scene">'
+            + '<div class="xp-kicker">Paso 2 · El turno</div>'
+            + '<h4>Tiras el dado y resuelves</h4>'
+            + '<div class="xp-dice"><div class="xp-die" id="xpDie">3</div></div>'
+            + board({ tokens:[{ at:0, color:"#E2483C" }] })
+            + '<div class="xp-note" id="xpNote">Tira el dado: la ficha avanza y en la casilla donde cae aparece un ejercicio de ese tipo.</div>'
+            + '<button class="xp-btn" id="xpRoll" type="button">Tirar el dado</button>'
+            + '</div>';
+          var at = 0, die = el.querySelector("#xpDie"), note = el.querySelector("#xpNote");
+          el.querySelector("#xpRoll").addEventListener("click", function(){
+            pause();
+            var n = 1 + Math.floor(Math.random() * 6);
+            die.classList.remove("rolling"); void die.offsetWidth; die.classList.add("rolling");
+            setTimeout(function(){
+              die.textContent = n;
+              at = at + n;
+              if (at >= TRACK.length - 1){ at = TRACK.length - 1; }
+              moveToken(el, 0, at);
+              note.textContent = at >= TRACK.length - 1
+                ? "Llegó a la meta. Para ganar hay que responder bien el último desafío."
+                : "Sacó " + n + " y avanzó a la casilla " + (at + 1) + ". " + CELL_INFO[TRACK[at].t];
+            }, 260);
+          });
+        } },
+      { title:"Los mazos de cartas", dur:18000, build:function(el){
+          el.innerHTML = '<div class="xp-scene">'
+            + '<div class="xp-kicker">Paso 3 · Las cartas</div>'
+            + '<h4>Cuatro mazos, más de 200 cartas</h4>'
+            + '<div class="xp-cards">' + DECKS.map(function(d, i){
+                return '<button class="xp-card' + (i === 0 ? ' active' : '') + '" type="button" data-deck="' + i + '" style="--c:' + d.c + ';--k:' + d.k + '">'
+                     + '<span class="ico">' + d.ico + '</span><span class="nm">' + esc(d.nm) + '</span></button>';
+              }).join("") + '</div>'
+            + '<div class="xp-panel" id="xpPanel"></div>'
+            + '</div>';
+          var panel = el.querySelector("#xpPanel");
+          function draw(i){
+            var d = DECKS[i];
+            panel.style.setProperty("--c", d.c);
+            panel.style.setProperty("--k", d.k);
+            panel.innerHTML = '<span class="tag">' + esc(d.tag) + '</span>'
+              + '<div class="ask">' + esc(d.ask) + '</div>'
+              + '<div class="opts">' + d.opts.map(function(o, k){
+                  return '<button class="opt" type="button" data-opt="' + k + '">' + esc(o) + '</button>';
+                }).join("") + '</div>'
+              + '<div class="fb">' + esc(d.note) + '</div>';
+            var fb = panel.querySelector(".fb");
+            panel.querySelectorAll(".opt").forEach(function(b){
+              b.addEventListener("click", function(){
+                pause();
+                var k = +b.getAttribute("data-opt"), free = d.ok < 0;
+                panel.querySelectorAll(".opt").forEach(function(x){ x.disabled = true; });
+                b.classList.add(free || k === d.ok ? "ok" : "bad");
+                if (!free && k !== d.ok) panel.querySelectorAll(".opt")[d.ok].classList.add("ok");
+                fb.textContent = (free || k === d.ok) ? d.good : d.bad;
+                fb.className = "fb " + ((free || k === d.ok) ? "ok" : "bad");
+              });
+            });
+          }
+          el.querySelectorAll(".xp-card").forEach(function(b){
+            b.addEventListener("click", function(){
+              pause();
+              el.querySelectorAll(".xp-card").forEach(function(x){ x.classList.remove("active"); });
+              b.classList.add("active");
+              draw(+b.getAttribute("data-deck"));
+            });
+          });
+          draw(0);
+        } },
+      { title:"Una partida de ejemplo", dur:18000, build:function(el){
+          el.innerHTML = '<div class="xp-scene">'
+            + '<div class="xp-kicker">Paso 4 · Partida de ejemplo</div>'
+            + '<h4>Dos jugadores, siete turnos</h4>'
+            + '<div class="xp-split">'
+            + '<div>' + board({ tokens:[{ at:0, color:PLAYERS[0].color }, { at:0, color:PLAYERS[1].color }] }) + '</div>'
+            + '<ul class="xp-log" id="xpLog">' + PLAY.map(function(t, i){
+                return '<li data-step="' + i + '" tabindex="0"><span class="xp-token" style="background:' + PLAYERS[t.who].color + '"></span><span>' + esc(t.txt) + '</span></li>';
+              }).join("") + '</ul>'
+            + '</div></div>';
+          var items = Array.prototype.slice.call(el.querySelectorAll("#xpLog li")), timer;
+          function step(i){
+            items.forEach(function(li, k){
+              li.classList.toggle("now", k === i);
+              li.classList.toggle("done", k < i);
+            });
+            moveToken(el, 0, PLAY[i].at[0]);
+            moveToken(el, 1, PLAY[i].at[1]);
+          }
+          items.forEach(function(li){
+            function go(){ clearInterval(timer); pause(); step(+li.getAttribute("data-step")); }
+            li.addEventListener("click", go);
+            li.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); go(); } });
+          });
+          var i = 0; step(0);
+          timer = setInterval(function(){ i = (i + 1) % PLAY.length; step(i); }, 2400);
+          return function(){ clearInterval(timer); };
+        } },
+      { title:"Cómo se gana", dur:9000, build:function(el){
+          el.innerHTML = '<div class="xp-scene">'
+            + '<div class="xp-kicker">Paso 5 · La meta</div>'
+            + '<h4>Gana quien llega primero a la meta</h4>'
+            + '<p>Y para entrar hay que responder bien el último desafío, así que la partida se define en la última casilla.</p>'
+            + '<div class="xp-chips"><span class="xp-chip">3 modos de juego</span><span class="xp-chip">Guía del jugador incluida</span>'
+            + '<span class="xp-chip">Sirve en la sala de clases</span></div>'
+            + '<div class="xp-row"><a class="xp-btn ghost" href="#incluye">Ver qué incluye</a>'
+            + '<button class="xp-btn" type="button" id="xpBuy">Agregar al carrito</button></div>'
+            + '<p class="hint">Puedes repetir el recorrido con el botón ↺ de la barra.</p>'
+            + '</div>';
+          el.querySelector("#xpBuy").addEventListener("click", function(){
+            closeVideo();
+            add("individual");
+            openCart();
+          });
+        } }
+    ];
+
+    var TOTAL = SCENES.reduce(function(s, x){ return s + x.dur; }, 0);
+    var idx = 0, elapsed = 0, playing = false, raf = null, last = 0, cleanup = null, host = null;
+
+    function mmss(ms){
+      var s = Math.max(0, Math.round(ms / 1000));
+      return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2);
+    }
+    function before(i){ return SCENES.slice(0, i).reduce(function(s, x){ return s + x.dur; }, 0); }
+    function paint(){
+      if (!host) return;
+      host.querySelector("#xpFill").style.width = ((before(idx) + elapsed) / TOTAL * 100) + "%";
+      host.querySelector("#xpTime").textContent = mmss(before(idx) + elapsed);
+      host.querySelector("#xpName").textContent = SCENES[idx].title;
+      host.querySelector("#xpPlay").textContent = playing ? "❚❚" : "▶";
+      host.querySelector("#xpPlay").setAttribute("aria-label", playing ? "Pausar" : "Reproducir");
+      Array.prototype.slice.call(host.querySelectorAll(".xp-dots button")).forEach(function(b, i){
+        b.classList.toggle("on", i === idx);
+      });
+    }
+    function show(i){
+      if (cleanup){ cleanup(); cleanup = null; }
+      idx = Math.max(0, Math.min(SCENES.length - 1, i));
+      elapsed = 0;
+      cleanup = SCENES[idx].build(host.querySelector("#xpStage")) || null;
+      paint();
+    }
+    function tick(ts){
+      if (!playing){ raf = null; return; }
+      if (!last) last = ts;
+      elapsed += ts - last; last = ts;
+      if (elapsed >= SCENES[idx].dur){
+        if (idx < SCENES.length - 1){ show(idx + 1); }
+        else { elapsed = SCENES[idx].dur; playing = false; paint(); raf = null; return; }
+      }
+      paint();
+      raf = requestAnimationFrame(tick);
+    }
+    function play(){
+      if (playing) return;
+      if (idx === SCENES.length - 1 && elapsed >= SCENES[idx].dur) show(0);
+      playing = true; last = 0; paint();
+      raf = requestAnimationFrame(tick);
+    }
+    function pause(){
+      if (!playing) return;
+      playing = false; last = 0;
+      if (raf){ cancelAnimationFrame(raf); raf = null; }
+      paint();
+    }
+    function mount(frame){
+      frame.innerHTML = '<div class="xp">'
+        + '<div class="xp-stage" id="xpStage"></div>'
+        + '<div class="xp-bar">'
+        + '<button class="xp-ctl" id="xpPrev" type="button" aria-label="Paso anterior">◀</button>'
+        + '<button class="xp-ctl play" id="xpPlay" type="button" aria-label="Reproducir">▶</button>'
+        + '<button class="xp-ctl" id="xpNext" type="button" aria-label="Paso siguiente">▶</button>'
+        + '<span class="xp-title" id="xpName"></span>'
+        + '<div class="xp-progress" id="xpBar"><span id="xpFill"></span></div>'
+        + '<span class="xp-time" id="xpTime">0:00</span>'
+        + '<div class="xp-dots">' + SCENES.map(function(s, i){
+            return '<button type="button" data-go="' + i + '" aria-label="Ir a: ' + esc(s.title) + '"></button>';
+          }).join("") + '</div>'
+        + '<button class="xp-ctl" id="xpAgain" type="button" aria-label="Volver a empezar">↺</button>'
+        + '</div></div>';
+      host = frame;
+      host.querySelector("#xpPlay").addEventListener("click", function(){ playing ? pause() : play(); });
+      host.querySelector("#xpPrev").addEventListener("click", function(){ show(idx - 1); });
+      host.querySelector("#xpNext").addEventListener("click", function(){ show(idx + 1); });
+      host.querySelector("#xpAgain").addEventListener("click", function(){ show(0); play(); });
+      host.querySelectorAll(".xp-dots button").forEach(function(b){
+        b.addEventListener("click", function(){ show(+b.getAttribute("data-go")); });
+      });
+      host.querySelector("#xpBar").addEventListener("click", function(e){
+        var r = this.getBoundingClientRect(), p = (e.clientX - r.left) / r.width * TOTAL, acc = 0, i;
+        for (i = 0; i < SCENES.length; i++){
+          if (p < acc + SCENES[i].dur){ show(i); return; }
+          acc += SCENES[i].dur;
+        }
+        show(SCENES.length - 1);
+      });
+      show(0);
+      play();
+    }
+    function unmount(){
+      pause();
+      if (cleanup){ cleanup(); cleanup = null; }
+      idx = 0; elapsed = 0; host = null;
+    }
+    return { mount:mount, unmount:unmount, pause:pause, steps:SCENES.length, duration:TOTAL };
+  })();
   function embedUrl(u){
     var m;
     if ((m = u.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([\w-]{11})/))) return "https://www.youtube-nocookie.com/embed/" + m[1] + "?autoplay=1&rel=0";
@@ -1016,11 +1435,13 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
   function openVideo(){
     var frame = $("#videoFrame");
     if (VIDEO_URL){
+      frame.classList.remove("xp-mode");
       frame.innerHTML = '<iframe src="' + embedUrl(VIDEO_URL) + '" title="Video explicativo de STRATEGY" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+      $("#videoFoot").textContent = "Un recorrido por el tablero, las cartas y una partida de ejemplo.";
     } else {
-      frame.innerHTML = '<div class="video-placeholder"><div><div class="big-play">▶</div>'
-        + '<p style="font-family:Fredoka,sans-serif;font-size:1.3rem;color:#fff">Video explicativo próximamente</p>'
-        + '<p>Estamos grabando la partida de ejemplo. Mientras tanto, revisa <a href="#incluye" style="color:var(--yellow)">qué viene en la caja</a>.</p></div></div>';
+      frame.classList.add("xp-mode");
+      XP.mount(frame);
+      $("#videoFoot").textContent = "Recorrido interactivo en " + XP.steps + " pasos: puedes pausar, avanzar y probar las cartas y el dado.";
     }
     closeCart();
     $("#videoModal").classList.add("show");
@@ -1031,6 +1452,7 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
     var vm = $("#videoModal");
     if (!vm.classList.contains("show")) return;
     vm.classList.remove("show");
+    XP.unmount();
     $("#videoFrame").innerHTML = "";  /* detiene la reproducción */
     if (!$("#drawer").classList.contains("show") && !$("#checkout").classList.contains("show")) $("#overlay").classList.remove("show");
   }
