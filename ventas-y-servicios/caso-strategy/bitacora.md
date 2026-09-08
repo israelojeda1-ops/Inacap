@@ -2,6 +2,18 @@
 
 Entradas en orden cronológico inverso (la más reciente arriba).
 
+## 2026-09-08 — Se reconstruye la tienda online completa
+
+- Se reemplaza la página provisoria por el sitio completo en `sitio-web/index.html`
+  (un solo archivo HTML con CSS y JS): hero, beneficios, cómo se juega con el botón
+  "Ver qué incluye", tipos de cartas, tienda con carrito, cupón `APRENDE15`,
+  cálculo de despacho, pago simulado con validación de RUT, cotización para
+  colegios y contacto.
+- Las imágenes van como archivos separados en `sitio-web/img/` (optimizadas a
+  menos de 300 KB cada una) en lugar de base64.
+- Probado en local con Chromium en escritorio y móvil: 43 comprobaciones
+  automáticas sin errores de consola.
+
 ## 2026-09-08 — Se agregan el afiche y la imagen de producto
 
 - Se suben `material/afiche-strategy.jpg` y `material/producto-strategy.jpg`.

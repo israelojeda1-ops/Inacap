@@ -23,7 +23,8 @@ colegios y fundaciones.
 | Ruta | Contenido |
 |---|---|
 | `informe/` | El informe en `.docx` (aún no subido) |
-| `sitio-web/` | La tienda online: `index.html` (provisorio por ahora) más las imágenes en `sitio-web/img/` |
+| `sitio-web/index.html` | La tienda online completa en un solo archivo (HTML, CSS y JS) |
+| `sitio-web/img/` | Imágenes optimizadas para la web: producto, caja y afiche |
 | `material/afiche-strategy.jpg` | Afiche publicitario del juego (1024×1536) |
 | `material/producto-strategy.jpg` | Imagen de producto: caja, tablero, cartas y fichas (1536×1024) |
 | `bitacora.md` | Historial de cambios del proyecto |
@@ -34,7 +35,18 @@ colegios y fundaciones.
 - **Proyecto Vercel:** `strategy-inacap` (team `israelojeda1-ops-projects`), con
   directorio raíz `ventas-y-servicios/caso-strategy/sitio-web`.
 - Cada push a la rama de producción del repo publica automáticamente.
-- Por ahora muestra una página provisoria de "sitio en construcción".
+
+## Funciones del sitio web
+
+- Catálogo con dos productos: el juego ($24.990) y el Pack Aula ($109.990).
+- Carrito lateral con cantidades, persistente en el navegador (`localStorage`).
+- Código de descuento `APRENDE15` (15%).
+- Cálculo de despacho: retiro gratis, Región Metropolitana $3.990, otras
+  regiones $6.990 y envío gratis sobre $80.000.
+- Formulario de pago con validación de RUT chileno (módulo 11), correo y
+  teléfono. El pago es simulado y así se declara en pantalla.
+- Formulario aparte de cotización para colegios y fundaciones.
+- Diseño responsive con menú hamburguesa en celular.
 
 ## Cómo ver el sitio web en local
 
@@ -47,11 +59,13 @@ python3 -m http.server 8000
 ## Pendientes
 
 - [ ] Los precios del sitio ($24.990 el juego y $109.990 el Pack Aula) son de
-      ejemplo y hay que confirmarlos.
+      ejemplo y hay que confirmarlos. También el contenido del Pack Aula
+      (se describió como 5 juegos más guía docente) y las tarifas de despacho.
+- [ ] Los testimonios de la sección de opiniones son ilustrativos y están
+      marcados como tales en la página.
 - [ ] El correo, el WhatsApp y el Instagram del pie de página son ficticios.
 - [ ] El pago está simulado: el sitio no procesa transacciones reales y así lo
       declara en pantalla. Si alguna vez se quisiera cobrar de verdad haría falta
       integrar Webpay o Mercado Pago, lo que requiere un servidor.
-- [ ] Subir el informe y el `index.html` real a sus carpetas.
-- [ ] Separar las imágenes en base64 del `index.html` a archivos en `sitio-web/img/`.
+- [ ] Subir el informe `.docx` a `informe/`.
 - [ ] Confirmar estado de la entrega y fecha de entrega.
