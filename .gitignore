@@ -1,0 +1,19 @@
+# Archivos temporales de Microsoft Office
+~$*
+*.tmp
+.~lock.*#
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dependencias y builds (por si algún proyecto usa Node)
+node_modules/
+dist/
+build/
+.vercel/
+
+# Editores
+.vscode/
+.idea/
