@@ -12,10 +12,8 @@ explicativo del juego, dentro de la ventana "Ver video explicativo".
 | `paso-5.mp3` | Una partida de ejemplo |
 | `paso-6.mp3` | Cómo se gana |
 
-No están grabados con un micrófono: se generaron con **Piper**, un motor de voz
-neuronal gratuito y de código abierto, usando la voz `es_AR-daniela-high`.
-Piper no publica una voz chilena, así que se eligió la más cercana en acento
-entre las que existen (Argentina, México y España).
+No están grabados con un micrófono: se generaron con **es-CL-CatalinaNeural**,
+la voz neuronal chilena de Microsoft, a través de `edge-tts`.
 
 La ventaja de tenerlos como archivo es que **suenan igual en cualquier equipo**:
 antes la narración dependía de las voces instaladas en el computador de quien
@@ -28,9 +26,13 @@ propiedad `say` de cada paso. Si editas un texto ahí, vuelve a generar los
 audios con:
 
 ```bash
-python3 herramientas/generar-narracion.py                     # voz actual
-python3 herramientas/generar-narracion.py es_MX-claude-high   # otra voz
+python3 herramientas/generar-narracion.py                        # voz actual
+python3 herramientas/generar-narracion.py es-CL-LorenzoNeural    # voz chilena masculina
+python3 herramientas/generar-narracion.py es_AR-daniela-high     # con Piper, sin internet
 ```
+
+El script avisa si algún audio quedó más largo que la duración de su paso, para
+poder ajustarla en `../index.html`.
 
 Las instrucciones completas (qué instalar, qué voces hay) están en la cabecera
 de ese mismo script.

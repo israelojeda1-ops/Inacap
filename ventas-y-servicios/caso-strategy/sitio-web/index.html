@@ -1198,7 +1198,7 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
     var PLAYERS = [ { nm:"María", color:"#E2483C" }, { nm:"Diego", color:"#3FA9E0" } ];
 
     var SCENES = [
-      { title:"Qué es STRATEGY", dur:13000,
+      { title:"Qué es STRATEGY", dur:16500,
         say:"STRATEGY es un juego de mesa chileno para aprender matemáticas jugando. Se juega de 2 a 4 jugadores, desde los 8 años, y una partida dura entre 20 y 30 minutos. Te voy contando paso a paso cómo se juega.",
         build:function(el){
           el.innerHTML = '<div class="xp-scene">'
@@ -1213,7 +1213,7 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
             + '<p class="hint">Puedes pausar el recorrido y probar cada parte con el mouse.</p>'
             + '</div>';
         } },
-      { title:"El tablero", dur:17000,
+      { title:"El tablero", dur:19500,
         say:"Este es el tablero: 18 casillas que van de la salida a la meta. Cada color es un tipo de casilla: verde es suma, celeste resta, morado multiplicación, naranjo división, amarillo carta y rojo sorpresa. Toca cualquier casilla y te cuento qué pasa al caer en ella.",
         build:function(el){
           el.innerHTML = '<div class="xp-scene">'
@@ -1237,7 +1237,7 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
             g.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); show(); } });
           });
         } },
-      { title:"El turno y los dados", dur:14000,
+      { title:"El turno y los dados", dur:16000,
         say:"En tu turno tiras el dado y avanzas esa cantidad de casillas. En la casilla donde caes te toca un ejercicio de ese tipo: si respondes bien te quedas ahí, y si fallas retrocedes o pierdes el turno. Prueba tirando el dado.",
         build:function(el){
           el.innerHTML = '<div class="xp-scene">'
@@ -1269,7 +1269,7 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
             }, 260);
           });
         } },
-      { title:"Los mazos de cartas", dur:18000,
+      { title:"Los mazos de cartas", dur:21000,
         say:"La caja trae 4 mazos con más de 200 cartas: Desafío, con ejercicios de alternativas; Problema, con situaciones para leer y resolver; Verdadero o Falso, para discutir en la mesa; y Estrategia y Comodín, que sirven para avanzar, bloquear o repetir turno. Elige un mazo y responde la carta.",
         build:function(el){
           el.innerHTML = '<div class="xp-scene">'
@@ -1351,7 +1351,7 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
           timer = setInterval(function(){ i = (i + 1) % PLAY.length; step(i); }, 2600);
           return function(){ clearInterval(timer); };
         } },
-      { title:"Cómo se gana", dur:14000,
+      { title:"Cómo se gana", dur:17000,
         say:"Gana quien llega primero a la meta, y para entrar hay que responder bien el último desafío, así que la partida se define en la última casilla. La caja trae la guía del jugador con 3 modos de juego y todo lo necesario para usarlo también en la sala de clases.",
         build:function(el){
           el.innerHTML = '<div class="xp-scene">'
@@ -1493,7 +1493,8 @@ footer a:hover{color:var(--yellow);text-decoration:underline}
       return junto;
     }
     /* Narración grabada de los seis pasos. Son archivos de audio hechos con
-       una voz neuronal (Piper, voz es_AR-daniela-high), así que suenan igual en
+       una voz neuronal chilena (Microsoft, es-CL-CatalinaNeural), así que suenan
+       igual en
        cualquier equipo y no dependen de las voces que tenga instalado el
        navegador. Se regeneran con herramientas/generar-narracion.py.
        Si se deja una casilla vacía, ese paso vuelve a leerse con la voz del

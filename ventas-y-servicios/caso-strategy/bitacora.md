@@ -2,6 +2,24 @@
 
 Entradas en orden cronológico inverso (la más reciente arriba).
 
+## 2026-09-09 — La narración pasa a una voz chilena
+
+- Buscando más allá de Piper aparecieron dos voces neuronales chilenas de
+  Microsoft: `es-CL-CatalinaNeural` y `es-CL-LorenzoNeural`. Se eligió Catalina
+  y con ella se regeneró la narración de los seis pasos.
+- Se llega a esas voces con `edge-tts`, que es gratuito pero necesita internet
+  al momento de generar. Los `.mp3` que quedan en el repositorio ya no dependen
+  de nada: el sitio los reproduce como cualquier archivo.
+- `herramientas/generar-narracion.py` ahora entiende los dos motores y elige
+  según cómo esté escrito el nombre de la voz: con guiones (es-CL-Catalina...)
+  usa las de Microsoft, con guión bajo (es_AR-daniela...) usa Piper, que
+  funciona sin internet pero no tiene voz chilena. El script además compara
+  cuánto dura cada audio con cuánto dura su paso y avisa si queda corto.
+- Catalina habla más pausado que la voz anterior, así que se alargaron los
+  pasos: el recorrido queda en 1:50, con al menos un segundo de aire después
+  de cada narración.
+- Las 89 verificaciones siguen pasando.
+
 ## 2026-09-09 — La voz deja de sonar robótica
 
 - La narración sonaba robótica porque la ponía el navegador y en varios equipos

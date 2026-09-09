@@ -25,7 +25,7 @@ colegios y fundaciones.
 | `informe/` | El informe en `.docx` (aún no subido) |
 | `sitio-web/index.html` | La tienda online y el recorrido explicativo en un solo archivo (HTML, CSS y JS), 88 KB |
 | `sitio-web/favicon.ico`, `favicon.svg`, `apple-touch-icon.png` | Ícono del sitio: un dado amarillo sobre azul |
-| `sitio-web/audio/` | La narración de los seis pasos en `.mp3` (unas 540 KB en total) |
+| `sitio-web/audio/` | La narración de los seis pasos en `.mp3` (unas 530 KB en total) |
 | `../../herramientas/generar-narracion.py` | Script que regenera esos audios con Piper |
 | `sitio-web/img/` | Las tres imágenes del sitio (`hero-juego.jpg`, `tablero.jpg`, `cartas.jpg`), antes incrustadas en base64 |
 | `material/afiche-strategy.jpg` | Afiche publicitario del juego (1024×1536) |
@@ -55,7 +55,7 @@ colegios y fundaciones.
   Mientras no haya un video grabado, la ventana reproduce un **recorrido
   interactivo** hecho en HTML, CSS y JavaScript, con seis pasos: qué es
   STRATEGY, el tablero, el turno con el dado, los cuatro mazos de cartas, una
-  partida de ejemplo y cómo se gana. Avanza solo (1 minuto y 36 segundos en
+  partida de ejemplo y cómo se gana. Avanza solo (1 minuto y 50 segundos en
   total) y trae barra de reproducción con pausa, paso anterior/siguiente,
   saltos por punto, botón de repetir y botón de sonido. Además se puede interactuar:
   tocar cualquier casilla del tablero para leer qué pasa al caer en ella,
@@ -68,10 +68,10 @@ colegios y fundaciones.
   elegida y si la respuesta estuvo bien o mal, y cada turno de la partida de
   ejemplo— más efectos de dado, avance de ficha, acierto y error.
 - La narración de los seis pasos son **audios grabados** (`sitio-web/audio/`),
-  hechos con la voz neuronal `es_AR-daniela-high` de Piper. Suenan igual en
-  cualquier equipo. Se regeneran con `herramientas/generar-narracion.py`, que
-  toma los textos del propio `index.html`; ver `sitio-web/audio/LEEME.md`.
-  Piper no tiene voz chilena: se usó la argentina, la más cercana en acento.
+  hechos con `es-CL-CatalinaNeural`, la voz neuronal chilena de Microsoft.
+  Suenan igual en cualquier equipo. Se regeneran con
+  `herramientas/generar-narracion.py`, que toma los textos del propio
+  `index.html`; ver `sitio-web/audio/LEEME.md`.
 - Los comentarios de lo que va pasando dependen de lo que haga quien mira, así
   que no se pueden grabar: los dice la voz del navegador (`speechSynthesis`).
   El sitio elige la mejor voz en español que tenga el equipo —ordenándolas por
