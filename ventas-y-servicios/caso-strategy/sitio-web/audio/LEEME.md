@@ -1,36 +1,45 @@
-# Audios del recorrido explicativo (opcional)
+# Audios de la narración del recorrido
 
-Esta carpeta está vacía a propósito.
+Estos seis archivos son la voz que se escucha en cada paso del recorrido
+explicativo del juego, dentro de la ventana "Ver video explicativo".
 
-La narración del recorrido la hace hoy la voz del navegador. Si prefieres una
-voz humana —por ejemplo grabándote tú misma con el celular—, graba un audio por
-paso, déjalos aquí y nómbralos en el archivo `../index.html`, en la línea:
+| Archivo | Paso |
+|---|---|
+| `paso-1.mp3` | Qué es STRATEGY |
+| `paso-2.mp3` | El tablero |
+| `paso-3.mp3` | El turno y los dados |
+| `paso-4.mp3` | Los mazos de cartas |
+| `paso-5.mp3` | Una partida de ejemplo |
+| `paso-6.mp3` | Cómo se gana |
 
-```js
-var VOZ_GRABADA = ["", "", "", "", "", ""];
+No están grabados con un micrófono: se generaron con **Piper**, un motor de voz
+neuronal gratuito y de código abierto, usando la voz `es_AR-daniela-high`.
+Piper no publica una voz chilena, así que se eligió la más cercana en acento
+entre las que existen (Argentina, México y España).
+
+La ventaja de tenerlos como archivo es que **suenan igual en cualquier equipo**:
+antes la narración dependía de las voces instaladas en el computador de quien
+mirara, y en varios sonaba robótica.
+
+## Cómo cambiarlos
+
+Los textos no se escriben aquí: salen del propio `../index.html`, de la
+propiedad `say` de cada paso. Si editas un texto ahí, vuelve a generar los
+audios con:
+
+```bash
+python3 herramientas/generar-narracion.py                     # voz actual
+python3 herramientas/generar-narracion.py es_MX-claude-high   # otra voz
 ```
 
-Por ejemplo:
+Las instrucciones completas (qué instalar, qué voces hay) están en la cabecera
+de ese mismo script.
 
-```js
-var VOZ_GRABADA = ["audio/paso-1.mp3", "audio/paso-2.mp3", "audio/paso-3.mp3",
-                   "audio/paso-4.mp3", "audio/paso-5.mp3", "audio/paso-6.mp3"];
-```
+## Si prefieres tu propia voz
 
-Los seis pasos, en orden, son:
+Puedes grabarte con el celular y reemplazar cualquiera de estos archivos
+manteniendo el nombre. El sitio no distingue de dónde salió el audio.
 
-1. Qué es STRATEGY
-2. El tablero
-3. El turno y los dados
-4. Los mazos de cartas
-5. Una partida de ejemplo
-6. Cómo se gana
-
-No hace falta grabarlos todos: el paso que tenga archivo se escucha grabado y
-los demás siguen con la voz del navegador. Los comentarios de lo que va
-pasando (el dado, las respuestas, los turnos) siempre los dice el navegador,
-porque dependen de lo que haga quien está mirando.
-
-Formato recomendado: `.mp3`, voz clara, sin música de fondo. Si el audio dura
-más que el paso, conviene alargar ese paso en la constante `dur` del mismo
-script.
+Los comentarios de lo que va pasando —el dado, las respuestas de las cartas,
+los turnos de la partida— no se pueden grabar, porque dependen de lo que haga
+quien está mirando: esos los sigue diciendo la voz del navegador.

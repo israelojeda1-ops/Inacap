@@ -17,3 +17,6 @@ build/
 # Editores
 .vscode/
 .idea/
+
+# modelos de voz de Piper (pesan más de 60 MB cada uno)
+.voces/

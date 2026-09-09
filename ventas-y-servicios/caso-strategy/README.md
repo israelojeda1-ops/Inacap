@@ -25,6 +25,8 @@ colegios y fundaciones.
 | `informe/` | El informe en `.docx` (aún no subido) |
 | `sitio-web/index.html` | La tienda online y el recorrido explicativo en un solo archivo (HTML, CSS y JS), 88 KB |
 | `sitio-web/favicon.ico`, `favicon.svg`, `apple-touch-icon.png` | Ícono del sitio: un dado amarillo sobre azul |
+| `sitio-web/audio/` | La narración de los seis pasos en `.mp3` (unas 540 KB en total) |
+| `../../herramientas/generar-narracion.py` | Script que regenera esos audios con Piper |
 | `sitio-web/img/` | Las tres imágenes del sitio (`hero-juego.jpg`, `tablero.jpg`, `cartas.jpg`), antes incrustadas en base64 |
 | `material/afiche-strategy.jpg` | Afiche publicitario del juego (1024×1536) |
 | `material/producto-strategy.jpg` | Imagen de producto: caja, tablero, cartas y fichas (1536×1024) |
@@ -53,7 +55,7 @@ colegios y fundaciones.
   Mientras no haya un video grabado, la ventana reproduce un **recorrido
   interactivo** hecho en HTML, CSS y JavaScript, con seis pasos: qué es
   STRATEGY, el tablero, el turno con el dado, los cuatro mazos de cartas, una
-  partida de ejemplo y cómo se gana. Avanza solo (1 minuto y 35 segundos en
+  partida de ejemplo y cómo se gana. Avanza solo (1 minuto y 36 segundos en
   total) y trae barra de reproducción con pausa, paso anterior/siguiente,
   saltos por punto, botón de repetir y botón de sonido. Además se puede interactuar:
   tocar cualquier casilla del tablero para leer qué pasa al caer en ella,
@@ -64,11 +66,20 @@ colegios y fundaciones.
 - El recorrido tiene **sonido**: una voz va describiendo lo que ocurre —el paso
   en el que va, la casilla que se toca, el número que sale en el dado, la carta
   elegida y si la respuesta estuvo bien o mal, y cada turno de la partida de
-  ejemplo— más efectos de dado, avance de ficha, acierto y error. La voz es la
-  del propio navegador (`speechSynthesis`), así que no hay archivos de audio y
-  el idioma sale en español si el equipo tiene una voz en español instalada.
-  Los efectos se generan con `AudioContext`, también sin archivos.
-  Todo lo que dice la voz aparece además escrito como subtítulo bajo la barra,
+  ejemplo— más efectos de dado, avance de ficha, acierto y error.
+- La narración de los seis pasos son **audios grabados** (`sitio-web/audio/`),
+  hechos con la voz neuronal `es_AR-daniela-high` de Piper. Suenan igual en
+  cualquier equipo. Se regeneran con `herramientas/generar-narracion.py`, que
+  toma los textos del propio `index.html`; ver `sitio-web/audio/LEEME.md`.
+  Piper no tiene voz chilena: se usó la argentina, la más cercana en acento.
+- Los comentarios de lo que va pasando dependen de lo que haga quien mira, así
+  que no se pueden grabar: los dice la voz del navegador (`speechSynthesis`).
+  El sitio elige la mejor voz en español que tenga el equipo —ordenándolas por
+  calidad y por acento más cercano a Chile— y deja un selector en la barra para
+  cambiarla. En Windows conviene instalar la voz "Microsoft Catalina", que es
+  chilena; el sitio la prefiere automáticamente si está.
+- Los efectos de sonido se generan con `AudioContext`, sin archivos.
+- Todo lo que se escucha aparece además escrito como subtítulo bajo la barra,
   así que se entiende igual con el sonido apagado o en un computador sin voces.
   El botón 🔊 de la barra silencia y reactiva, y la elección se recuerda en el
   navegador.

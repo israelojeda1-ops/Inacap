@@ -2,6 +2,33 @@
 
 Entradas en orden cronológico inverso (la más reciente arriba).
 
+## 2026-09-09 — La voz deja de sonar robótica
+
+- La narración sonaba robótica porque la ponía el navegador y en varios equipos
+  la única voz en español disponible es eSpeak. Se arregló en dos frentes.
+- Primero, dentro del sitio: las voces del navegador ahora se ordenan por
+  calidad y por acento más cercano a Chile en vez de tomar la primera, se lee
+  algo más lento, se frasea en trozos cortos y los símbolos se dicen como
+  palabras ("7 × 8 = ?" se escucha "7 por 8, ¿cuánto es?"). Se agregó un
+  selector de voz en la barra que recuerda la elección.
+- Segundo, y es lo que resolvió el problema de verdad: la narración de los seis
+  pasos pasó a ser **audio grabado**. Se generó con Piper, un motor de voz
+  neuronal gratuito y de código abierto, con la voz `es_AR-daniela-high`.
+  Ahora suena igual en cualquier computador.
+- Piper no publica una voz chilena; entre argentina, mexicana y española se
+  eligió la argentina por ser la más cercana en acento.
+- Los seis `.mp3` quedan en `sitio-web/audio/` (unas 540 KB en total) y se
+  regeneran con `herramientas/generar-narracion.py`, que lee los textos del
+  propio `index.html` para que el audio y el subtítulo nunca se separen. El
+  script sirve igual para otros proyectos.
+- Los comentarios de lo que va pasando (el dado, las respuestas, los turnos)
+  siguen con la voz del navegador, porque dependen de lo que haga quien mira.
+  Si el navegador bloquea la reproducción del archivo, ese paso se lee con la
+  voz del sistema como respaldo.
+- Las duraciones de los pasos se ajustaron a lo que dura cada audio: el
+  recorrido queda en 1:36.
+- Probado con 89 verificaciones en total, todas pasando.
+
 ## 2026-09-08 — Ícono del sitio (favicon)
 
 - El sitio no tenía ícono y el navegador pedía `/favicon.ico` recibiendo un
